@@ -1,7 +1,7 @@
 package com.eureka.smartrecruit.security.auth;
 
-import com.eureka.smartrecruit.security.model.UserContext;
 import com.eureka.smartrecruit.security.factory.JwtTokenFactory;
+import com.eureka.smartrecruit.security.model.UserContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

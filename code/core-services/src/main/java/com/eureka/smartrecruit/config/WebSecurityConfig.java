@@ -1,12 +1,12 @@
 package com.eureka.smartrecruit.config;
 
-import com.eureka.smartrecruit.security.web.RestAuthenticationEntryPoint;
-import com.eureka.smartrecruit.security.auth.UserAuthenticationProvider;
-import com.eureka.smartrecruit.security.auth.LoginProcessingFilter;
 import com.eureka.smartrecruit.security.auth.JwtAuthenticationProvider;
 import com.eureka.smartrecruit.security.auth.JwtTokenAuthenticationProcessingFilter;
+import com.eureka.smartrecruit.security.auth.LoginProcessingFilter;
 import com.eureka.smartrecruit.security.auth.SkipPathRequestMatcher;
+import com.eureka.smartrecruit.security.auth.UserAuthenticationProvider;
 import com.eureka.smartrecruit.security.auth.extractor.TokenExtractor;
+import com.eureka.smartrecruit.security.web.RestAuthenticationEntryPoint;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

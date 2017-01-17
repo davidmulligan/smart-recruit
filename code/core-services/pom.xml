@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>com.eureka.smartrecruit</groupId>
+        <artifactId>microservice</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../common/maven/microservice</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>core-services</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.eureka.smartrecruit</groupId>
+            <artifactId>common-security</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- Generate DDL -->
+            <plugin>
+                <groupId>de.juplo</groupId>
+                <artifactId>hibernate-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-h2-ddl</id>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${basedir}/target/jpa/sql/h2-schema.sql</outputFile>
+                            <dialect>org.hibernate.dialect.H2Dialect</dialect>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-mysql-ddl</id>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${basedir}/target/jpa/sql/mysql-schema.sql</outputFile>
+                            <dialect>org.hibernate.dialect.MySQL5InnoDBDialect</dialect>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <export>false</export>
+                    <format>true</format>
+                    <physicalNamingStrategy>com.eureka.smartrecruit.database.CustomNamingStrategy</physicalNamingStrategy>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.eureka.smartrecruit</groupId>
+                        <artifactId>common-database</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>

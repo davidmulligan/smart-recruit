@@ -1,1 +1,1 @@
-# smart-recruit
+# Smart Recruit

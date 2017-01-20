@@ -7,13 +7,17 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Role extends BaseDomainObject {
+public class Favourite extends BaseDomainObject {
 
     @Column(nullable = false)
-    private String role;
+    private String name;
+
+    @ManyToOne
+    private User user;
 }

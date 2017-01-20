@@ -12,8 +12,14 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Role extends BaseDomainObject {
+public class Skill extends BaseDomainObject {
 
     @Column(nullable = false)
-    private String role;
+    private String name;
+
+    @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
+    private boolean active;
 }

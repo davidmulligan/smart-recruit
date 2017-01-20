@@ -5,15 +5,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Role extends BaseDomainObject {
+public class Application extends BaseDomainObject {
 
-    @Column(nullable = false)
-    private String role;
+    @ManyToOne
+    @JoinColumn
+    private Project project;
+
+    @ManyToOne
+    @JoinColumn
+    private User applicant;
 }

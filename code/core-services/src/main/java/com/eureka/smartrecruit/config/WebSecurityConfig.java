@@ -3,7 +3,7 @@ package com.eureka.smartrecruit.config;
 import com.eureka.smartrecruit.security.auth.JwtAuthenticationProvider;
 import com.eureka.smartrecruit.security.auth.JwtTokenAuthenticationProcessingFilter;
 import com.eureka.smartrecruit.security.auth.LoginProcessingFilter;
-import com.eureka.smartrecruit.security.auth.SkipPathRequestMatcher;
+import com.eureka.smartrecruit.security.util.SkipPathRequestMatcher;
 import com.eureka.smartrecruit.security.auth.UserAuthenticationProvider;
 import com.eureka.smartrecruit.security.auth.extractor.TokenExtractor;
 import com.eureka.smartrecruit.security.web.RestAuthenticationEntryPoint;
@@ -30,12 +30,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
     private final RestAuthenticationEntryPoint authenticationEntryPoint;
     private final AuthenticationSuccessHandler successHandler;
     private final AuthenticationFailureHandler failureHandler;
@@ -49,14 +43,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String JWT_TOKEN_HEADER_PARAM = "X-Authorization";
 
-    private static final String FORM_BASED_LOGIN_ENTRY_POINT = "/api/auth/login";
-    private static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/api/**";
-    private static final String TOKEN_REFRESH_ENTRY_POINT = "/api/auth/token";
+    private static final String FORM_BASED_LOGIN_ENTRY_POINT = "/auth/login";
+    private static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/**";
+    private static final String TOKEN_REFRESH_ENTRY_POINT = "/auth/token";
 
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) {
         authenticationManagerBuilder.authenticationProvider(ajaxAuthenticationProvider);
         authenticationManagerBuilder.authenticationProvider(jwtAuthenticationProvider);
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Override
@@ -68,15 +68,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
                 .and()
                     .authorizeRequests()
                     .antMatchers(FORM_BASED_LOGIN_ENTRY_POINT).permitAll()
                     .antMatchers(TOKEN_REFRESH_ENTRY_POINT).permitAll()
                 .and()
                     .authorizeRequests()
-                    .antMatchers(TOKEN_BASED_AUTH_ENTRY_POINT).authenticated() // Protected API End-points
-                    .antMatchers("/greeting/**").authenticated()
+                    .antMatchers(TOKEN_BASED_AUTH_ENTRY_POINT).authenticated()
+                    .antMatchers("/categories/**").authenticated()
+                    .antMatchers("/favourites/**").authenticated()
+                    .antMatchers("/feedback/**").authenticated()
+                    .antMatchers("/memberships/**").authenticated()
+                    .antMatchers("/projects/**").authenticated()
+                    .antMatchers("/skills/**").authenticated()
+                    .antMatchers("/users/**").authenticated()
                 .and()
                     .addFilterBefore(buildAjaxLoginProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
                     .addFilterBefore(buildJwtTokenAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class);

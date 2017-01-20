@@ -7,13 +7,24 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Role extends BaseDomainObject {
+public class Feedback extends BaseDomainObject {
 
     @Column(nullable = false)
-    private String role;
+    private String review;
+
+    @Column(nullable = false)
+    private Float averageRating;
+
+    @ManyToOne
+    private User author;
+
+    @OneToOne
+    private User user;
 }

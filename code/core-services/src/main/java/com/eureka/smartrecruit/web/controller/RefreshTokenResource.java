@@ -25,6 +25,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(value="/auth/token")
 public class RefreshTokenResource {
 
     private JwtTokenFactory tokenFactory;
@@ -33,7 +34,7 @@ public class RefreshTokenResource {
     private TokenVerifier tokenVerifier;
     private TokenExtractor tokenExtractor;
 
-    @RequestMapping(value="/auth/token", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public @ResponseBody JwtToken refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String tokenPayload = tokenExtractor.extract(request.getHeader(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM));
         UnverifiedJwtToken unverifiedJwtToken = new UnverifiedJwtToken(tokenPayload);

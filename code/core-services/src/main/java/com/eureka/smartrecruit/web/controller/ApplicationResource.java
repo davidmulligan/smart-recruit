@@ -8,6 +8,7 @@ import com.eureka.smartrecruit.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,14 +21,14 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/projects/{projectId}")
+@RequestMapping("/projects/{projectId}/applications")
 public class ApplicationResource {
 
     private final ApplicationService applicationService;
     private final ProjectService projectService;
     private final Mapper mapper;
 
-    @RequestMapping(value="/applications", method= RequestMethod.POST, produces={ "application/json" })
+    @RequestMapping(method=RequestMethod.POST, produces={ MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@PathVariable("projectId") Long projectId, @RequestBody ApplicationDto applicantDto) {
         Project project = projectService.findById(projectId);
@@ -35,20 +36,20 @@ public class ApplicationResource {
         applicationService.create(application, project);
     }
 
-    @RequestMapping(value="/applications", method=RequestMethod.PUT, produces={ "application/json" })
-    @ResponseStatus( HttpStatus.OK )
+    @RequestMapping(method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody ApplicationDto applicationDto) {
         Application application = applicationService.findById(applicationDto.getId());
         applicationService.update(application);
     }
 
-    @RequestMapping(value="/applications/{id}", method=RequestMethod.DELETE, produces={ "application/json" })
-    @ResponseStatus( HttpStatus.OK )
+    @RequestMapping(value="/{id}", method=RequestMethod.DELETE, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         applicationService.delete(id);
     }
 
-    @RequestMapping(value="/applications", method=RequestMethod.GET, produces={ "application/json" })
+    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<ApplicationDto> findAll(@PathVariable("projectId") Long projectId) {
         Project project = projectService.findById(projectId);
         return project.getApplications().stream().map(application -> mapper.map(application, ApplicationDto.class)).collect(Collectors.toList());

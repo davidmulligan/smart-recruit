@@ -27,4 +27,7 @@ public class Feedback extends BaseDomainObject {
 
     @OneToOne
     private User user;
+
+    @OneToOne
+    private Project project;
 }

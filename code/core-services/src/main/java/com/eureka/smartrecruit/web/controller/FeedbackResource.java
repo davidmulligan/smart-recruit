@@ -8,6 +8,7 @@ import com.eureka.smartrecruit.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,14 +21,14 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user/{userId}")
+@RequestMapping("/user/{userId}/feedback")
 public class FeedbackResource {
 
     private final FeedbackService feedbackService;
     private final UserService userService;
     private final Mapper mapper;
 
-    @RequestMapping(value="/feedback", method= RequestMethod.POST, produces={ "application/json" })
+    @RequestMapping(method=RequestMethod.POST, produces={ MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@PathVariable("userId") Long userId, @RequestBody FeedbackDto feedbackDto) {
         User user = userService.findById(userId);
@@ -35,7 +36,7 @@ public class FeedbackResource {
         feedbackService.create(feedback, user);
     }
 
-    @RequestMapping(value="/feedback", method=RequestMethod.GET, produces={ "application/json" })
+    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<FeedbackDto> findAll(@PathVariable("userId") Long userId) {
         User user = userService.findById(userId);
         return user.getFeedback().stream().map(feedback -> mapper.map(feedback, FeedbackDto.class)).collect(Collectors.toList());

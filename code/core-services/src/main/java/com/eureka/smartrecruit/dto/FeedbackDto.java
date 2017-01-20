@@ -15,4 +15,5 @@ public class FeedbackDto {
     private String review;
     private Float averageRating;
     private UserDto author;
+    private ProjectDto project;
 }

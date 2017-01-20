@@ -2,10 +2,5 @@
 
 fill category for project
 feedback categories
-add feedback project
-
+notifuication type
 UserSkills
-state model
-tbl_favourites
-messages
-notification

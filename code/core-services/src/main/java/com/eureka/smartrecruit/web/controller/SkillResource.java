@@ -6,6 +6,7 @@ import com.eureka.smartrecruit.service.SkillService;
 import lombok.RequiredArgsConstructor;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,20 +19,21 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-public class SkillRestResource {
+@RequestMapping(value="/skills")
+public class SkillResource {
 
     private final SkillService skillService;
     private final Mapper mapper;
 
-    @RequestMapping(value="/skills", method=RequestMethod.POST, produces={ "application/json" })
+    @RequestMapping(method=RequestMethod.POST, produces={ MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody SkillDto skillDto) {
         Skill skill = mapper.map(skillDto, Skill.class);
         skillService.create(skill);
     }
 
-    @RequestMapping(value="/skills", method=RequestMethod.PUT, produces={ "application/json" })
-    @ResponseStatus( HttpStatus.OK )
+    @RequestMapping(method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody SkillDto skillDto) {
         Skill skill = skillService.findById(skillDto.getId());
         skill.setName(skillDto.getName());
@@ -40,13 +42,13 @@ public class SkillRestResource {
         skillService.update(skill);
     }
 
-    @RequestMapping(value="/skills/{id}", method=RequestMethod.DELETE, produces={ "application/json" })
-    @ResponseStatus( HttpStatus.OK )
+    @RequestMapping(value="/{id}", method=RequestMethod.DELETE, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         skillService.delete(skillService.findById(id));
     }
 
-    @RequestMapping(value="/skills", method=RequestMethod.GET, produces={ "application/json" })
+    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<SkillDto> findAll() {
         return skillService.findAll().stream().map(skill -> mapper.map(skill, SkillDto.class)).collect(Collectors.toList());
     }

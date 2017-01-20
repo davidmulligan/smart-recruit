@@ -8,6 +8,7 @@ import com.eureka.smartrecruit.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,37 +21,37 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-public class ProjectRestResource {
+@RequestMapping("/projects")
+public class ProjectResource {
 
     private final ProjectService projectService;
     private final Mapper mapper;
 
-    @RequestMapping(value="/projects", method=RequestMethod.POST, produces={ "application/json" })
+    @RequestMapping(method=RequestMethod.POST, produces={ MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody ProjectDto projectDto) {
         Project project = mapper.map(projectDto, Project.class);
         projectService.create(project);
     }
 
-    @RequestMapping(value="/projects", method=RequestMethod.PUT, produces={ "application/json" })
-    @ResponseStatus( HttpStatus.OK )
+    @RequestMapping(method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody ProjectDto projectDto) {
         Project project = projectService.findById(projectDto.getId());
         project.setTitle(projectDto.getTitle());
         project.setDescription(projectDto.getDescription());
-        project.setActive(projectDto.isActive());
         project.setCategory(mapper.map(projectDto.getCategoryDto(), Category.class));
         project.setSkills(projectDto.getSkills().stream().map(skill -> mapper.map(skill, Skill.class)).collect(Collectors.toList()));
         projectService.update(project);
     }
 
-    @RequestMapping(value="/projects/{id}", method=RequestMethod.DELETE, produces={ "application/json" })
-    @ResponseStatus( HttpStatus.OK )
+    @RequestMapping(value="/{id}", method=RequestMethod.DELETE, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         projectService.delete(id);
     }
 
-    @RequestMapping(value="/projects", method=RequestMethod.GET, produces={ "application/json" })
+    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<ProjectDto> findAll() {
         return projectService.findAll().stream().map(project -> mapper.map(project, ProjectDto.class)).collect(Collectors.toList());
     }

@@ -6,6 +6,7 @@ import com.eureka.smartrecruit.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,20 +19,21 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-public class CategoryRestResource {
+@RequestMapping("/categories")
+public class CategoryResource {
 
     private final CategoryService categoryService;
     private final Mapper mapper;
 
-    @RequestMapping(value="/categories", method=RequestMethod.POST, produces={ "application/json" })
+    @RequestMapping(method=RequestMethod.POST, produces={ MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody CategoryDto categoryDto) {
         Category category = mapper.map(categoryDto, Category.class);
         categoryService.create(category);
     }
 
-    @RequestMapping(value="/categories", method=RequestMethod.PUT, produces={ "application/json" })
-    @ResponseStatus( HttpStatus.OK )
+    @RequestMapping(method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody CategoryDto categoryDto) {
         Category category = categoryService.findById(categoryDto.getId());
         category.setName(categoryDto.getName());
@@ -41,13 +43,13 @@ public class CategoryRestResource {
         categoryService.update(category);
     }
 
-    @RequestMapping(value="/categories/{id}", method=RequestMethod.DELETE, produces={ "application/json" })
-    @ResponseStatus( HttpStatus.OK )
+    @RequestMapping(value="/{id}", method=RequestMethod.DELETE, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         categoryService.delete(id);
     }
 
-    @RequestMapping(value="/categories", method=RequestMethod.GET, produces={ "application/json" })
+    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<CategoryDto> findAll() {
         return categoryService.findAll().stream().map(category -> mapper.map(category, CategoryDto.class)).collect(Collectors.toList());
     }

@@ -24,7 +24,7 @@ public class UnverifiedJwtToken implements JwtToken {
         } catch (UnsupportedJwtException | MalformedJwtException | IllegalArgumentException | SignatureException e) {
             throw new BadCredentialsException("Invalid JWT token", e);
         } catch (ExpiredJwtException e) {
-            throw new JwtExpiredTokenException(this, "JWT Token has expired", e);
+            throw new JwtExpiredTokenException(this, "JWT token has expired", e);
         }
     }
 }

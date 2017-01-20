@@ -25,16 +25,11 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-                                        AuthenticationException e) throws IOException, ServletException {
+                                        AuthenticationException exception) throws IOException, ServletException {
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-
-        if (e instanceof BadCredentialsException) {
-            mapper.writeValue(response.getWriter(), new ErrorResponse("Invalid username or password", HttpStatus.UNAUTHORIZED));
-        } else if (e instanceof JwtExpiredTokenException) {
-            mapper.writeValue(response.getWriter(), new ErrorResponse("Token has expired", HttpStatus.UNAUTHORIZED));
-        } else if (e instanceof AuthMethodNotSupportedException) {
-            mapper.writeValue(response.getWriter(), new ErrorResponse(e.getMessage(), HttpStatus.UNAUTHORIZED));
+        if (exception instanceof BadCredentialsException || exception instanceof JwtExpiredTokenException || exception instanceof AuthMethodNotSupportedException) {
+            mapper.writeValue(response.getWriter(), new ErrorResponse(exception.getMessage(), HttpStatus.UNAUTHORIZED));
         }
         mapper.writeValue(response.getWriter(), new ErrorResponse("Authentication failed", HttpStatus.UNAUTHORIZED));
     }

@@ -13,8 +13,8 @@ public class JwtTokenExtractor implements TokenExtractor {
     public String extract(String header) {
         if (StringUtils.isEmpty(header)) {
             throw new AuthenticationServiceException("Authorization header cannot be empty");
-        } else if (header.length() < HEADER_PREFIX.length()) {
-            throw new AuthenticationServiceException("Invalid authorization header size");
+        } else if (!header.startsWith(HEADER_PREFIX)) {
+            throw new AuthenticationServiceException("Authorization header is invalid");
         }
         return header.substring(HEADER_PREFIX.length(), header.length());
     }

@@ -1,16 +1,16 @@
 package com.eureka.smartrecruit.security.auth;
 
-import com.eureka.smartrecruit.security.model.UserContext;
 import com.eureka.smartrecruit.security.model.token.UnverifiedJwtToken;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 
     private UnverifiedJwtToken rawAccessToken;
-    private UserContext userContext;
+    private UserDetails userDetails;
 
     public JwtAuthenticationToken(UnverifiedJwtToken unsafeToken) {
         super(null);
@@ -18,10 +18,10 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
         this.setAuthenticated(false);
     }
 
-    public JwtAuthenticationToken(UserContext userContext, Collection<? extends GrantedAuthority> authorities) {
+    public JwtAuthenticationToken(UserDetails userDetails, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.eraseCredentials();
-        this.userContext = userContext;
+        this.userDetails = userDetails;
         super.setAuthenticated(true);
     }
 
@@ -40,7 +40,7 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 
     @Override
     public Object getPrincipal() {
-        return userContext;
+        return userDetails;
     }
 
     @Override

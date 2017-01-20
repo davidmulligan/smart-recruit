@@ -1,4 +1,4 @@
-package com.eureka.smartrecruit.security.auth;
+package com.eureka.smartrecruit.security.util;
 
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;

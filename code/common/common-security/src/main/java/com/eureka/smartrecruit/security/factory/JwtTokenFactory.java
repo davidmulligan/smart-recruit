@@ -2,13 +2,13 @@ package com.eureka.smartrecruit.security.factory;
 
 import com.eureka.smartrecruit.security.config.JwtSettings;
 import com.eureka.smartrecruit.security.model.Scopes;
-import com.eureka.smartrecruit.security.model.UserContext;
 import com.eureka.smartrecruit.security.model.token.AccessJwtToken;
 import com.eureka.smartrecruit.security.model.token.JwtToken;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -24,17 +24,17 @@ public class JwtTokenFactory {
 
     private final JwtSettings settings;
 
-    public AccessJwtToken createAccessJwtToken(UserContext userContext) {
-        if (StringUtils.isEmpty(userContext.getUsername())) {
+    public AccessJwtToken createAccessJwtToken(UserDetails userDetails) {
+        if (StringUtils.isEmpty(userDetails.getUsername())) {
             throw new IllegalArgumentException("Cannot create JWT Token without username");
         }
-        if (userContext.getAuthorities() == null || userContext.getAuthorities().isEmpty()) {
+        if (userDetails.getAuthorities() == null || userDetails.getAuthorities().isEmpty()) {
             throw new IllegalArgumentException("User doesn't have any privileges");
         }
 
         ZonedDateTime now = ZonedDateTime.now();
-        Claims claims = Jwts.claims().setSubject(userContext.getUsername());
-        claims.put("scopes", userContext.getAuthorities().stream().map(s -> s.toString()).collect(Collectors.toList()));
+        Claims claims = Jwts.claims().setSubject(userDetails.getUsername());
+        claims.put("scopes", userDetails.getAuthorities().stream().map(s -> s.toString()).collect(Collectors.toList()));
         String token = Jwts.builder()
                 .setClaims(claims)
                 .setIssuer(settings.getTokenIssuer())
@@ -45,13 +45,13 @@ public class JwtTokenFactory {
         return new AccessJwtToken(token, claims);
     }
 
-    public JwtToken createRefreshToken(UserContext userContext) {
-        if (StringUtils.isEmpty(userContext.getUsername())) {
+    public JwtToken createRefreshToken(UserDetails userDetails) {
+        if (StringUtils.isEmpty(userDetails.getUsername())) {
             throw new IllegalArgumentException("Cannot create JWT Token without username");
         }
 
         ZonedDateTime now = ZonedDateTime.now();
-        Claims claims = Jwts.claims().setSubject(userContext.getUsername());
+        Claims claims = Jwts.claims().setSubject(userDetails.getUsername());
         claims.put("scopes", Arrays.asList(Scopes.REFRESH_TOKEN.authority()));
         String token = Jwts.builder()
                 .setId(UUID.randomUUID().toString())

@@ -1,8 +1,8 @@
 package com.eureka.smartrecruit.security.factory
 
 import com.eureka.smartrecruit.security.config.JwtSettings
-import com.eureka.smartrecruit.security.model.UserContext
 import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -16,15 +16,17 @@ class JwtTokenFactoryTest extends Specification {
     def "test createAccessJwtToken()"() {
 
         given:
-        def userContext = new UserContext("username", [new SimpleGrantedAuthority("ROLE")] as Set)
+        def userDetails = Mock(UserDetails)
+        userDetails.getUsername() >> "username"
+        userDetails.getAuthorities() >> [new SimpleGrantedAuthority("ROLE")]
 
         when:
-        def result = subject.createAccessJwtToken(userContext)
+        def result = subject.createAccessJwtToken(userDetails)
 
         then:
         result.getToken() != null
-        result.getClaims().get("sub", String) == userContext.getUsername()
-        result.getClaims().get("scopes", List) == userContext.getAuthorities().collect { it.toString() }
+        result.getClaims().get("sub", String) == userDetails.getUsername()
+        result.getClaims().get("scopes", List) == userDetails.getAuthorities().collect { it.toString() }
         result.getClaims().get("iss", String) == jwtSettings.getTokenIssuer()
         result.getClaims().get("iat", Date) != null
         result.getClaims().get("exp", Date) != null
@@ -33,10 +35,11 @@ class JwtTokenFactoryTest extends Specification {
     def "test createAccessJwtToken() - Ensure an exception is thrown when a username is not provided"() {
 
         given:
-        def userContext = new UserContext(null, [new SimpleGrantedAuthority("ROLE")] as Set)
+        def userDetails = Mock(UserDetails)
+        userDetails.getAuthorities() >> [new SimpleGrantedAuthority("ROLE")]
 
         when:
-        subject.createAccessJwtToken(userContext)
+        subject.createAccessJwtToken(userDetails)
 
         then:
         def e = thrown(IllegalArgumentException)
@@ -46,10 +49,11 @@ class JwtTokenFactoryTest extends Specification {
     def "test createAccessJwtToken() - Ensure an exception is thrown when the authorities are not provided"() {
 
         given:
-        def userContext = new UserContext("username", null)
+        def userDetails = Mock(UserDetails)
+        userDetails.getUsername() >> "username"
 
         when:
-        subject.createAccessJwtToken(userContext)
+        subject.createAccessJwtToken(userDetails)
 
         then:
         def e = thrown(IllegalArgumentException)
@@ -59,10 +63,12 @@ class JwtTokenFactoryTest extends Specification {
     def "test createAccessJwtToken() - Ensure an exception is thrown when an empty list of authorities are provided"() {
 
         given:
-        def userContext = new UserContext("username",  [] as Set)
+        def userDetails = Mock(UserDetails)
+        userDetails.getUsername() >> "username"
+        userDetails.getAuthorities() >> []
 
         when:
-        subject.createAccessJwtToken(userContext)
+        subject.createAccessJwtToken(userDetails)
 
         then:
         def e = thrown(IllegalArgumentException)

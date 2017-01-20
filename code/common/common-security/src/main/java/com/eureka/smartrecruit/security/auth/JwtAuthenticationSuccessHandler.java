@@ -1,12 +1,12 @@
 package com.eureka.smartrecruit.security.auth;
 
 import com.eureka.smartrecruit.security.factory.JwtTokenFactory;
-import com.eureka.smartrecruit.security.model.UserContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -31,14 +31,14 @@ public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHan
                                         Authentication authentication) throws IOException, ServletException {
         response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        mapper.writeValue(response.getWriter(), generateTokenMap((UserContext) authentication.getPrincipal()));
+        mapper.writeValue(response.getWriter(), generateTokenMap((UserDetails) authentication.getPrincipal()));
         clearAuthenticationAttributes(request);
     }
 
-    private Map<String, String> generateTokenMap(UserContext userContext) {
+    private Map<String, String> generateTokenMap(UserDetails userDetails) {
         Map<String, String> tokenMap = new HashMap<>();
-        tokenMap.put("token", tokenFactory.createAccessJwtToken(userContext).getToken());
-        tokenMap.put("refreshToken", tokenFactory.createRefreshToken(userContext).getToken());
+        tokenMap.put("token", tokenFactory.createAccessJwtToken(userDetails).getToken());
+        tokenMap.put("refreshToken", tokenFactory.createRefreshToken(userDetails).getToken());
         return tokenMap;
     }
 

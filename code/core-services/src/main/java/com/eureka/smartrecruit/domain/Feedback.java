@@ -5,10 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -17,17 +21,18 @@ import javax.persistence.OneToOne;
 public class Feedback extends BaseDomainObject {
 
     @Column(nullable = false)
-    private String review;
-
-    @Column(nullable = false)
-    private Float averageRating;
+    private Integer averageScore;
 
     @ManyToOne
     private User author;
 
-    @OneToOne
+    @ManyToOne
     private User user;
 
-    @OneToOne
+    @ManyToOne
     private Project project;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "feedbackId")
+    private Set<FeedbackItem> feedbackItems;
 }

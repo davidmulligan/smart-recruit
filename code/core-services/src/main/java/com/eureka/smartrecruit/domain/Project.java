@@ -41,4 +41,7 @@ public class Project extends BaseDomainObject {
 
     @OneToMany(mappedBy = "project")
     private Set<Application> applications;
+
+    @OneToMany(mappedBy = "project")
+    private Set<Feedback> feedback;
 }

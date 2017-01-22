@@ -34,9 +34,9 @@ public class Notification extends BaseDomainObject {
     private String type;
 
     @Column(nullable = false)
-    private boolean read;
+    private boolean opened;
 
     @Column
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
-    private LocalDateTime readOn;
+    private LocalDateTime openedOn;
 }

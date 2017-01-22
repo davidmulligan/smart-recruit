@@ -1,6 +1,5 @@
 # Smart Recruit
 
-fill category for project
-feedback categories
+feedback categories/type
 notifuication type
 UserSkills

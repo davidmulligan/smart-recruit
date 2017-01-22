@@ -34,11 +34,11 @@ public class Message extends BaseDomainObject {
     private String content;
 
     @Column(nullable = false)
-    private boolean read;
+    private boolean opened;
 
     @Column
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
-    private LocalDateTime readOn;
+    private LocalDateTime openedOn;
 
     @Column(nullable = false)
     private boolean deleted;

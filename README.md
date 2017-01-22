@@ -1,5 +1,6 @@
 # Smart Recruit
 
 feedback categories/type
-notifuication type
 UserSkills
+UserWallet
+tbl_project_dispute

@@ -67,7 +67,7 @@ public class User extends BaseDomainObject implements UserDetails {
     private Integer totalProjects;
 
     @Enumerated(EnumType.STRING)
-    private UserType userType;
+    private UserType type;
 
     @Column(nullable = false)
     private boolean enabled;

@@ -1,0 +1,82 @@
+<div class="row">
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">Membership</div>
+			<div class="panel-body">
+				<div class="col-md-12">
+					<form ng-submit="submit()" name="membershipForm" novalidate>
+						<div class="form-group" ng-class="{ 'has-error': membershipForm.name.$invalid && membershipForm.name.$dirty }">
+							<label for="name">Name:</label>
+							<input type="text" required class="form-control" ng-model="membership.name" id="name" name="name">
+						</div>
+						<div class="form-group" ng-class="{ 'has-error': membershipForm.description.$invalid && membershipForm.description.$dirty }">
+							<label for="description">Description:</label>
+							<input type="text" required class="form-control" ng-model="membership.description" id="description" name="description">
+						</div>
+						<div class="form-group" ng-class="{ 'has-error': membershipForm.cost.$invalid && membershipForm.cost.$dirty }">
+							<label for="cost">Cost:</label>
+							<input type="text" required class="form-control" ng-model="membership.cost" id="cost" name="cost">
+						</div>
+						<div class="form-group">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" ng-model="membership.active"> Enabled
+								</label>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-default" ng-disabled="membershipForm.$invalid">{{buttonText}}</button>
+						<div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Memberships
+				<button type="button" class="btn btn-default btn-sm" ng-click="initAddMembership()">
+					<span class="glyphicon glyphicon-plus"></span> New Membership
+				</button>
+			</div>
+			<div class="panel-body">
+				<div class="alert alert-info margin-top-5" ng-show="deleteMessage">{{deleteMessage}}</div>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Name</th>
+							<th>Description</th>
+							<th>Cost</th>
+							<th>Enabled</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="membership in memberships">
+							<td>{{$index+1}}</td>
+							<td>{{membership.name}}</td>
+							<td>{{membership.description}}</td>
+							<td>{{membership.cost}}</td>
+							<td>
+								<span ng-show="membership.active">Yes</span>
+								<span ng-hide="membership.active">No</span>
+							</td>
+							<td>
+								<button type="button" class="btn btn-default btn-sm" ng-click="initEdit(membership)">
+									<span class="glyphicon glyphicon-edit"></span>
+								</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-default btn-sm" ng-click="deleteMembership(membership)">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

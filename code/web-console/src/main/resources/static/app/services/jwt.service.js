@@ -1,6 +1,12 @@
-angular.module('sr-app')
+(function() {
+    'use strict';
 
-    .service('JwtHelper', function($window) {
+    angular
+        .module('services.jwtService', [])
+        .service('JwtService', service);
+
+    /* @ngInject */
+    function service($rootScope, $window) {
 
         this.urlBase64Decode = function(str) {
             var output = str.replace(/-/g, '+').replace(/_/g, '/');
@@ -65,4 +71,5 @@ angular.module('sr-app')
             }
             return !(d.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)));
         };
-    });
+    }
+})();

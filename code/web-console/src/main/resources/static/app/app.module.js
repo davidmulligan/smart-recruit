@@ -3,7 +3,13 @@
 
     angular
         .module('app.module', [
-        'app.config'
+            'app.config',
+            'auth',
+            'navigation',
+            'home',
+            'category',
+            'skill',
+            'membership',
+            'user'
     ]);
-
 })();

@@ -3,20 +3,45 @@
 
     angular
         .module('app.config', [
-        //'app.constants',
-        //'app.factories',
-        //'app.services',
-        //'app.directives',
-        'app.module'
+            'ui.router',
+            'app.constants',
+            'app.factories',
+            'app.services',
+            'app.module'
     ])
     .run(runner)
     .config(state)
     .config(config);
 
     /* @ngInject */
-    function runner($rootScope, $state, $stateParams) {
+    function runner($rootScope, $state, $stateParams, AuthenticationService) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
+
+        // The following method will run at the time of initializing the module, running once.
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+            if (!AuthenticationService.isAuthenticated()) {
+                if (toState.name != 'login' && toState.name != 'register') {
+                    event.preventDefault();
+                    $state.go('login');
+                }
+            } else {
+                if (toState.data && toState.data.role) {
+                    var hasAccess = true;
+    //				for (var i = 0; i < AuthenticationService.getCurrentUser().roles.length; i++) {
+    //					var role = AuthenticationService.user.roles[i];
+    //					if (toState.data.role == role) {
+    //						hasAccess = true;
+    //						break;
+    //					}
+    //				}
+                    if (!hasAccess) {
+                        event.preventDefault();
+                        $state.go('access-denied');
+                    }
+                }
+            }
+        });
     }
 
     /* @ngInject */
@@ -24,15 +49,12 @@
         $stateProvider.linkState = angular.linkState;
     }
 
-    /** @ngInject */
+    /* @ngInject */
     function config($logProvider, $httpProvider) {
-
-        // Enable log
         $logProvider.debugEnabled(true);
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $httpProvider.defaults.headers.post = {};
         $httpProvider.defaults.headers.put = {};
         $httpProvider.defaults.headers.patch = {};
     }
-
 })();

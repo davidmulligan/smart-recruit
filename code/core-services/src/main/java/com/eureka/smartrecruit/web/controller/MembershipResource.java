@@ -38,6 +38,7 @@ public class MembershipResource {
         Membership membership = membershipService.findById(membershipDto.getId());
         membership.setName(membershipDto.getName());
         membership.setDescription(membershipDto.getDescription());
+        membership.setCost(membershipDto.getCost());
         membership.setActive(membershipDto.isActive());
         membershipService.update(membership);
     }

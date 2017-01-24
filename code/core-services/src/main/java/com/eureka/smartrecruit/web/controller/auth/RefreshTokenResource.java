@@ -1,4 +1,4 @@
-package com.eureka.smartrecruit.web.controller;
+package com.eureka.smartrecruit.web.controller.auth;
 
 import com.eureka.smartrecruit.config.WebSecurityConfig;
 import com.eureka.smartrecruit.domain.User;

@@ -1,4 +1,4 @@
-angular.module('sr-app', [ 'ui.router', 'sr-app.factories' ])
+angular.module('sr-app', [ 'ui.router', 'app.module', 'sr-app.factories' ])
 
 // The following method will run at the time of initializing the module, running once.
 .run(function($rootScope, $state, AuthenticationService) {

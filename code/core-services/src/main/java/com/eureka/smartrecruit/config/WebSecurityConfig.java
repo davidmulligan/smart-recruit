@@ -3,9 +3,9 @@ package com.eureka.smartrecruit.config;
 import com.eureka.smartrecruit.security.auth.JwtAuthenticationProvider;
 import com.eureka.smartrecruit.security.auth.JwtTokenAuthenticationProcessingFilter;
 import com.eureka.smartrecruit.security.auth.LoginProcessingFilter;
-import com.eureka.smartrecruit.security.util.SkipPathRequestMatcher;
 import com.eureka.smartrecruit.security.auth.UserAuthenticationProvider;
 import com.eureka.smartrecruit.security.auth.extractor.TokenExtractor;
+import com.eureka.smartrecruit.security.util.SkipPathRequestMatcher;
 import com.eureka.smartrecruit.security.web.RestAuthenticationEntryPoint;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -44,8 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String JWT_TOKEN_HEADER_PARAM = "X-Authorization";
 
     private static final String FORM_BASED_LOGIN_ENTRY_POINT = "/auth/login";
-    private static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/**";
+    private static final String REGISTRATION_ENTRY_POINT = "/auth/register";
     private static final String TOKEN_REFRESH_ENTRY_POINT = "/auth/token";
+    private static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/**";
 
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) {
@@ -62,6 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(this.authenticationEntryPoint)
@@ -72,6 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
                     .antMatchers(FORM_BASED_LOGIN_ENTRY_POINT).permitAll()
                     .antMatchers(TOKEN_REFRESH_ENTRY_POINT).permitAll()
+                    .antMatchers(REGISTRATION_ENTRY_POINT).permitAll()
                 .and()
                     .authorizeRequests()
                     .antMatchers(TOKEN_BASED_AUTH_ENTRY_POINT).authenticated()
@@ -94,7 +98,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter() throws Exception {
-        List<String> pathsToSkip = Arrays.asList(TOKEN_REFRESH_ENTRY_POINT, FORM_BASED_LOGIN_ENTRY_POINT);
+        List<String> pathsToSkip = Arrays.asList(TOKEN_REFRESH_ENTRY_POINT, FORM_BASED_LOGIN_ENTRY_POINT, REGISTRATION_ENTRY_POINT);
         SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, TOKEN_BASED_AUTH_ENTRY_POINT);
         JwtTokenAuthenticationProcessingFilter filter = new JwtTokenAuthenticationProcessingFilter(failureHandler, tokenExtractor, matcher);
         filter.setAuthenticationManager(authenticationManager);

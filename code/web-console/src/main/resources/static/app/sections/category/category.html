@@ -4,24 +4,24 @@
 			<div class="panel-heading">Category</div>
 			<div class="panel-body">
 				<div class="col-md-12">
-					<form ng-submit="submit()" name="categoryForm" novalidate>
-						<div class="form-group" ng-class="{ 'has-error': categoryForm.name.$invalid && categoryForm.name.$dirty }">
+					<form ng-submit="categoryCtrl.submit()" name="categoryCtrl.categoryForm" novalidate>
+						<div class="form-group" ng-class="{ 'has-error': categoryCtrl.categoryForm.name.$invalid && categoryCtrl.categoryForm.name.$dirty }">
 							<label for="name">Name:</label>
-							<input type="text" required class="form-control" ng-model="category.name" id="name" name="name">
+							<input type="text" required class="form-control" ng-model="categoryCtrl.category.name" id="name" name="name">
 						</div>
-						<div class="form-group" ng-class="{ 'has-error': categoryForm.description.$invalid && categoryForm.description.$dirty }">
+						<div class="form-group" ng-class="{ 'has-error': categoryCtrl.categoryForm.description.$invalid && categoryCtrl.categoryForm.description.$dirty }">
 							<label for="description">Description:</label>
-							<input type="text" required class="form-control" ng-model="category.description" id="description" name="description">
+							<input type="text" required class="form-control" ng-model="categoryCtrl.category.description" id="description" name="description">
 						</div>
 						<div class="form-group">
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="category.active"> Enabled
+									<input type="checkbox" ng-model="categoryCtrl.category.active"> Enabled
 								</label>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-default" ng-disabled="categoryForm.$invalid">{{buttonText}}</button>
-						<div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>
+						<button type="submit" class="btn btn-default" ng-disabled="categoryCtrl.categoryForm.$invalid">{{categoryCtrl.buttonText}}</button>
+						<div class="alert alert-info margin-top-5" ng-show="categoryCtrl.message">{{categoryCtrl.message}}</div>
 					</form>
 				</div>
 			</div>
@@ -31,12 +31,12 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Categories
-				<button type="button" class="btn btn-default btn-sm" ng-click="initAddCategory()">
+				<button type="button" class="btn btn-default btn-sm" ng-click="categoryCtrl.initAddCategory()">
 					<span class="glyphicon glyphicon-plus"></span> New Category
 				</button>
 			</div>
 			<div class="panel-body">
-				<div class="alert alert-info margin-top-5" ng-show="deleteMessage">{{deleteMessage}}</div>
+				<div class="alert alert-info margin-top-5" ng-show="categoryCtrl.deleteMessage">{{categoryCtrl.deleteMessage}}</div>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -49,7 +49,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="category in categories">
+						<tr ng-repeat="category in categoryCtrl.categories">
 							<td>{{$index+1}}</td>
 							<td>{{category.name}}</td>
 							<td>{{category.description}}</td>
@@ -58,12 +58,12 @@
 								<span ng-hide="category.active">No</span>
 							</td>
 							<td>
-								<button type="button" class="btn btn-default btn-sm" ng-click="initEdit(category)">
+								<button type="button" class="btn btn-default btn-sm" ng-click="categoryCtrl.initEdit(category)">
 									<span class="glyphicon glyphicon-edit"></span>
 								</button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-default btn-sm" ng-click="deleteCategory(category)">
+								<button type="button" class="btn btn-default btn-sm" ng-click="categoryCtrl.deleteCategory(category)">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 							</td>

@@ -6,6 +6,6 @@
         .controller('HomeController', controller);
 
     /** @ngInject */
-    function controller($scope) {
+    function controller() {
     }
 })();

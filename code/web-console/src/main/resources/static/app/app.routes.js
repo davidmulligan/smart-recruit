@@ -72,7 +72,8 @@
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/user/user.html',
-                        controller : 'UserController'
+                        controller : 'UserController',
+                        controllerAs : 'userCtrl'
                     }
                 }
             })

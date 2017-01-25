@@ -6,7 +6,7 @@
         .controller('NavigationController', controller);
 
     /** @ngInject */
-    function controller($http, $scope, $state, $rootScope, AuthenticationService) {
+    function controller($state, $rootScope, AuthenticationService) {
 
         $rootScope.$on('LoginSuccessful', function() {
             $rootScope.user = AuthenticationService.getCurrentUser();

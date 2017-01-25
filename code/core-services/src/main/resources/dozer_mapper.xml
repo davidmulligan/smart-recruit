@@ -40,4 +40,13 @@
         </field>
     </mapping>
 
+    <mapping>
+        <class-a>com.eureka.smartrecruit.dto.UserDto</class-a>
+        <class-b>com.eureka.smartrecruit.domain.User</class-b>
+        <field>
+            <a>id</a>
+            <b>id</b>
+        </field>
+    </mapping>
+
 </mappings>

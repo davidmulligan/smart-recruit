@@ -6,95 +6,94 @@
         .controller('CategoryController', controller);
 
     /** @ngInject */
-    function controller($http, $scope) {
+    function controller($http) {
+        var vm = this;
+        vm.edit = false;
+	    vm.buttonText = 'Create';
 
-        var edit = false;
-
-	    $scope.buttonText = 'Create';
-
-        var init = function() {
+        vm.init = function() {
             $http.get('http://localhost:8888/categories')
 
             .success(function(result) {
-                $scope.categories = result;
-                $scope.category = null;
-                $scope.categoryForm.$setPristine();
-                $scope.message = '';
-                $scope.buttonText = 'Create';
+                vm.categories = result;
+                vm.category = null;
+                vm.categoryForm.$setPristine();
+                vm.message = '';
+                vm.buttonText = 'Create';
             })
 
             .error(function(error) {
-                $scope.message = error.message;
+                vm.message = error.message;
             });
         };
 
-        $scope.initEdit = function(category) {
-            edit = true;
-            $scope.category = category;
-            $scope.categoryForm.$setPristine();
-            $scope.message = '';
-            $scope.buttonText = 'Update';
+        vm.initEdit = function(category) {
+            vm.edit = true;
+            vm.category = category;
+            vm.categoryForm.$setPristine();
+            vm.message = '';
+            vm.buttonText = 'Update';
         };
 
-        $scope.initAddCategory = function() {
-            edit = false;
-            $scope.category = null;
-            $scope.categoryForm.$setPristine();
-            $scope.message = '';
-            $scope.buttonText = 'Create';
+        vm.initAddCategory = function() {
+            vm.edit = false;
+            vm.category = null;
+            vm.categoryForm.$setPristine();
+            vm.message = '';
+            vm.buttonText = 'Create';
         };
 
-        $scope.deleteCategory = function(category) {
+        vm.deleteCategory = function(category) {
             $http.delete('http://localhost:8888/categories/' + category.id)
 
             .success(function(res) {
-                $scope.deleteMessage = "Deleted Category";
-                init();
+                vm.deleteMessage = "Deleted Category";
+                vm.init();
             })
 
             .error(function(error) {
-                $scope.deleteMessage = error.message;
+                vm.deleteMessage = error.message;
             });
         };
 
-        var editCategory = function() {
-            $http.put('http://localhost:8888/categories', $scope.category)
+        vm.editCategory = function() {
+            $http.put('http://localhost:8888/categories', vm.category)
 
             .success(function(result) {
-                $scope.category = null;
-                $scope.categoryForm.$setPristine();
-                $scope.message = "Category Updated";
-                init();
+                vm.category = null;
+                vm.categoryForm.$setPristine();
+                vm.message = "Category Updated";
+                vm.init();
             })
 
             .error(function(error) {
-                $scope.message = error.message;
+                vm.message = error.message;
             });
         };
 
-        var addCategory = function() {
-            $http.post('http://localhost:8888/categories', $scope.category)
+        vm.addCategory = function() {
+            $http.post('http://localhost:8888/categories', vm.category)
 
             .success(function(result) {
-                result.category = null;
-                $scope.categoryForm.$setPristine();
-                $scope.message = "Category Created";
-                init();
+                vm.category = null;
+                vm.categoryForm.$setPristine();
+                vm.message = "Category Created";
+                vm.init();
             })
 
             .error(function(error) {
-                $scope.message = error.message;
+                vm.message = error.message;
             });
         };
 
-        $scope.submit = function() {
-            if (edit){
-                editCategory();
+        vm.submit = function() {
+            if (vm.edit){
+                vm.editCategory();
             } else {
-                addCategory();
+                vm.addCategory();
             }
         };
 
-	    init();
+	    vm.init();
     }
 })();

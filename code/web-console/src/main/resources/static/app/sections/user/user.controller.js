@@ -6,98 +6,96 @@
         .controller('UserController', controller);
 
     /** @ngInject */
-    function controller($http, $scope) {
+    function controller($http) {
+        var vm = this;
+        vm.edit = false;
+	    vm.buttonText = 'Create';
 
-        var edit = false;
-
-        $scope.buttonText = 'Create';
-
-        var init = function() {
+        vm.init = function() {
             $http.get('http://localhost:8888/users')
 
             .success(function(result) {
-                $scope.users = result;
-                $scope.user = null;
-                $scope.userForm.$setPristine();
-                $scope.message = '';
-                $scope.buttonText = 'Create';
-
+                vm.users = result;
+                vm.user = null;
+                vm.userForm.$setPristine();
+                vm.message = '';
+                vm.buttonText = 'Create';
             })
 
             .error(function(error) {
-                $scope.message = error.message;
+                vm.message = error.message;
             });
         };
 
-        $scope.initEdit = function(user) {
-            edit = true;
-            $scope.user = user;
-            $scope.userForm.$setPristine();
-            $scope.message = '';
-            $scope.buttonText = 'Update';
+        vm.initEdit = function(user) {
+            vm.edit = true;
+            vm.user = user;
+            vm.userForm.$setPristine();
+            vm.message = '';
+            vm.buttonText = 'Update';
         };
 
-        $scope.initAddUser = function() {
-            edit = false;
-            $scope.user = null;
-            $scope.userForm.$setPristine();
-            $scope.message = '';
-            $scope.buttonText = 'Create';
+        vm.initAddUser = function() {
+            vm.edit = false;
+            vm.user = null;
+            vm.userForm.$setPristine();
+            vm.message = '';
+            vm.buttonText = 'Create';
         };
 
-        $scope.deleteUser = function(user) {
+        vm.deleteUser = function(user) {
             $http.delete('http://localhost:8888/users/' + user.id)
 
             .success(function(result) {
-                $scope.deleteMessage = "Deleted User";
-                init();
+                vm.deleteMessage = "Deleted User";
+                vm.init();
             })
 
             .error(function(error) {
-                $scope.deleteMessage = error.message;
+                vm.deleteMessage = error.message;
             });
         };
 
-        var editUser = function(){
-            $http.put('http://localhost:8888/users', $scope.user)
+        vm.editUser = function(){
+            $http.put('http://localhost:8888/users', vm.user)
 
             .success(function(result) {
-                $scope.user = null;
-                $scope.confirmPassword = null;
-                $scope.userForm.$setPristine();
-                $scope.message = "User Updated";
-                init();
+                vm.user = null;
+                vm.confirmPassword = null;
+                vm.userForm.$setPristine();
+                vm.message = "User Updated";
+                vm.init();
             })
 
             .error(function(error) {
-                $scope.message = error.message;
+                vm.message = error.message;
             });
         };
 
-        var addUser = function(){
-            $http.post('http://localhost:8888/users', $scope.user)
+        vm.addUser = function(){
+            $http.post('http://localhost:8888/users', vm.user)
 
             .success(function(result) {
-                $scope.user = null;
-                $scope.confirmPassword = null;
-                $scope.userForm.$setPristine();
-                $scope.message = "User Created";
-                init();
+                vm.user = null;
+                vm.confirmPassword = null;
+                vm.userForm.$setPristine();
+                vm.message = "User Created";
+                vm.init();
             })
 
             .error(function(error) {
-                $scope.message = error.message;
+                vm.message = error.message;
             });
         };
 
-        $scope.submit = function() {
-            if (edit) {
-                editUser();
+        vm.submit = function() {
+            if (vm.edit) {
+                vm.editUser();
             } else{
-                addUser();
+                vm.addUser();
             }
         };
 
-        init();
+        vm.init();
     }
 })();

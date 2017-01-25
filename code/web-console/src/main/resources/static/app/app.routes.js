@@ -99,7 +99,8 @@
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/category/category.html',
-                        controller : 'CategoryController'
+                        controller : 'CategoryController',
+                        controllerAs : 'categoryCtrl'
                     }
                 }
             })
@@ -112,7 +113,8 @@
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/membership/membership.html',
-                        controller : 'MembershipController'
+                        controller : 'MembershipController',
+                        controllerAs : 'membershipCtrl'
                     }
                 }
             })

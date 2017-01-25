@@ -6,95 +6,94 @@
         .controller('MembershipController', controller);
 
     /** @ngInject */
-    function controller($http, $scope) {
+    function controller($http) {
+        var vm = this;
+        vm.edit = false;
+        vm.buttonText = 'Create';
 
-        var edit = false;
-
-        $scope.buttonText = 'Create';
-
-        var init = function() {
+        vm.init = function() {
             $http.get('http://localhost:8888/memberships')
 
             .success(function(result) {
-                $scope.memberships = result;
-                $scope.membership = null;
-                $scope.membershipForm.$setPristine();
-                $scope.message = '';
-                $scope.buttonText = 'Create';
+                vm.memberships = result;
+                vm.membership = null;
+                vm.membershipForm.$setPristine();
+                vm.message = '';
+                vm.buttonText = 'Create';
             })
 
             .error(function(error) {
-                $scope.message = error.message;
+                vm.message = error.message;
             });
         };
 
-        $scope.initEdit = function(membership) {
-            edit = true;
-            $scope.membership = membership;
-            $scope.membershipForm.$setPristine();
-            $scope.message = '';
-            $scope.buttonText = 'Update';
+        vm.initEdit = function(membership) {
+            vm.edit = true;
+            vm.membership = membership;
+            vm.membershipForm.$setPristine();
+            vm.message = '';
+            vm.buttonText = 'Update';
         };
 
-        $scope.initAddMembership = function() {
-            edit = false;
-            $scope.membership = null;
-            $scope.membershipForm.$setPristine();
-            $scope.message = '';
-            $scope.buttonText = 'Create';
+        vm.initAddMembership = function() {
+            vm.edit = false;
+            vm.membership = null;
+            vm.membershipForm.$setPristine();
+            vm.message = '';
+            vm.buttonText = 'Create';
         };
 
-        $scope.deleteMembership = function(membership) {
+        vm.deleteMembership = function(membership) {
             $http.delete('http://localhost:8888/memberships/' + membership.id)
 
             .success(function(res) {
-                $scope.deleteMessage = "Deleted Membership";
-                init();
+                vm.deleteMessage = "Deleted Membership";
+                vm.init();
             })
 
             .error(function(error) {
-                $scope.deleteMessage = error.message;
+                vm.deleteMessage = error.message;
             });
         };
 
-        var editMembership = function() {
-            $http.put('http://localhost:8888/memberships', $scope.membership)
+        vm.editMembership = function() {
+            $http.put('http://localhost:8888/memberships', vm.membership)
 
             .success(function(result) {
-                $scope.membership = null;
-                $scope.membershipForm.$setPristine();
-                $scope.message = "Membership Updated";
-                init();
+                vm.membership = null;
+                vm.membershipForm.$setPristine();
+                vm.message = "Membership Updated";
+                vm.init();
             })
 
             .error(function(error) {
-                $scope.message = error.message;
+                vm.message = error.message;
             });
         };
 
-        var addMembership = function() {
-            $http.post('http://localhost:8888/memberships', $scope.membership)
+        vm.addMembership = function() {
+            $http.post('http://localhost:8888/memberships', vm.membership)
 
             .success(function(result) {
-                result.membership = null;
-                $scope.membershipForm.$setPristine();
-                $scope.message = "Membership Created";
-                init();
+                vm.membership = null;
+                vm.membershipForm.$setPristine();
+                vm.message = "Membership Created";
+                vm.init();
             })
 
             .error(function(error) {
-                $scope.message = error.message;
+                vm.message = error.message;
             });
         };
 
-        $scope.submit = function() {
-            if (edit){
-                editMembership();
+        vm.submit = function() {
+            if (vm.edit){
+                vm.editMembership();
             } else {
-                addMembership();
+                vm.addMembership();
             }
         };
 
-        init();
+        vm.init();
     }
 })();

@@ -4,4 +4,31 @@
           xsi:schemaLocation="http://dozer.sourceforge.net
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
+    <mapping>
+        <class-a>com.eureka.smartrecruit.dto.CategoryDto</class-a>
+        <class-b>com.eureka.smartrecruit.domain.Category</class-b>
+        <field>
+            <a>id</a>
+            <b>id</b>
+        </field>
+    </mapping>
+
+    <mapping>
+        <class-a>com.eureka.smartrecruit.dto.ProjectDto</class-a>
+        <class-b>com.eureka.smartrecruit.domain.Project</class-b>
+        <field>
+            <a>id</a>
+            <b>id</b>
+        </field>
+    </mapping>
+
+    <mapping>
+        <class-a>com.eureka.smartrecruit.dto.SkillDto</class-a>
+        <class-b>com.eureka.smartrecruit.domain.Skill</class-b>
+        <field>
+            <a>id</a>
+            <b>id</b>
+        </field>
+    </mapping>
+
 </mappings>

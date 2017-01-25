@@ -17,6 +17,6 @@ public class ProjectDto {
     private String title;
     private String description;
     private String status;
-    private CategoryDto categoryDto;
+    private CategoryDto category;
     private List<SkillDto> skills;
 }

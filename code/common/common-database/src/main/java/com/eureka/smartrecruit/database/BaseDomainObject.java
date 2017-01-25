@@ -1,6 +1,5 @@
 package com.eureka.smartrecruit.database;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -27,7 +26,6 @@ public class BaseDomainObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter(value = AccessLevel.PROTECTED)
     private Long id;
 
     @Column

@@ -2,22 +2,24 @@
     'use strict';
 
     angular
-        .module('skill.core', [])
-        .controller('SkillController', controller);
+        .module('project.core', [])
+        .controller('ProjectController', controller);
 
     /** @ngInject */
-    function controller($http) {
+    function controller($http, projectData) {
         var vm = this;
+        vm.categories = projectData.categories;
+        vm.skills = projectData.skills;
         vm.edit = false;
         vm.buttonText = 'Create';
 
         vm.init = function() {
-            $http.get('http://localhost:8888/skills')
+            $http.get('http://localhost:8888/projects')
 
             .success(function(result) {
-                vm.skills = result;
-                vm.skill = null;
-                vm.skillForm.$setPristine();
+                vm.projects = result;
+                vm.project = null;
+                vm.projectForm.$setPristine();
                 vm.message = '';
                 vm.buttonText = 'Create';
             })
@@ -27,27 +29,27 @@
             });
         };
 
-        vm.initEdit = function(skill) {
+        vm.initEdit = function(project) {
             vm.edit = true;
-            vm.skill = skill;
-            vm.skillForm.$setPristine();
+            vm.project = project;
+            vm.projectForm.$setPristine();
             vm.message = '';
             vm.buttonText = 'Update';
         };
 
-        vm.initAddSkill = function() {
+        vm.initAddProject = function() {
             vm.edit = false;
-            vm.skill = null;
-            vm.skillForm.$setPristine();
+            vm.project = null;
+            vm.projectForm.$setPristine();
             vm.message = '';
             vm.buttonText = 'Create';
         };
 
-        vm.deleteSkill = function(skill) {
-            $http.delete('http://localhost:8888/skills/' + skill.id)
+        vm.deleteProject = function(project) {
+            $http.delete('http://localhost:8888/projects/' + project.id)
 
             .success(function(res) {
-                vm.deleteMessage = "Deleted Skill";
+                vm.deleteMessage = "Deleted Project";
                 vm.init();
             })
 
@@ -56,13 +58,13 @@
             });
         };
 
-        vm.editSkill = function() {
-            $http.put('http://localhost:8888/skills', vm.skill)
+        vm.editProject = function() {
+            $http.put('http://localhost:8888/projects', vm.project)
 
             .success(function(result) {
-                vm.skill = null;
-                vm.skillForm.$setPristine();
-                vm.message = "Skill Updated";
+                vm.project = null;
+                vm.projectForm.$setPristine();
+                vm.message = "Project Updated";
                 vm.init();
             })
 
@@ -71,13 +73,13 @@
             });
         };
 
-        vm.addSkill = function() {
-            $http.post('http://localhost:8888/skills', vm.skill)
+        vm.addProject = function() {
+            $http.post('http://localhost:8888/projects', vm.project)
 
             .success(function(result) {
-                vm.skill = null;
-                vm.skillForm.$setPristine();
-                vm.message = "Skill Created";
+                vm.project = null;
+                vm.projectForm.$setPristine();
+                vm.message = "Project Created";
                 vm.init();
             })
 
@@ -88,9 +90,9 @@
 
         vm.submit = function() {
             if (vm.edit){
-                vm.editSkill();
+                vm.editProject();
             } else {
-                vm.addSkill();
+                vm.addProject();
             }
         };
 

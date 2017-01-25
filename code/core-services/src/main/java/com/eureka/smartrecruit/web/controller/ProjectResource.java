@@ -40,7 +40,7 @@ public class ProjectResource {
         Project project = projectService.findById(projectDto.getId());
         project.setTitle(projectDto.getTitle());
         project.setDescription(projectDto.getDescription());
-        project.setCategory(mapper.map(projectDto.getCategoryDto(), Category.class));
+        project.setCategory(mapper.map(projectDto.getCategory(), Category.class));
         project.setSkills(projectDto.getSkills().stream().map(skill -> mapper.map(skill, Skill.class)).collect(Collectors.toList()));
         projectService.update(project);
     }

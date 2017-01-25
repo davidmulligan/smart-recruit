@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum ProjectStatus {
 
-    DRAFT {
+    PENDING {
 
         @Override
         public void publish(Project project) {

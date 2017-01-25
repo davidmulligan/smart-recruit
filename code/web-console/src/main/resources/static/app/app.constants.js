@@ -1,5 +1,6 @@
 (function () {
 
     return angular.module('app.constants', [])
-        .constant('TIS_API_URL', '/api/tis');
+        .constant('CATEGORIES_URL', 'http://localhost:8888/categories')
+        .constant('SKILLS_URL', 'http://localhost:8888/skills');
 })();

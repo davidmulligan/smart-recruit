@@ -10,6 +10,7 @@
             'category',
             'skill',
             'membership',
-            'user'
+            'user',
+            'project'
     ]);
 })();

@@ -3,6 +3,7 @@
 
     angular
         .module('app.config', [
+            'ngResource',
             'ui.router',
             'app.constants',
             'app.factories',
@@ -11,7 +12,8 @@
     ])
     .run(runner)
     .config(state)
-    .config(config);
+    .config(config)
+    .config(resources);
 
     /* @ngInject */
     function runner($rootScope, $state, $stateParams, AuthenticationService) {
@@ -53,8 +55,30 @@
     function config($logProvider, $httpProvider) {
         $logProvider.debugEnabled(true);
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-        $httpProvider.defaults.headers.post = {};
-        $httpProvider.defaults.headers.put = {};
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/json';
         $httpProvider.defaults.headers.patch = {};
+    }
+
+    /** @ngInject */
+    function resources($resourceProvider) {
+        $resourceProvider.defaults.actions = {
+            get: {
+                method: 'GET'
+            },
+            getAll: {
+                method: 'GET',
+                isArray: true
+            },
+            post: {
+                method: 'POST'
+            },
+            update: {
+                method: 'PUT'
+            },
+            del: {
+                method: 'DELETE'
+            }
+        };
     }
 })();

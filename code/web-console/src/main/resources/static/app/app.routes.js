@@ -39,6 +39,30 @@
                     }
                 }
             })
+            .state('projects', {
+                parent : 'nav',
+                url : '/projects',
+                data : {
+                    role : 'USER'
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/project/project.html',
+                        controller : 'ProjectController',
+                        controllerAs: 'projectCtrl'
+                    }
+                },
+                resolve: {
+
+                    /* @ngInject */
+                    projectData: function($q, Categories, Skills) {
+                        return $q.all({
+                             categories: Categories.getAll(),
+                             skills: Skills.getAll()
+                        });
+                    }
+                }
+            })
             .state('users', {
                 parent : 'nav',
                 url : '/users',
@@ -61,7 +85,8 @@
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/skill/skill.html',
-                        controller : 'SkillController'
+                        controller : 'SkillController',
+                        controllerAs : 'skillCtrl'
                     }
                 }
             })

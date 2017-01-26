@@ -25,7 +25,8 @@
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/auth/login/login.html',
-                        controller : 'LoginController'
+                        controller : 'LoginController',
+                        controllerAs : 'loginCtrl'
                     }
                 }
             })
@@ -125,7 +126,8 @@
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/user/register/register.html',
-                        controller : 'RegisterController'
+                        controller : 'RegisterController',
+                        controllerAs : 'registerCtrl'
                     }
                 }
             })

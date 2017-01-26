@@ -3,12 +3,12 @@
 		<div class="panel-heading">Login</div>
 		<div class="panel-body">
 			<div class="col-md-12">
-				<form ng-submit="login()">
+				<form ng-submit="loginCtrl.login()">
 					<div class="form-group">
-						<label for="username">Username:</label><input type="txt" class="form-control" ng-model="username" id="username">
+						<label for="username">Username:</label><input type="txt" class="form-control" ng-model="loginCtrl.username" id="username">
 					</div>
 					<div class="form-group">
-						<label for="pwd">Password:</label> <input type="password" class="form-control" id="pwd" ng-model="password">
+						<label for="pwd">Password:</label> <input type="password" class="form-control" id="pwd" ng-model="loginCtrl.password">
 					</div>
 					<button type="submit" class="btn btn-default">Submit</button>
 					<button class="btn btn-default" ui-sref="register">Register</button>

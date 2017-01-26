@@ -26,11 +26,11 @@
 				<li ng-show="user"><a ui-sref="users">Users</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li ng-show="user"><span>{{user}}</span></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
 				<li ng-show="user"><a><span ng-click="logout()" href="">Logout</span></a></li>
 				<li ng-show="!user"><a ui-sref="register">Register</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-show="user"><a><span>{{user}}</span></a></li>
 			</ul>
 		</div>
 	</div>

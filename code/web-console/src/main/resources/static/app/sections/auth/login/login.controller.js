@@ -6,21 +6,24 @@
         .controller('LoginController', controller);
 
     /** @ngInject */
-    function controller($scope, $state, AuthenticationService) {
+    function controller($state, AuthenticationService) {
+        var vm = this;
 
-        $scope.login = function() {
-            AuthenticationService.login({username: $scope.username, password: $scope.password})
+        vm.login = function() {
+            AuthenticationService.login({username: vm.username, password: vm.password})
+
                 .then(function(result) {
-                    $scope.password = null;
+                    vm.password = null;
                     if (AuthenticationService.isAuthenticated()) {
-                        $scope.message = '';
+                        vm.message = '';
                         $state.go('home');
                     } else {
-                        $scope.message = 'Authentication Failed';
+                        vm.message = 'Authentication Failed';
                     }
                 })
+
                 .catch(function() {
-                    $scope.message = 'Authentication Failed';
+                    vm.message = 'Authentication Failed';
                 });
     	};
     }

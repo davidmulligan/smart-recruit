@@ -6,22 +6,22 @@
         .controller('RegisterController', controller);
 
     /** @ngInject */
-    function controller($http, $scope, AuthenticationService) {
+    function controller($http, AuthenticationService) {
+        var vm = this;
 
-        $scope.submit = function() {
-            $http.post('http://localhost:8888/auth/register', $scope.user)
+        vm.submit = function() {
+            $http.post('http://localhost:8888/auth/register', vm.user)
 
             .success(function(res) {
-                $scope.user = null;
-                $scope.confirmPassword = null;
-                $scope.register.$setPristine();
-                $scope.message = "Registration Successful";
+                vm.user = null;
+                vm.confirmPassword = null;
+                vm.registerForm.$setPristine();
+                vm.message = "Registration Successful";
             })
 
             .error(function(error) {
-                $scope.message = error.message;
+                vm.message = error.message;
             });
-
         };
     }
 })();

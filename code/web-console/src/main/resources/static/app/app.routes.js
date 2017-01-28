@@ -36,7 +36,8 @@
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/home/home.html',
-                        controller : 'HomeController'
+                        controller : 'HomeController',
+                        controllerAs : 'homeCtrl'
                     }
                 }
             })

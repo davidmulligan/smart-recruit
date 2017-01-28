@@ -5,8 +5,10 @@ import com.eureka.smartrecruit.domain.Project;
 import com.eureka.smartrecruit.domain.Skill;
 import com.eureka.smartrecruit.dto.ProjectDto;
 import com.eureka.smartrecruit.service.ProjectService;
+import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.dozer.Mapper;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,7 +54,7 @@ public class ProjectResource {
     }
 
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public List<ProjectDto> findAll() {
-        return projectService.findAll().stream().map(project -> mapper.map(project, ProjectDto.class)).collect(Collectors.toList());
+    public List<ProjectDto> find(@QuerydslPredicate(root = Project.class) Predicate predicate) {
+        return projectService.find(predicate).stream().map(project -> mapper.map(project, ProjectDto.class)).collect(Collectors.toList());
     }
 }

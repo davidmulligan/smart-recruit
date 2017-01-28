@@ -1,8 +1,10 @@
 # Smart Recruit
 
-When editing with joins, need to set values
 
+
+
+Apply for project
+mark project as favourite
+Leave feedback for project
+When editing with joins, need to set values
 feedback categories/type
-UserSkills
-UserWallet
-tbl_project_dispute

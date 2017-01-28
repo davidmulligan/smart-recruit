@@ -65,6 +65,20 @@
                     }
                 }
             })
+            .state('project', {
+                parent : 'nav',
+                url : '/project/:selectedProject',
+                data : {
+                    role : 'USER'
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/project/viewproject/viewproject.html',
+                        controller : 'ViewProjectController',
+                        controllerAs: 'viewProjectCtrl'
+                    }
+                }
+            })
             .state('users', {
                 parent : 'nav',
                 url : '/users',

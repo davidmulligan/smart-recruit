@@ -39,7 +39,7 @@
                         <td>{{project.category.name}}</td>
                         <td><span ng-repeat="skill in project.skills">{{skill.name}} | </span></td>
                         <td>
-                            <button type="button" class="btn btn-default btn-sm" ng-click="homeCtrl.view(project)">
+                            <button type="button" class="btn btn-default btn-sm" ui-sref="project({ selectedProject: project.id })">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                             </button>
                         </td>

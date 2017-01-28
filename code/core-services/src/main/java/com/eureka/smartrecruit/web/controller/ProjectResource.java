@@ -53,6 +53,11 @@ public class ProjectResource {
         projectService.delete(id);
     }
 
+    @RequestMapping(value="/{id}", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public ProjectDto findById(@PathVariable("id") Long id) {
+        return mapper.map(projectService.findById(id), ProjectDto.class);
+    }
+
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<ProjectDto> find(@QuerydslPredicate(root = Project.class) Predicate predicate) {
         return projectService.find(predicate).stream().map(project -> mapper.map(project, ProjectDto.class)).collect(Collectors.toList());

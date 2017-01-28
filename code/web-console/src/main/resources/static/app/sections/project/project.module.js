@@ -3,6 +3,7 @@
 
     angular
         .module('project', [
+            'viewproject',
             'project.core'
         ]);
 })();

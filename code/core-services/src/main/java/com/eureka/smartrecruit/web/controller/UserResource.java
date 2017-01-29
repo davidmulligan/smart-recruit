@@ -1,6 +1,7 @@
 package com.eureka.smartrecruit.web.controller;
 
 import com.eureka.smartrecruit.domain.User;
+import com.eureka.smartrecruit.domain.enumeration.UserType;
 import com.eureka.smartrecruit.dto.UserDto;
 import com.eureka.smartrecruit.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -52,5 +53,20 @@ public class UserResource {
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<UserDto> findAll() {
         return userService.findAll().stream().map(user -> mapper.map(user, UserDto.class)).collect(Collectors.toList());
+    }
+
+    @RequestMapping(value="/clients", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public List<UserDto> getClients() {
+        return userService.findByType(UserType.CLIENT).stream().map(user -> mapper.map(user, UserDto.class)).collect(Collectors.toList());
+    }
+
+    @RequestMapping(value="/freelancers", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public List<UserDto> getFreelancers() {
+        return userService.findByType(UserType.FREELANCER).stream().map(user -> mapper.map(user, UserDto.class)).collect(Collectors.toList());
+    }
+
+    @RequestMapping(value="/{id}", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public UserDto findById(@PathVariable("id") Long id) {
+        return mapper.map(userService.findById(id), UserDto.class);
     }
 }

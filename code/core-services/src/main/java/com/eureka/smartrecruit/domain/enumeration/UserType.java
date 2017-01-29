@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 public enum UserType {
 
     CLIENT("Client"),
-    USER("User");
+    FREELANCER("Freelancer");
 
     private final String description;
 

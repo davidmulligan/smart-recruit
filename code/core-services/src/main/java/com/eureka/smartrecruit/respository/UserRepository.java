@@ -1,6 +1,7 @@
 package com.eureka.smartrecruit.respository;
 
 import com.eureka.smartrecruit.domain.User;
+import com.eureka.smartrecruit.domain.enumeration.UserType;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Optional<User> findById(Long id);
 
-    Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String email);
 
-    List<User> findAllByOrderByUsernameAsc();
+    List<User> findAllByOrderByEmailAsc();
+
+    List<User> findByTypeOrderByLastNameAscFirstNameAsc(UserType userType);
 }

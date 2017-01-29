@@ -5,13 +5,13 @@
 			<div class="col-md-12">
 				<form ng-submit="loginCtrl.login()">
 					<div class="form-group">
-						<label for="username">Username:</label><input type="txt" class="form-control" ng-model="loginCtrl.username" id="username">
+						<label for="email">Email:</label><input type="text" class="form-control" ng-model="loginCtrl.email" id="email">
 					</div>
 					<div class="form-group">
 						<label for="pwd">Password:</label> <input type="password" class="form-control" id="pwd" ng-model="loginCtrl.password">
 					</div>
 					<button type="submit" class="btn btn-default">Submit</button>
-					<button class="btn btn-default" ui-sref="register">Register</button>
+					<button class="btn btn-default" ui-sref="register">Create Account</button>
 					<div class="alert alert-info margin-top-5" ng-show="loginCtrl.message">{{loginCtrl.message}}</div>
 				</form>
 			</div>

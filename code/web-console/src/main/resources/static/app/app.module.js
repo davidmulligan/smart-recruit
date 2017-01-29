@@ -4,13 +4,14 @@
     angular
         .module('app.module', [
             'app.config',
-            'auth',
             'navigation',
             'home',
-            'category',
-            'skill',
-            'membership',
-            'user',
-            'project'
+            'login',
+            'freelancers'
+//            'category',
+//            'skill',
+//            'membership',
+//            'user',
+//            'project'
     ]);
 })();

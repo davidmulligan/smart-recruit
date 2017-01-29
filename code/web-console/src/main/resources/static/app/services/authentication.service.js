@@ -37,6 +37,10 @@
                         RefreshTokenStorage.clear();
                         throw e;
                     });
+            },
+            recoverToken: function() {
+                currentUser = JwtService.getUser(AccessTokenStorage.retrieve());
+                $http.defaults.headers.common['X-Authorization'] = 'Bearer ' + AccessTokenStorage.retrieve();
             }
         }
     }

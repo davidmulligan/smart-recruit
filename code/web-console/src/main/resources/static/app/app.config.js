@@ -16,16 +16,20 @@
     .config(resources);
 
     /* @ngInject */
-    function runner($rootScope, $state, $stateParams, AuthenticationService) {
+    function runner($rootScope, $state, $stateParams, AuthenticationService, AccessTokenStorage) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
 
         // The following method will run at the time of initializing the module, running once.
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
             if (!AuthenticationService.isAuthenticated()) {
-                if (toState.name != 'login' && toState.name != 'register') {
-                    event.preventDefault();
-                    $state.go('login');
+                if (toState.data.secure) {
+                    if (AccessTokenStorage.retrieve()) {
+                        AuthenticationService.recoverToken();
+                    } else {
+                        event.preventDefault();
+                        $state.go('login');
+                    }
                 }
             } else {
                 if (toState.data && toState.data.role) {

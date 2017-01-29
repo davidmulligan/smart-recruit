@@ -10,7 +10,7 @@
         var vm = this;
 
         vm.login = function() {
-            AuthenticationService.login({username: vm.username, password: vm.password})
+            AuthenticationService.login({username: vm.email, password: vm.password})
 
                 .then(function(result) {
                     vm.password = null;

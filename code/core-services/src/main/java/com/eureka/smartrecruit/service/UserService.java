@@ -1,6 +1,7 @@
 package com.eureka.smartrecruit.service;
 
 import com.eureka.smartrecruit.domain.User;
+import com.eureka.smartrecruit.domain.enumeration.UserType;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +32,8 @@ public class UserService implements org.springframework.security.core.userdetail
     }
 
     @Override
-    public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
+    public User loadUserByUsername(String email) throws UsernameNotFoundException {
+        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
     }
 
     public User findById(final Long id) {
@@ -40,6 +41,10 @@ public class UserService implements org.springframework.security.core.userdetail
     }
 
     public List<User> findAll() {
-        return userRepository.findAllByOrderByUsernameAsc();
+        return userRepository.findAllByOrderByEmailAsc();
+    }
+
+    public List<User> findByType(UserType userType) {
+        return userRepository.findByTypeOrderByLastNameAscFirstNameAsc(userType);
     }
 }

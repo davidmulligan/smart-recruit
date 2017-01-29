@@ -2,7 +2,8 @@
 
 
 
-
+relogin on refresh
+use modals
 Apply for project
 mark project as favourite
 Leave feedback for project

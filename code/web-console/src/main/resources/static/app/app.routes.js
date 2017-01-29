@@ -12,6 +12,9 @@
             .state('nav', {
                 abstract : true,
                 url : '',
+                data : {
+                    secure : true
+                },
                 views : {
                     'nav@' : {
                         templateUrl : 'app/sections/navigation/navigation.html',
@@ -22,17 +25,37 @@
             .state('login', {
                 parent : 'nav',
                 url : '/login',
+                data : {
+                    secure : false
+                },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/auth/login/login.html',
+                        templateUrl : 'app/sections/login/login.html',
                         controller : 'LoginController',
                         controllerAs : 'loginCtrl'
+                    }
+                }
+            })
+            .state('register', {
+                parent : 'nav',
+                url : '/register',
+                data : {
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/user/register/register.html',
+                        controller : 'RegisterController',
+                        controllerAs : 'registerCtrl'
                     }
                 }
             })
             .state('home', {
                 parent : 'nav',
                 url : '/',
+                data : {
+                    secure : false
+                },
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/home/home.html',
@@ -41,6 +64,24 @@
                     }
                 }
             })
+            .state('freelancers', {
+                parent : 'nav',
+                url : '/freelancers',
+                data : {
+                    role : 'USER',
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/freelancers/freelancers.html',
+                        controller : 'FreelancersController',
+                        controllerAs : 'freelancersCtrl'
+                    }
+                }
+            })
+
+
+
             .state('projects', {
                 parent : 'nav',
                 url : '/projects',
@@ -135,20 +176,14 @@
                     }
                 }
             })
-            .state('register', {
-                parent : 'nav',
-                url : '/register',
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/user/register/register.html',
-                        controller : 'RegisterController',
-                        controllerAs : 'registerCtrl'
-                    }
-                }
-            })
+
+
             .state('page-not-found', {
                 parent : 'nav',
                 url : '/page-not-found',
+                data : {
+                    secure : false
+                },
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/page-not-found.html'
@@ -158,12 +193,16 @@
             .state('access-denied', {
                 parent : 'nav',
                 url : '/access-denied',
+                data : {
+                    secure : false
+                },
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/access-denied.html'
                     }
                 }
             });
+
             $urlRouterProvider.otherwise('/page-not-found');
     }
 })();

@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 public class User extends BaseDomainObject implements UserDetails {
 
     @Column(nullable = false)
-    private String username;
+    private String email;
 
     @Column(nullable = false)
     private String password;
@@ -44,9 +44,6 @@ public class User extends BaseDomainObject implements UserDetails {
 
     @Column
     private String companyName;
-
-    @Column(nullable = false)
-    private String email;
 
     @Column
     private String securityQuestion;
@@ -93,6 +90,11 @@ public class User extends BaseDomainObject implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole())).collect(Collectors.toSet());
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     @Override

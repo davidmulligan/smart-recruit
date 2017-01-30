@@ -79,6 +79,21 @@
                     }
                 }
             })
+            .state('jobs', {
+                parent : 'nav',
+                url : '/jobs',
+                data : {
+                    role : 'USER',
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/jobs/jobs.html',
+                        controller : 'JobsController',
+                        controllerAs : 'jobsCtrl'
+                    }
+                }
+            })
 
 
 

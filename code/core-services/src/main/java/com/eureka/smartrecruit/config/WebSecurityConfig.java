@@ -48,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String TOKEN_REFRESH_ENTRY_POINT = "/auth/token";
     private static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/**";
     private static final String FREELANCERS_ENTRY_POINT = "/users/freelancers";
+    private static final String PROJECTS_ENTRY_POINT = "/projects";
 
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) {
@@ -79,6 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(TOKEN_REFRESH_ENTRY_POINT).permitAll()
                     .antMatchers(REGISTRATION_ENTRY_POINT).permitAll()
                     .antMatchers(FREELANCERS_ENTRY_POINT).permitAll()
+                    .antMatchers(PROJECTS_ENTRY_POINT).permitAll()
                 .and()
                     .authorizeRequests()
                     .antMatchers(TOKEN_BASED_AUTH_ENTRY_POINT).authenticated()
@@ -101,7 +103,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter() throws Exception {
-        List<String> pathsToSkip = Arrays.asList(TOKEN_REFRESH_ENTRY_POINT, FORM_BASED_LOGIN_ENTRY_POINT, REGISTRATION_ENTRY_POINT, FREELANCERS_ENTRY_POINT);
+        List<String> pathsToSkip = Arrays.asList(TOKEN_REFRESH_ENTRY_POINT, FORM_BASED_LOGIN_ENTRY_POINT, REGISTRATION_ENTRY_POINT, FREELANCERS_ENTRY_POINT, PROJECTS_ENTRY_POINT);
         SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, TOKEN_BASED_AUTH_ENTRY_POINT);
         JwtTokenAuthenticationProcessingFilter filter = new JwtTokenAuthenticationProcessingFilter(failureHandler, tokenExtractor, matcher);
         filter.setAuthenticationManager(authenticationManager);

@@ -1,0 +1,55 @@
+<style>
+    .glyphicon { margin-right:5px;}
+.section-box h2 { margin-top:0px;}
+.section-box h2 a { font-size:15px; }
+.glyphicon-heart { color:#e74c3c;}
+.glyphicon-comment { color:#27ae60;}
+.separator { padding-right:5px;padding-left:5px; }
+.section-box hr {margin-top: 0;margin-bottom: 5px;border: 0;border-top: 1px solid rgb(199, 199, 199);}
+</style>
+
+<div class="row">
+    <div class="col-md-6" ng-repeat="job in jobsCtrl.jobs">
+        <div class="well well-sm">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 section-box">
+                    <h2> <a href="" data-toggle="modal" data-target="#myModal-{{job.id}}">{{job.title}}</a></h2>
+                    <p>{{job.description}}</p>
+                    <hr />
+                    <div class="row rating-desc">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-heart"></span>
+                            <span class="glyphicon glyphicon-heart"></span>
+                            <span class="glyphicon glyphicon-heart"></span>
+                            <span class="glyphicon glyphicon-heart"></span>
+                            <span class="glyphicon glyphicon-heart"></span>(36)
+                            <span class="separator">|</span>
+                            <span class="glyphicon glyphicon-comment"></span>(100 Comments)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal-{{job.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title" id="myModalLabel">More About {{job.title}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-left"><strong>Description: </strong><br>{{job.description}}</p>
+                        <p class="text-left"><strong>Skills: </strong><br><span class="label label-info" ng-repeat="skill in job.skills">{{skill.name}} </span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <center>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">I've read enough about this job</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

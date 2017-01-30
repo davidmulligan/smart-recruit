@@ -7,7 +7,8 @@
             'navigation',
             'home',
             'login',
-            'freelancers'
+            'freelancers',
+            'jobs'
 //            'category',
 //            'skill',
 //            'membership',

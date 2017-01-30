@@ -9,6 +9,19 @@
     function controller($http, JOBS_URL) {
         var vm = this;
 
+        vm.init = function() {
+            $http.get('http://localhost:8888/skills/principals')
+
+            .success(function(result) {
+                vm.skills = result;
+                vm.message = '';
+            })
+
+            .error(function(error) {
+                vm.message = error.message;
+            });
+        };
+
         vm.search = function() {
             $http.get(JOBS_URL + '?title=' + vm.searchTitle)
 
@@ -21,5 +34,7 @@
                     vm.message = error.message;
                 });
         }
+
+        vm.init();
     }
 })();

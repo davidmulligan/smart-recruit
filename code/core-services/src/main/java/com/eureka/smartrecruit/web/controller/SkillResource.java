@@ -38,6 +38,7 @@ public class SkillResource {
         Skill skill = skillService.findById(skillDto.getId());
         skill.setName(skillDto.getName());
         skill.setDescription(skillDto.getDescription());
+        skill.setPrincipal(skillDto.isPrincipal());
         skill.setActive(skillDto.isActive());
         skillService.update(skill);
     }
@@ -51,5 +52,10 @@ public class SkillResource {
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<SkillDto> findAll() {
         return skillService.findAll().stream().map(skill -> mapper.map(skill, SkillDto.class)).collect(Collectors.toList());
+    }
+
+    @RequestMapping(value="/principals", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public List<SkillDto> findPrincipals() {
+        return skillService.findPrincipals().stream().map(skill -> mapper.map(skill, SkillDto.class)).collect(Collectors.toList());
     }
 }

@@ -21,5 +21,8 @@ public class Skill extends BaseDomainObject {
     private String description;
 
     @Column(nullable = false)
+    private boolean principal;
+
+    @Column(nullable = false)
     private boolean active;
 }

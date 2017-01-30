@@ -13,4 +13,6 @@ public interface SkillRepository extends CrudRepository<Skill, Long> {
     Optional<Skill> findById(Long id);
 
     List<Skill> findAllByOrderByNameAsc();
+
+    List<Skill> findPrincipalByOrderByNameAsc();
 }

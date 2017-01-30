@@ -1,56 +1,136 @@
-<style>
-    .border-right {
-        border-right: 1px solid #ccc;
-    }
-    .border-bottom {
-        border-bottom: 1px solid #ccc;
-    }
-</style>
 <div ng-show="!user">
-    <div class="row border-bottom">
-        <div class="col-md-7 border-right">
-            <h1>Do you organise events regularly</h1>
-            <p>You can be a product company, start-up promoting their product, ... (list of potential cases). We know that agencies suck (+ data reference). We have the solution.</p>
-            <h2>Ad-hoc Event?</h2>
-            <p>Organising birth party (or another ad-hoc event)? Leave it to the professionals. We can offer you bunch of vetted freelancers who want to show their best and receive good feedback.</p>
-            <p><a ui-sref="post">Post a job</a></p>
+    <div class="row">
+        <div class="col-xs-12 col-md-7">
+            <div class="box">
+                <div class="icon">
+                    <div class="image"><i class="fa fa-thumbs-o-up"></i></div>
+                    <div class="info">
+                        <h3 class="title">Do you organise events regularly?</h3>
+                        <p>You can be a product company, start-up promoting their product, ... (list of potential cases). We know that agencies suck (+ data reference). We have the solution.</p>
+                        <h4>Ad-hoc Event?</h4>
+                        <p>Organising birth party (or another ad-hoc event)? Leave it to the professionals. We can offer you bunch of vetted freelancers who want to show their best and receive good feedback.</p>
+                        <div class="more">
+                            <a ui-sref="post" title="Post a Job">Post a Job <i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="space"></div>
+            </div>
         </div>
-        <div class="col-md-5">
-            <h1>Want to offer your skills?</h1>
-            <p>You are freelancers and are looking for top paying companies? Tired of agencies and ready to build your personal brand?</p>
-            <p>In order to offer the best freelancers to our clients, we limit the number and perform a personal assessment with them. Want to be one of them?</p>
-            <p><b>Hurry up, only 100 places left!</b></p>
-            <p><a ui-sref="">Apply</a></p>
+        <div class="col-xs-12 col-md-5">
+            <div class="box">
+                <div class="icon">
+                    <div class="image"><i class="fa fa-flag"></i></div>
+                    <div class="info">
+                        <h3 class="title">Want to offer your skills?</h3>
+                        <p>You are freelancers and are looking for top paying companies? Tired of agencies and ready to build your personal brand?</p>
+                        <p>In order to offer the best freelancers to our clients, we limit the number and perform a personal assessment with them. Want to be one of them?</p>
+                        <p><b>Hurry up, only 100 places left!</b></p>
+                        <div class="more">
+                            <a href="#" title="Post a Job">Apply <i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="space"></div>
+            </div>
         </div>
     </div>
-    <div class="row border-bottom">
+
+    <div class="row">
         <h1 class="text-center">How does it work?</h1>
-        <div class="col-md-4 border-right">
-            <h2 class="text-center">1. Post a job</h2>
-            <p>Are you an event organiser? Post the offer and see who from our freelancers is available. It is for free.</p>
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+            <div class="box">
+                <div class="icon">
+                    <div class="image"><i class="fa fa-thumbs-o-up"></i></div>
+                    <div class="info">
+                        <h3 class="title">1. Post a job</h3>
+                        <p>Are you an event organiser? Post the offer and see who from our freelancers is available. It is for free.</p>
+                        <div class="more">
+                            <a href="#" title="Title Link">
+                                Read More <i class="fa fa-angle-double-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="space"></div>
+            </div>
         </div>
-        <div class="col-md-4 border-right">
-            <h2 class="text-center">2. Apply for the job</h2>
-            <p>Are you a vetted freelancer and have account with us, you can apply for the jobs posted. Be your own working agent.</p>
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+            <div class="box">
+                <div class="icon">
+                    <div class="image"><i class="fa fa-flag"></i></div>
+                    <div class="info">
+                        <h3 class="title">2. Apply for the job</h3>
+                        <p>Are you a vetted freelancer and have account with us, you can apply for the jobs posted. Be your own working agent.</p>
+                        <div class="more">
+                            <a href="#" title="Title Link">
+                                Read More <i class="fa fa-angle-double-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="space"></div>
+            </div>
         </div>
-        <div class="col-md-4">
-            <h2 class="text-center">3. Pay and get paid.</h2>
-            <p>Once everybody is happy, money from event organiser are transferred to freelancers.</p>
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+            <div class="box">
+                <div class="icon">
+                    <div class="image"><i class="fa fa-desktop"></i></div>
+                    <div class="info">
+                        <h3 class="title">3. Pay and get paid.</h3>
+                        <p>Once everybody is happy, money from event organiser are transferred to freelancers.</p>
+                        <div class="more">
+                            <a href="#" title="Title Link">
+                                Read More <i class="fa fa-angle-double-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="space"></div>
+            </div>
         </div>
         <div class="col-md-12">
-            <p>Once the job is posted, we deposit money and release them only when both sides agree. We guarantee your satisfaction thanks to our assessment and your feedback, for both, event organisers and freelancers. Even though we think it is almost unnecessary, because you can't hide behind any working agency.</p>
-            <p class="text-center"><a ui-sref="guide">Learn more</a></p>
+        <p>Once the job is posted, we deposit money and release them only when both sides agree. We guarantee your satisfaction thanks to our assessment and your feedback, for both, event organisers and freelancers. Even though we think it is almost unnecessary, because you can't hide behind any working agency.</p>
+            <div class="more">
+                <a href="#" title="Title Link">
+                    Read More <i class="fa fa-angle-double-right"></i>
+                </a>
+            </div>
         </div>
     </div>
-    <div class="row border-bottom">
-        <div class="col-md-7 border-right">
-            <h1>Popular skills offered</h1>
+
+    <div class="row">
+            <div class="col-xs-12 col-md-7">
+                <div class="box">
+                    <div class="icon">
+                        <div class="image"><i class="fa fa-thumbs-o-up"></i></div>
+                        <div class="info">
+                            <h3 class="title">Popular skills offered</h3>
+                            <div class="more">
+                                <a title="View Skills">View More <i class="fa fa-angle-double-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space"></div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-5">
+                <div class="box">
+                    <div class="icon">
+                        <div class="image"><i class="fa fa-flag"></i></div>
+                        <div class="info">
+                            <h3 class="title">Recent jobs posted</h3>
+                            <div class="more">
+                                <a title="View Jobs">View More <i class="fa fa-angle-double-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space"></div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-5">
-            <h1>Recent jobs posted</h1>
-        </div>
-    </div>
 </div>
+
 <div ng-show="user">
     <div class="row">
         <div class="col-md-12">

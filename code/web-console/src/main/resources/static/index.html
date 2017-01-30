@@ -4,32 +4,41 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>CrewLance POC</title>
+        <title>CrewLance</title>
+
+        <!-- Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+
+        <!-- CSS Libs -->
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <style>
-            .margin-top-5 {
-                margin-top: 10px;
-            }
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-            .panel-scroll {
-                height: 300px;
-                overflow-y: auto;
-            }
-        </style>
+        <!-- CSS App -->
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
     </head>
 
     <body ng-app="sr-app">
 
-        <div ui-view="nav"></div>
-
-        <div class="container">
-            <div ui-view="content"></div>
+        <div id="wrap">
+            <div ui-view="nav"></div>
+            <div class="container">
+                <div ui-view="content"></div>
+            </div>
         </div>
 
-        <div class="footer navbar-fixed-bottom">
+        <div id="footer">
             <div class="container">
-                <p class="text-muted">Copyright. Contact us on <a href="hello@crewlance.me">hello@crewlance.me</a><span class="pull-right"><a href="">Terms of use</a> | <a href="">Liability</a></span></p>
+                <p class="text-muted credit">Copyright CrewLance Ltd. Contact us on <a href="hello@crewlance.me">hello@crewlance.me</a><span class="pull-right"><a href="">Terms of Use</a> | <a href="">Liability</a></span></p>
             </div>
         </div>
 

@@ -1,3 +1,8 @@
+<style>
+    .modal-footer {
+        border-top: 0px;
+    }
+</style>
 <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -6,8 +11,8 @@
                 <h1 class="text-center">Login</h1>
             </div>
             <div class="modal-body">
-                <div class="alert alert-info margin-top-5" ng-show="loginCtrl.message">{{loginCtrl.message}}</div>
                 <form class="form col-md-12 center-block" ng-submit="loginCtrl.login()">
+                    <div class="alert alert-danger" ng-show="loginCtrl.message">{{loginCtrl.message}}</div>
                     <div class="form-group">
                         <input type="text" class="form-control input-lg" placeholder="Email" ng-model="loginCtrl.email">
                     </div>
@@ -16,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary btn-lg btn-block">Sign In</button>
-                        <span class="pull-right"><a ui-sref="register">Create Account</a></span><span><a href="#">Need help?</a></span>
+                        <span class="pull-right"><a ui-sref="register">Create Account</a></span><span><a ui-sref="help">Need help?</a></span>
                     </div>
                 </form>
             </div>

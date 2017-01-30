@@ -15,15 +15,14 @@
                 .then(function(result) {
                     vm.password = null;
                     if (AuthenticationService.isAuthenticated()) {
-                        vm.message = '';
                         $state.go('home');
                     } else {
-                        vm.message = 'Authentication Failed';
+                        vm.message = 'Please check you have entered your email address and password correctly and try again.';
                     }
                 })
 
                 .catch(function() {
-                    vm.message = 'Authentication Failed';
+                    vm.message = 'Please check you have entered your email address and password correctly and try again.';
                 });
     	};
     }

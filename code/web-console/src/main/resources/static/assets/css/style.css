@@ -36,6 +36,10 @@ body {
     overflow-y: auto;
 }
 
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
+
 .box > .icon { text-align: center; position: relative; }
 .box > .icon > .image { position: relative; z-index: 2; margin: auto; width: 88px; height: 88px; border: 8px solid white; line-height: 88px; border-radius: 50%; background: #FFA500; vertical-align: middle; }
 .box > .icon:hover > .image { background: #333; }

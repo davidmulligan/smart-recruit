@@ -193,6 +193,18 @@
             })
 
 
+            .state('help', {
+                parent : 'nav',
+                url : '/help',
+                data : {
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/help.html'
+                    }
+                }
+            })
             .state('page-not-found', {
                 parent : 'nav',
                 url : '/page-not-found',

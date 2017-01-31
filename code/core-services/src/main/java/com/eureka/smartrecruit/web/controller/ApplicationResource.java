@@ -1,10 +1,10 @@
 package com.eureka.smartrecruit.web.controller;
 
 import com.eureka.smartrecruit.domain.Application;
-import com.eureka.smartrecruit.domain.Project;
+import com.eureka.smartrecruit.domain.Job;
 import com.eureka.smartrecruit.dto.ApplicationDto;
 import com.eureka.smartrecruit.service.ApplicationService;
-import com.eureka.smartrecruit.service.ProjectService;
+import com.eureka.smartrecruit.service.JobService;
 import lombok.RequiredArgsConstructor;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
@@ -21,19 +21,19 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/projects/{projectId}/applications")
+@RequestMapping("/jobs/{jobId}/applications")
 public class ApplicationResource {
 
     private final ApplicationService applicationService;
-    private final ProjectService projectService;
+    private final JobService jobService;
     private final Mapper mapper;
 
     @RequestMapping(method=RequestMethod.POST, produces={ MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@PathVariable("projectId") Long projectId, @RequestBody ApplicationDto applicantDto) {
-        Project project = projectService.findById(projectId);
+    public void create(@PathVariable("jobId") Long jobId, @RequestBody ApplicationDto applicantDto) {
+        Job job = jobService.findById(jobId);
         Application application = mapper.map(applicantDto, Application.class);
-        applicationService.create(application, project);
+        applicationService.create(application, job);
     }
 
     @RequestMapping(method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
@@ -50,8 +50,8 @@ public class ApplicationResource {
     }
 
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public List<ApplicationDto> findAll(@PathVariable("projectId") Long projectId) {
-        Project project = projectService.findById(projectId);
-        return project.getApplications().stream().map(application -> mapper.map(application, ApplicationDto.class)).collect(Collectors.toList());
+    public List<ApplicationDto> findAll(@PathVariable("jobId") Long jobId) {
+        Job job = jobService.findById(jobId);
+        return job.getApplications().stream().map(application -> mapper.map(application, ApplicationDto.class)).collect(Collectors.toList());
     }
 }

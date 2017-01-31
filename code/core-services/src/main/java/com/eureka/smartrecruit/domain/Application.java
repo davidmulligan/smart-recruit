@@ -17,7 +17,7 @@ public class Application extends BaseDomainObject {
 
     @ManyToOne
     @JoinColumn
-    private Project project;
+    private Job job;
 
     @ManyToOne
     @JoinColumn

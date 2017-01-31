@@ -5,18 +5,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjectDto {
+public class JobDto {
 
     private Long id;
     private String title;
     private String description;
-    private String status;
     private CategoryDto category;
+    private Double remuneration;
+    private Integer duration;
+    private Integer numberPositions;
+    private String location;
+    private LocalDateTime deadline;
+    private boolean fixedPrice;
     private List<SkillDto> skills;
 }

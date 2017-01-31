@@ -61,7 +61,7 @@ public class User extends BaseDomainObject implements UserDetails {
     private Float totalRating;
 
     @Column
-    private Integer totalProjects;
+    private Integer totalJobs;
 
     @Enumerated(EnumType.STRING)
     private UserType type;

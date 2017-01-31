@@ -19,6 +19,6 @@ public class UserDto {
     private String lastName;
     private String companyName;
     private Float totalRating;
-    private Integer totalProjects;
+    private Integer totalJobs;
     private boolean enabled;
 }

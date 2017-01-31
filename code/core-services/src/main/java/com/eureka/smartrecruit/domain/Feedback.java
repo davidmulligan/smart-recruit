@@ -30,7 +30,7 @@ public class Feedback extends BaseDomainObject {
     private User user;
 
     @ManyToOne
-    private Project project;
+    private Job job;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "feedbackId")

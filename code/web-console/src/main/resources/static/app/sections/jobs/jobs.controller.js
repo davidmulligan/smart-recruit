@@ -6,11 +6,11 @@
         .controller('JobsController', controller);
 
     /** @ngInject */
-    function controller($http) {
+    function controller($http, JOBS_URL) {
         var vm = this;
 
         vm.init = function() {
-            $http.get('http://localhost:8888/projects')
+            $http.get(JOBS_URL)
 
             .success(function(result) {
                 vm.jobs = result;

@@ -11,7 +11,7 @@
         vm.selectedProjectId = $state.params.selectedProject;
 
         vm.init = function() {
-            $http.get('http://localhost:8888/projects/' + vm.selectedProjectId)
+            $http.get('http://localhost:8888/jobs/' + vm.selectedProjectId)
 
             .success(function(result) {
                 vm.project = result;

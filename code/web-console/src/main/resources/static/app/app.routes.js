@@ -121,17 +121,17 @@
                     }
                 }
             })
-            .state('project', {
+            .state('job', {
                 parent : 'nav',
-                url : '/project/:selectedProject',
+                url : '/job/:selectedJob',
                 data : {
                     role : 'USER'
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/project/viewproject/viewproject.html',
-                        controller : 'ViewProjectController',
-                        controllerAs: 'viewProjectCtrl'
+                        templateUrl : 'app/sections/job/viewjob/viewjob.html',
+                        controller : 'ViewJobController',
+                        controllerAs: 'viewJobCtrl'
                     }
                 }
             })

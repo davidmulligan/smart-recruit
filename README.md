@@ -1,7 +1,8 @@
 # Smart Recruit
 
+Change application to bids
 
-
+show only open jobs
 relogin on refresh
 use modals
 Apply for project

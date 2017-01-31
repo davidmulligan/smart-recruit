@@ -14,7 +14,7 @@
         vm.buttonText = 'Create';
 
         vm.init = function() {
-            $http.get('http://localhost:8888/projects')
+            $http.get('http://localhost:8888/jobs')
 
             .success(function(result) {
                 vm.projects = result;
@@ -46,7 +46,7 @@
         };
 
         vm.deleteProject = function(project) {
-            $http.delete('http://localhost:8888/projects/' + project.id)
+            $http.delete('http://localhost:8888/jobs/' + project.id)
 
             .success(function(res) {
                 vm.deleteMessage = "Deleted Project";
@@ -59,7 +59,7 @@
         };
 
         vm.editProject = function() {
-            $http.put('http://localhost:8888/projects', vm.project)
+            $http.put('http://localhost:8888/jobs', vm.project)
 
             .success(function(result) {
                 vm.project = null;
@@ -74,7 +74,7 @@
         };
 
         vm.addProject = function() {
-            $http.post('http://localhost:8888/projects', vm.project)
+            $http.post('http://localhost:8888/jobs', vm.project)
 
             .success(function(result) {
                 vm.project = null;

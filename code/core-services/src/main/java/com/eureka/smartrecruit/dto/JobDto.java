@@ -22,7 +22,9 @@ public class JobDto {
     private Integer duration;
     private Integer numberPositions;
     private String location;
+    private String status;
     private LocalDateTime deadline;
     private boolean fixedPrice;
     private List<SkillDto> skills;
+    private List<BidDto> bids;
 }

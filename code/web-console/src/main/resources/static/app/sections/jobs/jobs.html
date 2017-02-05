@@ -141,18 +141,48 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                         <h4 class="modal-title" id="myModalLabel">More About {{job.title}}</h4>
                     </div>
-                    <div class="modal-body">
-                        <p class="text-left"><strong>Description: </strong><br>{{job.description}}</p>
-                        <p class="text-left"><strong>Skills: </strong><br><span class="label label-info" ng-repeat="skill in job.skills">{{skill.name}} </span></p>
-                    </div>
-                    <div class="modal-footer">
-                        <center>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">I've read enough about this job</button>
-                        </center>
-                    </div>
+                    <form ng-submit="jobsCtrl.applyJob(999)" name="jobsCtrl.applyJobForm" novalidate>
+                        <div class="modal-body">
+                            <p class="text-left"><strong>Description: </strong><br>{{job.description}}</p>
+                            <p class="text-left"><strong>Category: </strong><br>{{job.category.name}}</p>
+                            <p class="text-left"><strong>Location: </strong><br>{{job.location}}</p>
+                            <p class="text-left"><strong>Remuneration: </strong><br>{{job.remuneration}}</p>
+                            <p class="text-left"><strong>Duration: </strong><br>{{job.duration}}</p>
+                            <p class="text-left"><strong>Skills: </strong><br><span class="label label-info" ng-repeat="skill in job.skills">{{skill.name}} </span></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal-{{job.id}}-apply">Apply</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Not Interested</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
+        <div class="modal fade" id="myModal-{{job.id}}-apply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title" id="myModalLabel2">Apply for {{job.title}}</h4>
+                    </div>
+                    <form ng-submit="jobsCtrl.applyJob(job.id)" name="jobsCtrl.applyJobForm" novalidate>
+                        <div class="modal-body">
+                            <div class="form-group" ng-class="{ 'has-error': jobsCtrl.applyJobForm.comment.$invalid && jobsCtrl.applyJobForm.comment.$dirty }">
+                                <label for="comment">Comment:</label>
+                                <input type="text" required class="form-control" ng-model="jobsCtrl.bid.comment" id="comment" name="comment">
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': jobsCtrl.applyJobForm.quote.$invalid && jobsCtrl.applyJobForm.quote.$dirty }">
+                                <label for="quote">Quote:</label>
+                                <input type="text" required class="form-control" ng-model="jobsCtrl.bid.quote" id="quote" name="quote">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-info" ng-disabled="jobsCtrl.applyJobForm.$invalid">Apply</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

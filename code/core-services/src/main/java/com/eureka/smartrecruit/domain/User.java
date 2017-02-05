@@ -72,6 +72,10 @@ public class User extends BaseDomainObject implements UserDetails {
     @OneToOne
     private Address address;
 
+    @OneToMany(mappedBy = "createdBy")
+    @OrderBy("name")
+    private Set<Job> jobs;
+
     @OneToMany(mappedBy = "user")
     @OrderBy("name")
     private Set<Favourite> favourites;

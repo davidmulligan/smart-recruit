@@ -1,0 +1,50 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Jobs
+			</div>
+			<div class="panel-body">
+				<div class="alert alert-info margin-top-5" ng-show="myJobsCtrl.deleteMessage">{{myJobsCtrl.deleteMessage}}</div>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Title</th>
+							<th>Category</th>
+							<th>No. of Bids</th>
+							<th>Status</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="job in myJobsCtrl.jobs">
+							<td>{{$index+1}}</td>
+							<td>{{job.title}}</td>
+							<td>{{job.category.name}}</td>
+							<td>{{job.bids.length}}</td>
+							<td>{{job.status}}</td>
+							<td>
+								<button type="button" class="btn btn-default btn-sm" ng-click="myJobsCtrl.openJob(job)">
+									<span class="glyphicon glyphicon-zoom-in"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-sm" ng-click="myJobsCtrl.closeJob(job)">
+									<span class="glyphicon glyphicon-zoom-out"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-sm" ng-click="myJobsCtrl.cancelJob(job)">
+									<span class="glyphicon glyphicon-remove-circle"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-sm" ng-click="myJobsCtrl.disputeJob(job)">
+									<span class="glyphicon glyphicon-ban-circle"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-sm" ng-click="myJobsCtrl.archiveJob(job)">
+									<span class="glyphicon glyphicon-screenshot"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

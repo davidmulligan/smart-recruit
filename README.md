@@ -1,6 +1,6 @@
 # Smart Recruit
 
-Change application to bids
+Add user as create by and updated by
 
 show only open jobs
 relogin on refresh

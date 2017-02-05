@@ -1,13 +1,13 @@
 package com.eureka.smartrecruit.respository;
 
-import com.eureka.smartrecruit.domain.Application;
+import com.eureka.smartrecruit.domain.Bid;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface ApplicationRepository extends CrudRepository<Application, Long> {
+public interface BidRepository extends CrudRepository<Bid, Long> {
 
-    Optional<Application> findById(Long id);
+    Optional<Bid> findById(Long id);
 }

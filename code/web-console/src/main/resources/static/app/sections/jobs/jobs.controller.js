@@ -22,6 +22,20 @@
             });
         };
 
+        vm.applyJob = function(jobId) {
+            $http.post('http://localhost:8888/jobs/' + jobId + '/bids', vm.bid)
+
+            .success(function(result) {
+//                vm.job = null;
+//                vm.createJobForm.$setPristine();
+//                vm.message = "Bid Submitted";
+            })
+
+            .error(function(error) {
+                vm.message = error.message;
+            });
+        }
+
         vm.init();
     }
 })();

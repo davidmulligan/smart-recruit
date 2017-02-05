@@ -59,7 +59,7 @@ public class Job extends BaseDomainObject {
     private List<Skill> skills;
 
     @OneToMany(mappedBy = "job")
-    private Set<Application> applications;
+    private Set<Bid> bids;
 
     @OneToMany(mappedBy = "job")
     private Set<Feedback> feedback;

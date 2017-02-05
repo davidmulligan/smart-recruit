@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,7 +14,16 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Application extends BaseDomainObject {
+public class Bid extends BaseDomainObject {
+
+    @Column
+    private String comment;
+
+    @Column
+    private Double quote;
+
+    @Column
+    private boolean accepted;
 
     @ManyToOne
     @JoinColumn
@@ -21,5 +31,5 @@ public class Application extends BaseDomainObject {
 
     @ManyToOne
     @JoinColumn
-    private User applicant;
+    private User user;
 }

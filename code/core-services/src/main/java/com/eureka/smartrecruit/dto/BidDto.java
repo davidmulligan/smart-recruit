@@ -9,8 +9,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApplicationDto {
+public class BidDto {
 
     private Long id;
-    private UserDto applicant;
+    private String comment;
+    private Double quote;
+    private boolean accepted;
+    private UserDto user;
 }

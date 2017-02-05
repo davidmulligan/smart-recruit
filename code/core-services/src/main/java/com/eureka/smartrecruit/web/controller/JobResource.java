@@ -51,6 +51,46 @@ public class JobResource {
         jobService.update(job);
     }
 
+    @RequestMapping(value="/{id}/open", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
+    public void openJob(@PathVariable("id") Long id) {
+        Job job = jobService.findById(id);
+        job.getStatus().open(job);
+        jobService.update(job);
+    }
+
+    @RequestMapping(value="/{id}/close", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
+    public void closeJob(@PathVariable("id") Long id) {
+        Job job = jobService.findById(id);
+        job.getStatus().close(job);
+        jobService.update(job);
+    }
+
+    @RequestMapping(value="/{id}/cancel", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
+    public void cancelJob(@PathVariable("id") Long id) {
+        Job job = jobService.findById(id);
+        job.getStatus().cancel(job);
+        jobService.update(job);
+    }
+
+    @RequestMapping(value="/{id}/dispute", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
+    public void disputeJob(@PathVariable("id") Long id) {
+        Job job = jobService.findById(id);
+        job.getStatus().dispute(job);
+        jobService.update(job);
+    }
+
+    @RequestMapping(value="/{id}/archive", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
+    public void archiveJob(@PathVariable("id") Long id) {
+        Job job = jobService.findById(id);
+        job.getStatus().archive(job);
+        jobService.update(job);
+    }
+
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE, produces={ MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
@@ -64,7 +104,11 @@ public class JobResource {
 
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<JobDto> find(@QuerydslPredicate(root = Job.class) Predicate predicate) {
-        System.out.println();
         return jobService.find(predicate).stream().map(job -> mapper.map(job, JobDto.class)).collect(Collectors.toList());
+    }
+
+    @RequestMapping(value="/self", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public List<JobDto> findMyProjects() {
+        return jobService.findMyJobs().stream().map(job -> mapper.map(job, JobDto.class)).collect(Collectors.toList());
     }
 }

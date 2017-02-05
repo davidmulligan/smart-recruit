@@ -1,11 +1,14 @@
 package com.eureka.smartrecruit.service;
 
 import com.eureka.smartrecruit.domain.Job;
+import com.eureka.smartrecruit.domain.User;
+import com.eureka.smartrecruit.domain.enumeration.JobStatus;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.JobRepository;
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.jooq.lambda.Seq;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,7 @@ public class JobService {
     private final JobRepository jobRepository;
 
     public void create(final Job job) {
+        job.setStatus(JobStatus.OPEN);
         jobRepository.save(job);
     }
 
@@ -37,5 +41,9 @@ public class JobService {
 
     public List<Job> find(Predicate predicate) {
         return Seq.seq(jobRepository.findAll(predicate)).collect(Collectors.toList());
+    }
+
+    public List<Job> findMyJobs() {
+        return jobRepository.findByCreatedBy(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
 }

@@ -1,0 +1,55 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Job</div>
+			<div class="panel-body">
+				<div class="col-md-12">
+					<form ng-submit="createJobCtrl.submit()" name="createJobCtrl.createJobForm" novalidate>
+						<div class="form-group" ng-class="{ 'has-error': createJobCtrl.jobForm.title.$invalid && createJobCtrl.jobForm.title.$dirty }">
+							<label for="title">Title:</label>
+							<input type="text" required class="form-control" ng-model="createJobCtrl.job.title" id="title" name="title">
+						</div>
+						<div class="form-group" ng-class="{ 'has-error': createJobCtrl.jobForm.description.$invalid && createJobCtrl.jobForm.description.$dirty }">
+							<label for="description">Description:</label>
+							<input type="text" required class="form-control" ng-model="createJobCtrl.job.description" id="description" name="description">
+						</div>
+                        <div class="form-group" ng-class="{ 'has-error': createJobCtrl.jobForm.category.$invalid && createJobCtrl.jobForm.category.$dirty }">
+                            <label for="category">Category:</label>
+                            <select class="form-control" id="category" ng-model="createJobCtrl.job.category" ng-options="item as item.name for item in createJobCtrl.categories" typeahead-editable="false" required></select>
+                        </div>
+
+						<div class="form-group" ng-class="{ 'has-error': createJobCtrl.jobForm.location.$invalid && createJobCtrl.jobForm.location.$dirty }">
+							<label for="location">Location:</label>
+							<input type="text" required class="form-control" ng-model="createJobCtrl.job.location" id="location" name="location">
+						</div>
+                        <div class="form-group" ng-class="{ 'has-error': createJobCtrl.jobForm.remuneration.$invalid && createJobCtrl.jobForm.remuneration.$dirty }">
+                            <label for="remuneration">Remuneration:</label>
+                            <input type="text" required class="form-control" ng-model="createJobCtrl.job.remuneration" id="remuneration" name="remuneration">
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': createJobCtrl.jobForm.duration.$invalid && createJobCtrl.jobForm.duration.$dirty }">
+                            <label for="duration">Duration:</label>
+                            <input type="text" required class="form-control" ng-model="createJobCtrl.job.duration" id="duration" name="duration">
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': createJobCtrl.jobForm.numberPositions.$invalid && createJobCtrl.jobForm.numberPositions.$dirty }">
+                            <label for="numberPositions">Number Positions:</label>
+                            <input type="text" class="form-control" ng-model="createJobCtrl.job.numberPositions" id="numberPositions" name="numberPositions">
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="createJobCtrl.job.fixedPrice"> Fixed Price
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': createJobCtrl.jobForm.skills.$invalid && createJobCtrl.jobForm.skills.$dirty }">
+                            <label for="skills">Skills:</label>
+                            <select class="form-control" id="skills" ng-model="createJobCtrl.job.skills" ng-options="item as item.name for item in createJobCtrl.skills" typeahead-editable="false" multiple required></select>
+                        </div>
+						<button type="submit" class="btn btn-default" ng-disabled="createJobCtrl.jobForm.$invalid">Create</button>
+						<div class="alert alert-info margin-top-5" ng-show="createJobCtrl.message">{{createJobCtrl.message}}</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -3,6 +3,7 @@
 
     angular
         .module('jobs', [
+            'createjob',
             'jobs.core'
         ]);
 })();

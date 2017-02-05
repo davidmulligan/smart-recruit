@@ -20,6 +20,16 @@
                         templateUrl : 'app/sections/navigation/navigation.html',
                         controller : 'NavigationController'
                     }
+                },
+                resolve: {
+
+                    /* @ngInject */
+                    jobData: function($q, Categories, Skills) {
+                        return $q.all({
+                             categories: Categories.getAll(),
+                             skills: Skills.getAll()
+                        });
+                    }
                 }
             })
             .state('login', {
@@ -91,6 +101,20 @@
                         templateUrl : 'app/sections/jobs/jobs.html',
                         controller : 'JobsController',
                         controllerAs : 'jobsCtrl'
+                    }
+                }
+            })
+            .state('postJob', {
+                parent : 'nav',
+                url : '/postJob',
+                data : {
+                    role : 'USER'
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/jobs/create/createjob.html',
+                        controller : 'CreateJobController',
+                        controllerAs : 'createJobCtrl'
                     }
                 }
             })

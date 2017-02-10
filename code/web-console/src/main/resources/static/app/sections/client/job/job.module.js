@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('createjob', [
-            'createjob.core'
+        .module('client.job', [
+            'client.job.core'
         ]);
 })();

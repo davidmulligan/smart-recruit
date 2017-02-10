@@ -3,9 +3,10 @@
 
     angular
         .module('admin', [
-            'category',
-            'membership',
-            'skill',
-            'user'
+            'admin.category',
+            'admin.job',
+            'admin.membership',
+            'admin.skill',
+            'admin.user'
         ]);
 })();

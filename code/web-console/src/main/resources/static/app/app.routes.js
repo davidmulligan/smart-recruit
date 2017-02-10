@@ -104,20 +104,7 @@
                     }
                 }
             })
-            .state('postJob', {
-                parent : 'nav',
-                url : '/postJob',
-                data : {
-                    role : 'USER'
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/jobs/create/createjob.html',
-                        controller : 'CreateJobController',
-                        controllerAs : 'createJobCtrl'
-                    }
-                }
-            })
+
             .state('myjobs', {
                 parent : 'nav',
                 url : '/myjobs',
@@ -172,34 +159,23 @@
                     }
                 }
             })
-            .state('users', {
+
+
+            .state('postJob', {
                 parent : 'nav',
-                url : '/users',
+                url : '/postJob',
                 data : {
-                    role : 'ADMIN'
+                    role : 'CLIENT'
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/admin/user/user.html',
-                        controller : 'UserController',
-                        controllerAs : 'userCtrl'
+                        templateUrl : 'app/sections/client/job/job.html',
+                        controller : 'ClientJobController',
+                        controllerAs : 'jobCtrl'
                     }
                 }
             })
-            .state('skills', {
-                parent : 'nav',
-                url : '/skills',
-                data : {
-                    role : 'ADMIN'
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/admin/skill/skill.html',
-                        controller : 'SkillController',
-                        controllerAs : 'skillCtrl'
-                    }
-                }
-            })
+
             .state('categories', {
                 parent : 'nav',
                 url : '/categories',
@@ -209,8 +185,22 @@
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/admin/category/category.html',
-                        controller : 'CategoryController',
+                        controller : 'AdminCategoryController',
                         controllerAs : 'categoryCtrl'
+                    }
+                }
+            })
+            .state('adminJobs', {
+                parent : 'nav',
+                url : '/adminJobs',
+                data : {
+                    role : 'ADMIN'
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/admin/job/job.html',
+                        controller : 'AdminJobController',
+                        controllerAs : 'adminJobCtrl'
                     }
                 }
             })
@@ -223,12 +213,39 @@
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/admin/membership/membership.html',
-                        controller : 'MembershipController',
+                        controller : 'AdminMembershipController',
                         controllerAs : 'membershipCtrl'
                     }
                 }
             })
-
+            .state('skills', {
+                parent : 'nav',
+                url : '/skills',
+                data : {
+                    role : 'ADMIN'
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/admin/skill/skill.html',
+                        controller : 'AdminSkillController',
+                        controllerAs : 'skillCtrl'
+                    }
+                }
+            })
+            .state('users', {
+                parent : 'nav',
+                url : '/users',
+                data : {
+                    role : 'ADMIN'
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/admin/user/user.html',
+                        controller : 'AdminUserController',
+                        controllerAs : 'userCtrl'
+                    }
+                }
+            })
 
             .state('help', {
                 parent : 'nav',

@@ -1,0 +1,54 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Post a Job</div>
+			<div class="panel-body">
+				<div class="col-md-12">
+					<form ng-submit="jobCtrl.submit()" name="jobCtrl.createJobForm" novalidate>
+                        <div class="alert alert-info margin-top-5" ng-show="jobCtrl.message">{{jobCtrl.message}}</div>
+						<div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.title.$invalid && jobCtrl.jobForm.title.$dirty }">
+							<label for="title">Title:</label>
+							<input type="text" required class="form-control" ng-model="jobCtrl.job.title" id="title" name="title">
+						</div>
+						<div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.description.$invalid && jobCtrl.jobForm.description.$dirty }">
+							<label for="description">Description:</label>
+                            <textarea class="form-control" rows="5" ng-model="jobCtrl.job.description" id="description" name="description"></textarea>
+						</div>
+                        <div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.category.$invalid && jobCtrl.jobForm.category.$dirty }">
+                            <label for="category">Category:</label>
+                            <select class="form-control" id="category" ng-model="jobCtrl.job.category" ng-options="item as item.name for item in jobCtrl.categories" typeahead-editable="false" required></select>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.remuneration.$invalid && jobCtrl.jobForm.remuneration.$dirty }">
+                            <label for="remuneration">Remuneration:</label>
+                            <input type="text" required class="form-control" ng-model="jobCtrl.job.remuneration" id="remuneration" name="remuneration">
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.duration.$invalid && jobCtrl.jobForm.duration.$dirty }">
+                            <label for="duration">Duration:</label>
+                            <input type="text" required class="form-control" ng-model="jobCtrl.job.duration" id="duration" name="duration">
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.location.$invalid && jobCtrl.jobForm.location.$dirty }">
+                            <label for="location">Location:</label>
+                            <input type="text" required class="form-control" ng-model="jobCtrl.job.location" id="location" name="location">
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.numberPositions.$invalid && jobCtrl.jobForm.numberPositions.$dirty }">
+                            <label for="numberPositions">Number Positions:</label>
+                            <input type="text" class="form-control" ng-model="jobCtrl.job.numberPositions" id="numberPositions" name="numberPositions">
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="jobCtrl.job.fixedPrice"> Fixed Price
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.skills.$invalid && jobCtrl.jobForm.skills.$dirty }">
+                            <label for="skills">Skills:</label>
+                            <select class="form-control" id="skills" ng-model="jobCtrl.job.skills" ng-options="item as item.name for item in jobCtrl.skills" typeahead-editable="false" multiple required></select>
+                        </div>
+						<button type="submit" class="btn btn-default" ng-disabled="jobCtrl.jobForm.$invalid">Create</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

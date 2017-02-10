@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('membership.core', [])
-        .controller('MembershipController', controller);
+        .module('admin.membership.core', [])
+        .controller('AdminMembershipController', controller);
 
     /** @ngInject */
     function controller($http, MEMBERSHIPS_URL) {

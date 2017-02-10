@@ -23,7 +23,7 @@ public class JobService {
     private final JobRepository jobRepository;
 
     public void create(final Job job) {
-        job.setStatus(JobStatus.OPEN);
+        job.setStatus(JobStatus.PENDING);
         jobRepository.save(job);
     }
 
@@ -34,6 +34,21 @@ public class JobService {
     public void delete(final Long id) {
         jobRepository.delete(id);
     }
+
+    public void approve(final Job job) {
+        job.getStatus().open(job);
+        jobRepository.save(job);
+    }
+
+    public void reject(final Job job) {
+        job.getStatus().reject(job);
+        jobRepository.save(job);
+    }
+
+
+
+
+
 
     public Job findById(final Long id) {
         return jobRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Could not find job with id: %s", id)));

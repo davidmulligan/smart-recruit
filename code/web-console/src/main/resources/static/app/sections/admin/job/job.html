@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Pending Jobs</div>
+            <div class="panel-body">
+                <div class="alert alert-info margin-top-5" ng-show="adminJobCtrl.message">{{adminJobCtrl.message}}</div>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>No. Positions</th>
+                        <th>Deadline</th>
+                        <th>Fixed Price</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="job in adminJobCtrl.jobs">
+                        <td>{{$index+1}}</td>
+                        <td>{{job.title}}</td>
+                        <td>{{job.category.name}}</td>
+                        <td>{{job.numberPositions}}</td>
+                        <td>{{job.deadline}}</td>
+                        <td>
+                            <span ng-show="job.fixedPrice">Yes</span>
+                            <span ng-hide="job.fixedPrice">No</span>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-default btn-sm" ng-click="adminJobCtrl.approve(job)">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-default btn-sm" ng-click="adminJobCtrl.reject(job)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

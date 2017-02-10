@@ -11,7 +11,12 @@ public enum JobStatus {
 
         @Override
         public void open(Job job) {
-            job.setStatus(OPEN);
+            job.setStatus(OPENED);
+        }
+
+        @Override
+        public void reject(Job job) {
+            job.setStatus(REJECTED);
         }
 
         @Override
@@ -49,11 +54,16 @@ public enum JobStatus {
             job.setStatus(CANCELLED);
         }
     },
-    OPEN {
+    OPENED {
 
         @Override
         public void open(Job job) {
             throw new IllegalStateException("Job is already opened.");
+        }
+
+        @Override
+        public void reject(Job job) {
+            throw new IllegalStateException("You can not reject an open job.");
         }
 
         @Override
@@ -91,11 +101,80 @@ public enum JobStatus {
             job.setStatus(CANCELLED);
         }
     },
+    REJECTED {
+
+        @Override
+        public void open(Job job) {
+            throw new IllegalStateException("You can not open a rejected job.");
+        }
+
+        @Override
+        public void reject(Job job) {
+            throw new IllegalStateException("Job is already rejected.");
+        }
+
+        @Override
+        public void negotiate(Job job) {
+            throw new IllegalStateException("You can not negotiate a rejected job.");
+        }
+
+        @Override
+        public void start(Job job) {
+            throw new IllegalStateException("You can not start a rejected job.");
+        }
+
+        @Override
+        public void finish(Job job) {
+            throw new IllegalStateException("You can not finish a rejected job.");
+        }
+
+        @Override
+        public void dispute(Job job) {
+            throw new IllegalStateException("You can not dispute a rejected job.");
+        }
+
+        @Override
+        public void archive(Job job) {
+            job.setStatus(ARCHIVED);
+        }
+
+        @Override
+        public void expire(Job job) {
+            throw new IllegalStateException("You can not expire a rejected job.");
+        }
+
+        @Override
+        public void cancel(Job job) {
+            job.setStatus(CANCELLED);
+        }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     NEGOTIATION {
 
         @Override
         public void open(Job job) {
             throw new IllegalStateException("You can not open a negotiation job.");
+        }
+
+        @Override
+        public void reject(Job job) {
+            throw new IllegalStateException("You can not reject negotiation job.");
         }
 
         @Override
@@ -141,6 +220,11 @@ public enum JobStatus {
         }
 
         @Override
+        public void reject(Job job) {
+            throw new IllegalStateException("You can not reject a started job.");
+        }
+
+        @Override
         public void negotiate(Job job) {
             throw new IllegalStateException("You can not open a started job.");
         }
@@ -180,6 +264,11 @@ public enum JobStatus {
         @Override
         public void open(Job job) {
             throw new IllegalStateException("You can not open a finished job.");
+        }
+
+        @Override
+        public void reject(Job job) {
+            throw new IllegalStateException("You can not reject a finished job.");
         }
 
         @Override
@@ -225,6 +314,11 @@ public enum JobStatus {
         }
 
         @Override
+        public void reject(Job job) {
+            throw new IllegalStateException("You can not reject a disputed job.");
+        }
+
+        @Override
         public void negotiate(Job job) {
             throw new IllegalStateException("You can not negotiate a disputed job.");
         }
@@ -264,6 +358,11 @@ public enum JobStatus {
         @Override
         public void open(Job job) {
             throw new IllegalStateException("You can not close an archived job.");
+        }
+
+        @Override
+        public void reject(Job job) {
+            throw new IllegalStateException("You can not reject an archived job.");
         }
 
         @Override
@@ -309,6 +408,11 @@ public enum JobStatus {
         }
 
         @Override
+        public void reject(Job job) {
+            throw new IllegalStateException("You can not reject an expired job.");
+        }
+
+        @Override
         public void negotiate(Job job) {
             throw new IllegalStateException("You can not negotiate an expired job.");
         }
@@ -351,6 +455,11 @@ public enum JobStatus {
         }
 
         @Override
+        public void reject(Job job) {
+            throw new IllegalStateException("You can not reject a cancelled job.");
+        }
+
+        @Override
         public void negotiate(Job job) {
             throw new IllegalStateException("You can not negotiate a cancelled job.");
         }
@@ -387,6 +496,9 @@ public enum JobStatus {
     };
 
     public abstract void open(Job job);
+    public abstract void reject(Job job);
+
+
     public abstract void negotiate(Job job);
     public abstract void start(Job job);
     public abstract void finish(Job job);

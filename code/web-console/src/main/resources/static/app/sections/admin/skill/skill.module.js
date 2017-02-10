@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('skill', [
-            'skill.core'
+        .module('admin.skill', [
+            'admin.skill.core'
         ]);
 })();

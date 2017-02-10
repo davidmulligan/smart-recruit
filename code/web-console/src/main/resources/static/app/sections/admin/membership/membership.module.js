@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('membership', [
-            'membership.core'
+        .module('admin.membership', [
+            'admin.membership.core'
         ]);
 })();

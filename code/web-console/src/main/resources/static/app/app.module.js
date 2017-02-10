@@ -8,6 +8,7 @@
             'home',
             'admin',
             'login',
+            'client',
             'freelancers',
             'jobs'
 //            'project'

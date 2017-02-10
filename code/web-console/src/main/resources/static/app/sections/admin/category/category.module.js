@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('category', [
-            'category.core'
+        .module('admin.category', [
+            'admin.category.core'
         ]);
 })();

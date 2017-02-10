@@ -36,6 +36,37 @@ public class JobResource {
         jobService.create(job);
     }
 
+    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public List<JobDto> find(@QuerydslPredicate(root = Job.class) Predicate predicate) {
+        return jobService.find(predicate).stream().map(job -> mapper.map(job, JobDto.class)).collect(Collectors.toList());
+    }
+
+    @RequestMapping(value="/{id}/approve", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
+    public void approve(@PathVariable("id") Long id) {
+        jobService.approve(jobService.findById(id));
+    }
+
+    @RequestMapping(value="/{id}/reject", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
+    public void reject(@PathVariable("id") Long id) {
+        jobService.reject(jobService.findById(id));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @RequestMapping(method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody JobDto jobDto) {
@@ -126,10 +157,7 @@ public class JobResource {
         return mapper.map(jobService.findById(id), JobDto.class);
     }
 
-    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public List<JobDto> find(@QuerydslPredicate(root = Job.class) Predicate predicate) {
-        return jobService.find(predicate).stream().map(job -> mapper.map(job, JobDto.class)).collect(Collectors.toList());
-    }
+
 
     @RequestMapping(value="/self", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<JobDto> findMyProjects() {

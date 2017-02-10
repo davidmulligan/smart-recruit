@@ -1,18 +1,14 @@
 package com.eureka.smartrecruit.domain;
 
 import com.eureka.smartrecruit.database.BaseDomainObject;
+import com.eureka.smartrecruit.domain.enumeration.Rating;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -20,8 +16,11 @@ import java.util.Set;
 @NoArgsConstructor
 public class Feedback extends BaseDomainObject {
 
+    @Column
+    private String comment;
+
     @Column(nullable = false)
-    private Integer averageScore;
+    private Rating rating;
 
     @ManyToOne
     private User author;
@@ -31,8 +30,4 @@ public class Feedback extends BaseDomainObject {
 
     @ManyToOne
     private Job job;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "feedbackId")
-    private Set<FeedbackItem> feedbackItems;
 }

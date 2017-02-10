@@ -34,8 +34,34 @@
             });
         };
 
-        vm.closeJob = function(job) {
-            $http.put('http://localhost:8888/jobs/' + job.id + '/close')
+        vm.negotiateJob = function(job) {
+            $http.put('http://localhost:8888/jobs/' + job.id + '/negotiate')
+
+            .success(function(res) {
+                vm.init();
+            })
+
+            .error(function(error) {
+                vm.deleteMessage = error.message;
+            });
+        };
+
+
+        vm.startJob = function(job) {
+            $http.put('http://localhost:8888/jobs/' + job.id + '/start')
+
+            .success(function(res) {
+                vm.init();
+            })
+
+            .error(function(error) {
+                vm.deleteMessage = error.message;
+            });
+        };
+
+
+        vm.finishJob = function(job) {
+            $http.put('http://localhost:8888/jobs/' + job.id + '/finish')
 
             .success(function(res) {
                 vm.init();
@@ -72,6 +98,18 @@
 
         vm.archiveJob = function(job) {
             $http.put('http://localhost:8888/jobs/' + job.id + '/archive')
+
+            .success(function(res) {
+                vm.init();
+            })
+
+            .error(function(error) {
+                vm.deleteMessage = error.message;
+            });
+        };
+
+        vm.expireJob = function(job) {
+            $http.put('http://localhost:8888/jobs/' + job.id + '/expire')
 
             .success(function(res) {
                 vm.init();

@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,9 +13,8 @@ import java.util.Set;
 public class FeedbackDto {
 
     private Long id;
-    private String review;
-    private Integer averageScore;
+    private String comment;
+    private String rating;
     private User author;
     private User user;
-    private Set<FeedbackItemDto> feedbackItems;
 }

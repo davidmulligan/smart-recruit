@@ -18,7 +18,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String companyName;
-    private Float totalRating;
-    private Integer totalJobs;
+    private String profile;
+    private String userType;
     private boolean enabled;
 }

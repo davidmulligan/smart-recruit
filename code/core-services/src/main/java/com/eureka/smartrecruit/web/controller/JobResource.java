@@ -59,11 +59,27 @@ public class JobResource {
         jobService.update(job);
     }
 
-    @RequestMapping(value="/{id}/close", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value="/{id}/negotiate", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.OK)
-    public void closeJob(@PathVariable("id") Long id) {
+    public void negotiateJob(@PathVariable("id") Long id) {
         Job job = jobService.findById(id);
-        job.getStatus().close(job);
+        job.getStatus().negotiate(job);
+        jobService.update(job);
+    }
+
+    @RequestMapping(value="/{id}/start", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
+    public void startJob(@PathVariable("id") Long id) {
+        Job job = jobService.findById(id);
+        job.getStatus().start(job);
+        jobService.update(job);
+    }
+
+    @RequestMapping(value="/{id}/finish", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
+    public void finishJob(@PathVariable("id") Long id) {
+        Job job = jobService.findById(id);
+        job.getStatus().finish(job);
         jobService.update(job);
     }
 
@@ -88,6 +104,14 @@ public class JobResource {
     public void archiveJob(@PathVariable("id") Long id) {
         Job job = jobService.findById(id);
         job.getStatus().archive(job);
+        jobService.update(job);
+    }
+
+    @RequestMapping(value="/{id}/expire", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
+    public void expireJob(@PathVariable("id") Long id) {
+        Job job = jobService.findById(id);
+        job.getStatus().expire(job);
         jobService.update(job);
     }
 

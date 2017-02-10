@@ -39,7 +39,6 @@ public class CategoryResource {
         category.setName(categoryDto.getName());
         category.setDescription(categoryDto.getDescription());
         category.setActive(categoryDto.isActive());
-        category.setSubCategories(categoryDto.getSubCategories().stream().map(subCategory -> mapper.map(subCategory, Category.class)).collect(Collectors.toList()));
         categoryService.update(category);
     }
 

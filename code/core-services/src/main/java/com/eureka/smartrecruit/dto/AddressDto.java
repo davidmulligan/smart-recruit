@@ -9,7 +9,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FavouriteDto {
+public class AddressDto {
 
-    private Long id;
+    private String street1;
+    private String street2;
+    private String street3;
+    private String town;
+    private String county;
+    private String postCode;
 }

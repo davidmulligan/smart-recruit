@@ -15,5 +15,9 @@ public class MembershipDto {
     private String name;
     private String description;
     private Double cost;
+    private Integer jobPostLimit;
+    private Integer jobBidLimit;
+    private Integer jobApplicationLimit;
+    private String userType;
     private boolean active;
 }

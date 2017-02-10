@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FeedbackItemDto {
+public class ApplicationDto {
 
     private Long id;
-    private String review;
-    private Integer score;
+    private String comment;
+    private UserDto user;
 }

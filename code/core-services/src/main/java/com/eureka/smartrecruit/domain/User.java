@@ -20,6 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
+import javax.persistence.Transient;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -57,12 +58,6 @@ public class User extends BaseDomainObject implements UserDetails {
     @Column
     private String profile;
 
-    @Column
-    private Float totalRating;
-
-    @Column
-    private Integer totalJobs;
-
     @Enumerated(EnumType.STRING)
     private UserType type;
 
@@ -75,10 +70,6 @@ public class User extends BaseDomainObject implements UserDetails {
     @OneToMany(mappedBy = "createdBy")
     @OrderBy("name")
     private Set<Job> jobs;
-
-    @OneToMany(mappedBy = "user")
-    @OrderBy("name")
-    private Set<Favourite> favourites;
 
     @OneToMany(mappedBy = "user")
     @OrderBy("createdOn")
@@ -96,6 +87,7 @@ public class User extends BaseDomainObject implements UserDetails {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole())).collect(Collectors.toSet());
     }
 
+    @Transient
     @Override
     public String getUsername() {
         return email;

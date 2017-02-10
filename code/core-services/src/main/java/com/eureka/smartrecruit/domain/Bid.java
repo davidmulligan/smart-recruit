@@ -22,9 +22,6 @@ public class Bid extends BaseDomainObject {
     @Column
     private Double quote;
 
-    @Column
-    private boolean accepted;
-
     @ManyToOne
     @JoinColumn
     private Job job;

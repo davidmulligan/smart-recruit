@@ -26,6 +26,15 @@ public class Membership extends BaseDomainObject {
     @Column
     private Double cost;
 
+    @Column
+    private Integer jobPostLimit;
+
+    @Column
+    private Integer jobBidLimit;
+
+    @Column
+    private Integer jobApplicationLimit;
+
     @Column(nullable = false)
     private boolean active;
 

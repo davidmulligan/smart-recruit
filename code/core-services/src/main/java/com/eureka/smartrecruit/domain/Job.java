@@ -35,14 +35,14 @@ public class Job extends BaseDomainObject {
     @OneToOne(optional = false)
     private Category category;
 
-    @Column
-    private String location;
-
     @Column(nullable = false)
     private Double remuneration;
 
     @Column(nullable = false)
     private Integer duration;
+
+    @Column
+    private String location;
 
     @Column
     private Integer numberPositions;
@@ -54,6 +54,9 @@ public class Job extends BaseDomainObject {
     @Column
     private boolean fixedPrice;
 
+    @Enumerated(EnumType.STRING)
+    private JobStatus status;
+
     @ManyToMany
     @JoinTable(name = "JobSkills")
     private List<Skill> skills;
@@ -62,8 +65,8 @@ public class Job extends BaseDomainObject {
     private Set<Bid> bids;
 
     @OneToMany(mappedBy = "job")
-    private Set<Feedback> feedback;
+    private Set<Application> applications;
 
-    @Enumerated(EnumType.STRING)
-    private JobStatus status;
+    @OneToMany(mappedBy = "job")
+    private Set<Feedback> feedback;
 }

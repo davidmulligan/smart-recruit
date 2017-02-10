@@ -14,6 +14,5 @@ public class BidDto {
     private Long id;
     private String comment;
     private Double quote;
-    private boolean accepted;
     private UserDto user;
 }

@@ -20,11 +20,12 @@ public class JobDto {
     private CategoryDto category;
     private Double remuneration;
     private Integer duration;
-    private Integer numberPositions;
     private String location;
-    private String status;
+    private Integer numberPositions;
     private LocalDateTime deadline;
     private boolean fixedPrice;
+    private String status;
     private List<SkillDto> skills;
     private List<BidDto> bids;
+    private List<ApplicationDto> applications;
 }

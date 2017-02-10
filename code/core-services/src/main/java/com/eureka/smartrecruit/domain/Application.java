@@ -7,16 +7,23 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class FeedbackItem extends BaseDomainObject {
+public class Application extends BaseDomainObject {
 
-    @Column(nullable = false)
-    private String review;
+    @Column
+    private String comment;
 
-    @Column(nullable = false)
-    private Integer score;
+    @ManyToOne
+    @JoinColumn
+    private Job job;
+
+    @ManyToOne
+    @JoinColumn
+    private User user;
 }

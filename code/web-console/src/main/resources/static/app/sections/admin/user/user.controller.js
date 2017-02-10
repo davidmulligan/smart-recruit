@@ -6,13 +6,13 @@
         .controller('UserController', controller);
 
     /** @ngInject */
-    function controller($http) {
+    function controller($http, USERS_URL) {
         var vm = this;
         vm.edit = false;
 	    vm.buttonText = 'Create';
 
         vm.init = function() {
-            $http.get('http://localhost:8888/users')
+            $http.get(USERS_URL)
 
             .success(function(result) {
                 vm.users = result;
@@ -44,7 +44,7 @@
         };
 
         vm.deleteUser = function(user) {
-            $http.delete('http://localhost:8888/users/' + user.id)
+            $http.delete(USERS_URL + '/' + user.id)
 
             .success(function(result) {
                 vm.deleteMessage = "Deleted User";
@@ -57,7 +57,7 @@
         };
 
         vm.editUser = function(){
-            $http.put('http://localhost:8888/users', vm.user)
+            $http.put(USERS_URL, vm.user)
 
             .success(function(result) {
                 vm.user = null;
@@ -73,7 +73,7 @@
         };
 
         vm.addUser = function(){
-            $http.post('http://localhost:8888/users', vm.user)
+            $http.post(USERS_URL, vm.user)
 
             .success(function(result) {
                 vm.user = null;

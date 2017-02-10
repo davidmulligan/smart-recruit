@@ -17,6 +17,18 @@
 							<label for="cost">Cost:</label>
 							<input type="text" required class="form-control" ng-model="membershipCtrl.membership.cost" id="cost" name="cost">
 						</div>
+						<div class="form-group" ng-class="{ 'has-error': membershipCtrl.membershipForm.jobPostLimit.$invalid && membershipCtrl.membershipForm.jobPostLimit.$dirty }">
+							<label for="jobPostLimit">Post Limit:</label>
+							<input type="text" required class="form-control" ng-model="membershipCtrl.membership.jobPostLimit" id="jobPostLimit" name="jobPostLimit">
+						</div>
+						<div class="form-group" ng-class="{ 'has-error': membershipCtrl.membershipForm.jobBidLimit.$invalid && membershipCtrl.membershipForm.jobBidLimit.$dirty }">
+							<label for="jobBidLimit">Bid Limit:</label>
+							<input type="text" required class="form-control" ng-model="membershipCtrl.membership.jobBidLimit" id="jobBidLimit" name="jobBidLimit">
+						</div>
+						<div class="form-group" ng-class="{ 'has-error': membershipCtrl.membershipForm.jobApplicationLimit.$invalid && membershipCtrl.membershipForm.jobApplicationLimit.$dirty }">
+							<label for="jobApplicationLimit">Application Limit:</label>
+							<input type="text" required class="form-control" ng-model="membershipCtrl.membership.jobApplicationLimit" id="jobApplicationLimit" name="jobApplicationLimit">
+						</div>
 						<div class="form-group">
 							<div class="checkbox">
 								<label>
@@ -46,8 +58,10 @@
 						<tr>
 							<th>#</th>
 							<th>Name</th>
-							<th>Description</th>
 							<th>Cost</th>
+							<th>Post Limit</th>
+							<th>Bid Limit</th>
+							<th>Application Limit</th>
 							<th>Enabled</th>
 							<th></th>
 							<th></th>
@@ -57,11 +71,13 @@
 						<tr ng-repeat="membership in membershipCtrl.memberships">
 							<td>{{$index+1}}</td>
 							<td>{{membership.name}}</td>
-							<td>{{membership.description}}</td>
 							<td>{{membership.cost}}</td>
+							<td>{{membership.jobPostLimit}}</td>
+							<td>{{membership.jobBidLimit}}</td>
+							<td>{{membership.jobApplicationLimit}}</td>
 							<td>
-								<span ng-show="membershipCtrl.membership.active">Yes</span>
-								<span ng-hide="membershipCtrl.membership.active">No</span>
+								<span ng-show="membership.active">Yes</span>
+								<span ng-hide="membership.active">No</span>
 							</td>
 							<td>
 								<button type="button" class="btn btn-default btn-sm" ng-click="membershipCtrl.initEdit(membership)">

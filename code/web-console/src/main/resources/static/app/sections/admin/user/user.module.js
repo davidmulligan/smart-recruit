@@ -3,7 +3,6 @@
 
     angular
         .module('user', [
-            'user.core',
-            'register'
+            'user.core'
         ]);
 })();

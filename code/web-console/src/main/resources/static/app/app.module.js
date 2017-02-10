@@ -6,13 +6,10 @@
             'app.config',
             'navigation',
             'home',
+            'admin',
             'login',
             'freelancers',
             'jobs'
-//            'category',
-//            'skill',
-//            'membership',
-//            'user',
 //            'project'
     ]);
 })();

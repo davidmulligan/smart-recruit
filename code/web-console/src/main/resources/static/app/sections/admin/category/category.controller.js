@@ -6,13 +6,13 @@
         .controller('CategoryController', controller);
 
     /** @ngInject */
-    function controller($http) {
+    function controller($http, CATEGORIES_URL) {
         var vm = this;
         vm.edit = false;
 	    vm.buttonText = 'Create';
 
         vm.init = function() {
-            $http.get('http://localhost:8888/categories')
+            $http.get(CATEGORIES_URL)
 
             .success(function(result) {
                 vm.categories = result;
@@ -44,7 +44,7 @@
         };
 
         vm.deleteCategory = function(category) {
-            $http.delete('http://localhost:8888/categories/' + category.id)
+            $http.delete(CATEGORIES_URL + '/' + category.id)
 
             .success(function(res) {
                 vm.deleteMessage = "Deleted Category";
@@ -57,7 +57,7 @@
         };
 
         vm.editCategory = function() {
-            $http.put('http://localhost:8888/categories', vm.category)
+            $http.put(CATEGORIES_URL, vm.category)
 
             .success(function(result) {
                 vm.category = null;
@@ -72,7 +72,7 @@
         };
 
         vm.addCategory = function() {
-            $http.post('http://localhost:8888/categories', vm.category)
+            $http.post(CATEGORIES_URL, vm.category)
 
             .success(function(result) {
                 vm.category = null;

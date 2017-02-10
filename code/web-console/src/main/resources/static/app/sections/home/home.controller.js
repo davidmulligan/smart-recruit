@@ -6,34 +6,20 @@
         .controller('HomeController', controller);
 
     /** @ngInject */
-    function controller($http, JOBS_URL) {
+    function controller($http, SKILLS_URL) {
         var vm = this;
 
         vm.init = function() {
-            $http.get('http://localhost:8888/skills/principals')
+            $http.get(SKILLS_URL + '/principals')
 
             .success(function(result) {
                 vm.skills = result;
-                vm.message = '';
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                console.log(error.message);
             });
         };
-
-        vm.search = function() {
-            $http.get(JOBS_URL + '?title=' + vm.searchTitle)
-
-                .success(function(result) {
-                    vm.jobs = result;
-                    vm.message = '';
-                })
-
-                .error(function(error) {
-                    vm.message = error.message;
-                });
-        }
 
         vm.init();
     }

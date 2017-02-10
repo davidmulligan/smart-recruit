@@ -2,22 +2,22 @@
     'use strict';
 
     angular
-        .module('membership.core', [])
-        .controller('MembershipController', controller);
+        .module('skill.core', [])
+        .controller('SkillController', controller);
 
     /** @ngInject */
-    function controller($http) {
+    function controller($http, SKILLS_URL) {
         var vm = this;
         vm.edit = false;
         vm.buttonText = 'Create';
 
         vm.init = function() {
-            $http.get('http://localhost:8888/memberships')
+            $http.get(SKILLS_URL)
 
             .success(function(result) {
-                vm.memberships = result;
-                vm.membership = null;
-                vm.membershipForm.$setPristine();
+                vm.skills = result;
+                vm.skill = null;
+                vm.skillForm.$setPristine();
                 vm.message = '';
                 vm.buttonText = 'Create';
             })
@@ -27,27 +27,27 @@
             });
         };
 
-        vm.initEdit = function(membership) {
+        vm.initEdit = function(skill) {
             vm.edit = true;
-            vm.membership = membership;
-            vm.membershipForm.$setPristine();
+            vm.skill = skill;
+            vm.skillForm.$setPristine();
             vm.message = '';
             vm.buttonText = 'Update';
         };
 
-        vm.initAddMembership = function() {
+        vm.initAddSkill = function() {
             vm.edit = false;
-            vm.membership = null;
-            vm.membershipForm.$setPristine();
+            vm.skill = null;
+            vm.skillForm.$setPristine();
             vm.message = '';
             vm.buttonText = 'Create';
         };
 
-        vm.deleteMembership = function(membership) {
-            $http.delete('http://localhost:8888/memberships/' + membership.id)
+        vm.deleteSkill = function(skill) {
+            $http.delete(SKILLS_URL + '/' + skill.id)
 
             .success(function(res) {
-                vm.deleteMessage = "Deleted Membership";
+                vm.deleteMessage = "Deleted Skill";
                 vm.init();
             })
 
@@ -56,13 +56,13 @@
             });
         };
 
-        vm.editMembership = function() {
-            $http.put('http://localhost:8888/memberships', vm.membership)
+        vm.editSkill = function() {
+            $http.put(SKILLS_URL, vm.skill)
 
             .success(function(result) {
-                vm.membership = null;
-                vm.membershipForm.$setPristine();
-                vm.message = "Membership Updated";
+                vm.skill = null;
+                vm.skillForm.$setPristine();
+                vm.message = "Skill Updated";
                 vm.init();
             })
 
@@ -71,13 +71,13 @@
             });
         };
 
-        vm.addMembership = function() {
-            $http.post('http://localhost:8888/memberships', vm.membership)
+        vm.addSkill = function() {
+            $http.post(SKILLS_URL, vm.skill)
 
             .success(function(result) {
-                vm.membership = null;
-                vm.membershipForm.$setPristine();
-                vm.message = "Membership Created";
+                vm.skill = null;
+                vm.skillForm.$setPristine();
+                vm.message = "Skill Created";
                 vm.init();
             })
 
@@ -88,9 +88,9 @@
 
         vm.submit = function() {
             if (vm.edit){
-                vm.editMembership();
+                vm.editSkill();
             } else {
-                vm.addMembership();
+                vm.addSkill();
             }
         };
 

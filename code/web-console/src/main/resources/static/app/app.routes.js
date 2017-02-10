@@ -176,11 +176,11 @@
                 parent : 'nav',
                 url : '/users',
                 data : {
-                    role : 'USER'
+                    role : 'ADMIN'
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/user/user.html',
+                        templateUrl : 'app/sections/admin/user/user.html',
                         controller : 'UserController',
                         controllerAs : 'userCtrl'
                     }
@@ -190,11 +190,11 @@
                 parent : 'nav',
                 url : '/skills',
                 data : {
-                    role : 'USER'
+                    role : 'ADMIN'
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/skill/skill.html',
+                        templateUrl : 'app/sections/admin/skill/skill.html',
                         controller : 'SkillController',
                         controllerAs : 'skillCtrl'
                     }
@@ -204,11 +204,11 @@
                 parent : 'nav',
                 url : '/categories',
                 data : {
-                    role : 'USER'
+                    role : 'ADMIN'
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/category/category.html',
+                        templateUrl : 'app/sections/admin/category/category.html',
                         controller : 'CategoryController',
                         controllerAs : 'categoryCtrl'
                     }
@@ -218,11 +218,11 @@
                 parent : 'nav',
                 url : '/memberships',
                 data : {
-                    role : 'USER'
+                    role : 'ADMIN'
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/membership/membership.html',
+                        templateUrl : 'app/sections/admin/membership/membership.html',
                         controller : 'MembershipController',
                         controllerAs : 'membershipCtrl'
                     }

@@ -4,8 +4,8 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON sr_user.* TO 'smartrecruit'@'%' identifi
 INSERT INTO `smartrecruit`.`ROLE` (`id`, `role`) VALUES ('1', 'USER');
 INSERT INTO `smartrecruit`.`ROLE` (`id`, `role`) VALUES ('2', 'ADMIN');
 
-INSERT INTO `smartrecruit`.`MEMBERSHIP`(`id`, `created_by`, `created_on`, `modified_by`, `modified_on`, `active`, `cost`, `description`, `name`, `user_type`) VALUES(1, 1, now(), 1, now(), b'1', 0, 'Basic', 'Basic', 'USER');
-INSERT INTO `smartrecruit`.`MEMBERSHIP`(`id`, `created_by`, `created_on`, `modified_by`, `modified_on`, `active`, `cost`, `description`, `name`, `user_type`) VALUES(2, 1, now(), 1, now(), b'1', 0, 'Basic', 'Basic', 'CLIENT');
+INSERT INTO `smartrecruit`.`MEMBERSHIP`(`id`,`created_by`,`created_on`,`modified_by`,`modified_on`,`active`,`cost`,`description`,`job_application_limit`,`job_bid_limit`,`job_post_limit`,`name`,`user_type`) VALUES (1, 1, now(), 1, now(), b'1', 100.00, 'Basic', 5, 5, 5, 'Basic', 'FREELANCER');
+INSERT INTO `smartrecruit`.`MEMBERSHIP`(`id`,`created_by`,`created_on`,`modified_by`,`modified_on`,`active`,`cost`,`description`,`job_application_limit`,`job_bid_limit`,`job_post_limit`,`name`,`user_type`) VALUES (1, 1, now(), 1, now(), b'1', 100.00, 'Basic', 5, 5, 5, 'Basic', 'FREELANCER');
 
 INSERT INTO `smartrecruit`.`USER` (`id`,`activation_code`,`company_name`,`email`,`enabled`,`first_name`,`last_name`,`password`,`profile`,`security_answer`,`security_question`,`membership_id`)
 VALUES(1, null, null, 'davidmulligan@btopenworld.com', b'1', 'David', 'Mulligan', '$2a$10$hl/Fx1lT9Bk/H4WttkfM.u8HxE2GgrHi60cqej5wWcpz83EYwfDXK', '', null, null, 1);

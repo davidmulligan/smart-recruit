@@ -5,6 +5,7 @@
         .module('app.config', [
             'ngResource',
             'ui.router',
+            'ui.bootstrap',
             'app.constants',
             'app.factories',
             'app.services',

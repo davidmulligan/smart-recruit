@@ -10,6 +10,21 @@ INSERT INTO `smartrecruit`.`MEMBERSHIP`(`id`,`created_by`,`created_on`,`modified
 INSERT INTO `smartrecruit`.`USER` (`id`,`activation_code`,`company_name`,`email`,`enabled`,`first_name`,`last_name`,`password`,`profile`,`security_answer`,`security_question`,`membership_id`)
 VALUES(1, null, null, 'davidmulligan@btopenworld.com', b'1', 'David', 'Mulligan', '$2a$10$hl/Fx1lT9Bk/H4WttkfM.u8HxE2GgrHi60cqej5wWcpz83EYwfDXK', '', null, null, 1);
 INSERT INTO `smartrecruit`.`USER_ROLE` (`user_id`, `roles_id`) VALUES ('1', '1');
+INSERT INTO `smartrecruit`.`USER` (`id`, `email`, `enabled`, `first_name`, `last_name`, `password`, `membership_id`) VALUES ('2', 'nedim@crewlance.me', b'1', 'Nedim', 'Nemagic', 'PASSWORD', '1');
+UPDATE `smartrecruit`.`USER` SET `profile`='Software developer and entrepreneur' WHERE `id`='1';
+UPDATE `smartrecruit`.`USER` SET `profile`='Technical wizard' WHERE `id`='2';
+
+INSERT INTO `smartrecruit`.`USER_SKILLS`(`user_id`,`skills_id`)VALUES(1,3);
+INSERT INTO `smartrecruit`.`USER_SKILLS`(`user_id`,`skills_id`)VALUES(1,5);
+INSERT INTO `smartrecruit`.`USER_SKILLS`(`user_id`,`skills_id`)VALUES(1,4);
+INSERT INTO `smartrecruit`.`USER_SKILLS`(`user_id`,`skills_id`)VALUES(1,7);
+INSERT INTO `smartrecruit`.`USER_SKILLS`(`user_id`,`skills_id`)VALUES(1,6);
+
+INSERT INTO `smartrecruit`.`USER_SKILLS`(`user_id`,`skills_id`)VALUES(2,2);
+INSERT INTO `smartrecruit`.`USER_SKILLS`(`user_id`,`skills_id`)VALUES(2,4);
+INSERT INTO `smartrecruit`.`USER_SKILLS`(`user_id`,`skills_id`)VALUES(2,3);
+INSERT INTO `smartrecruit`.`USER_SKILLS`(`user_id`,`skills_id`)VALUES(2,6);
+INSERT INTO `smartrecruit`.`USER_SKILLS`(`user_id`,`skills_id`)VALUES(2,5);
 
 INSERT INTO `smartrecruit`.`SKILL` (`id`, `created_by`, `created_on`, `modified_by`, `modified_on`, `active`, `description`, `name`, `principal`) VALUES ('1', 1, now(), 1, now(), b'1', 'Van Drivers', 'Van Drivers', b'1');
 INSERT INTO `smartrecruit`.`SKILL` (`id`, `created_by`, `created_on`, `modified_by`, `modified_on`, `active`, `description`, `name`, `principal`) VALUES ('2', 1, now(), 1, now(), b'1', 'Lighting', 'Lighting', b'1');

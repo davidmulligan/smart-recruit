@@ -22,6 +22,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Transient;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -81,6 +82,10 @@ public class User extends BaseDomainObject implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "UserRole")
     private Set<Role> roles;
+
+    @ManyToMany
+    @JoinTable(name = "UserSkills")
+    private List<Skill> skills;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

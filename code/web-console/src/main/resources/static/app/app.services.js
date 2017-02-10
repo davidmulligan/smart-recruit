@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('app.services', ['services.authenticationService', 'services.jwtService']);
+        .module('app.services', ['services.modalService', 'services.authenticationService', 'services.jwtService']);
 })();

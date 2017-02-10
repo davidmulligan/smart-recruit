@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,4 +23,5 @@ public class UserDto {
     private String profile;
     private String userType;
     private boolean enabled;
+    private List<SkillDto> skills;
 }

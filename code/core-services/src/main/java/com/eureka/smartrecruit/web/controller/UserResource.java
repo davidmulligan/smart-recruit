@@ -26,6 +26,18 @@ public class UserResource {
     private final UserService userService;
     private final Mapper mapper;
 
+    @RequestMapping(value="/freelancers", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public List<UserDto> getFreelancers() {
+        return userService.findByType(UserType.FREELANCER).stream().map(user -> mapper.map(user, UserDto.class)).collect(Collectors.toList());
+    }
+
+
+
+
+
+
+
+
     @RequestMapping(method=RequestMethod.POST, produces={ MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody UserDto userDto) {
@@ -60,10 +72,7 @@ public class UserResource {
         return userService.findByType(UserType.CLIENT).stream().map(user -> mapper.map(user, UserDto.class)).collect(Collectors.toList());
     }
 
-    @RequestMapping(value="/freelancers", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public List<UserDto> getFreelancers() {
-        return userService.findByType(UserType.FREELANCER).stream().map(user -> mapper.map(user, UserDto.class)).collect(Collectors.toList());
-    }
+
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public UserDto findById(@PathVariable("id") Long id) {

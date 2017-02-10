@@ -6,10 +6,9 @@
             'app.config',
             'navigation',
             'home',
-            'admin',
             'login',
+            'admin',
             'client',
-            'freelancers',
             'jobs'
 //            'project'
     ]);

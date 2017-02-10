@@ -3,6 +3,7 @@
 
     angular
         .module('client', [
-            'client.job'
+            'client.job',
+            'client.freelancer'
         ]);
 })();

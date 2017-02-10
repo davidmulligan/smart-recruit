@@ -74,21 +74,7 @@
                     }
                 }
             })
-            .state('freelancers', {
-                parent : 'nav',
-                url : '/freelancers',
-                data : {
-                    role : 'USER',
-                    secure : false
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/freelancers/freelancers.html',
-                        controller : 'FreelancersController',
-                        controllerAs : 'freelancersCtrl'
-                    }
-                }
-            })
+
             .state('jobs', {
                 parent : 'nav',
                 url : '/jobs',
@@ -175,7 +161,20 @@
                     }
                 }
             })
-
+            .state('freelancers', {
+                parent : 'nav',
+                url : '/freelancers',
+                data : {
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/client/freelancer/freelancer.html',
+                        controller : 'ClientFreelancerController',
+                        controllerAs : 'freelancersCtrl'
+                    }
+                }
+            })
             .state('categories', {
                 parent : 'nav',
                 url : '/categories',

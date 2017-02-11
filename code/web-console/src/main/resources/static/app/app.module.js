@@ -9,7 +9,7 @@
             'login',
             'admin',
             'client',
+            'freelancer',
             'jobs'
-//            'project'
     ]);
 })();

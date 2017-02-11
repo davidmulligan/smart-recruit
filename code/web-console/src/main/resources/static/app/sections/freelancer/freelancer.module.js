@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('jobs', [
-            'myjobs'
+        .module('freelancer', [
+            'freelancer.job'
         ]);
 })();

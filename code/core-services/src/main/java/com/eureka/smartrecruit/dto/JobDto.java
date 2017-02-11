@@ -26,6 +26,4 @@ public class JobDto {
     private boolean fixedPrice;
     private String status;
     private List<SkillDto> skills;
-    private List<BidDto> bids;
-    private List<ApplicationDto> applications;
 }

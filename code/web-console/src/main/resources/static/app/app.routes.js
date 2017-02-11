@@ -75,21 +75,7 @@
                 }
             })
 
-            .state('jobs', {
-                parent : 'nav',
-                url : '/jobs',
-                data : {
-                    role : 'USER',
-                    secure : false
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/jobs/jobs.html',
-                        controller : 'JobsController',
-                        controllerAs : 'jobsCtrl'
-                    }
-                }
-            })
+
 
             .state('myjobs', {
                 parent : 'nav',
@@ -172,6 +158,20 @@
                         templateUrl : 'app/sections/client/freelancer/freelancer.html',
                         controller : 'ClientFreelancerController',
                         controllerAs : 'freelancersCtrl'
+                    }
+                }
+            })
+            .state('jobs', {
+                parent : 'nav',
+                url : '/jobs',
+                data : {
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/freelancer/job/job.html',
+                        controller : 'FreelancerJobController',
+                        controllerAs : 'jobCtrl'
                     }
                 }
             })

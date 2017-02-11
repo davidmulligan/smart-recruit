@@ -1,0 +1,42 @@
+<section ng-controller="FreelancerJobController as jobCtrl">
+    <div class="modal-header">
+        <h3 class="modal-title">More About {{job.title}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-left"><strong>Description: </strong><br>{{job.description}}</p>
+                <p class="text-left"><strong>Category: </strong><br>{{job.category.name}}</p>
+                <p class="text-left"><strong>Location: </strong><br>{{job.location}}</p>
+                <p class="text-left"><strong>Remuneration: </strong><br>{{job.remuneration}}</p>
+                <p class="text-left"><strong>Duration: </strong><br>{{job.duration}}</p>
+                <p class="text-left"><strong>Number of Positions: </strong><br>{{job.numberPositions}}</p>
+                <p class="text-left"><strong>Deadline: </strong><br>{{job.deadline}}</p>
+                <p class="text-left"><strong>Skills: </strong><br><span class="label label-primary" ng-repeat="skill in job.skills">{{skill.name}} </span></p>
+            </div>
+            <div class="col-md-6">
+                <form name="createApplicationForm" ng-show="job.fixedPrice" novalidate>
+                    <div class="form-group" ng-class="{ 'has-error': createApplicationForm.comment.$invalid && createApplicationForm.comment.$dirty }">
+                        <label for="comment">Comment:</label>
+                        <textarea class="form-control" rows="5" ng-model="jobCtrl.application.comment" id="comment" name="comment"></textarea>
+                    </div>
+                </form>
+                <form name="jobCtrl.createBidForm" ng-show="!job.fixedPrice" novalidate>
+                    <div class="form-group" ng-class="{ 'has-error': jobCtrl.createBidForm.comment.$invalid && jobCtrl.createBidForm.comment.$dirty }">
+                        <label for="bidComment">Comment:</label>
+                        <textarea class="form-control" rows="5" ng-model="jobCtrl.bid.comment" id="bidComment" name="bidComment"></textarea>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error': jobCtrl.createBidForm.quote.$invalid && jobCtrl.createBidForm.quote.$dirty }">
+                        <label for="quote">Quote:</label>
+                        <input type="text" required class="form-control" ng-model="jobCtrl.bid.quote" id="quote" name="quote">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" type="button" ng-click="jobCtrl.applyJob(job);ok()" ng-disabled="jobCtrl.createApplicationForm.$invalid" ng-show="job.fixedPrice">Apply</button>
+        <button class="btn btn-success" type="button" ng-click="jobCtrl.bidJob(job);ok()" ng-disabled="jobCtrl.createBidForm.$invalid" ng-show="!job.fixedPrice">Bid</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+    </div>
+</section>

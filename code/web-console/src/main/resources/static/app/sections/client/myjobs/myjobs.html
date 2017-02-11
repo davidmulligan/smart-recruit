@@ -1,0 +1,82 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Jobs
+			</div>
+			<div class="panel-body">
+				<div class="alert alert-info margin-top-5" ng-show="myJobsCtrl.deleteMessage">{{myJobsCtrl.deleteMessage}}</div>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Title</th>
+							<th>Category</th>
+							<th>No. of Bids / Applications</th>
+							<th>Deadline</th>
+							<th>Status</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="job in myJobsCtrl.jobs">
+							<td>{{$index+1}}</td>
+							<td><a ng-click="myJobsCtrl.modalDetail('lg', job)">{{job.title}}</a></td>
+							<td>{{job.category.name}}</td>
+							<td>{{job.bids.length}} / {{job.applications.length}}</td>
+							<td>{{job.deadline}}</td>
+							<td><span class="label label-info">{{job.status}}</span></td>
+							<td>
+								<button type="button" class="btn btn-primary btn-sm" ng-click="myJobsCtrl.disputeJob(job)"><i class="glyphicon glyphicon-ban-circle"></i> Dispute</button>
+								<button type="button" class="btn btn-primary btn-sm" ng-click="myJobsCtrl.archiveJob(job)"><i class="glyphicon glyphicon-screenshot"></i> Archive</button>
+								<button type="button" class="btn btn-danger btn-sm" ng-click="myJobsCtrl.cancelJob(job)"><i class="glyphicon glyphicon-remove-circle"></i> Cancel</button>
+
+                                <!--<div class="modal fade" id="myModal-{{job.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+                                    <!--<div class="modal-dialog">-->
+                                        <!--<div class="modal-content">-->
+                                            <!--<div class="modal-header">-->
+                                                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>-->
+                                                <!--<h4 class="modal-title" id="myModalLabel">Bids ({{job.bids.length}})</h4>-->
+                                            <!--</div>-->
+                                            <!--<form ng-submit="jobsCtrl.applyJob(999)" name="jobsCtrl.applyJobForm" novalidate>-->
+                                                <!--<div class="modal-body">-->
+                                                    <!--<table class="table table-bordered">-->
+                                                        <!--<thead>-->
+                                                        <!--<tr>-->
+                                                            <!--<th>#</th>-->
+                                                            <!--<th>User</th>-->
+                                                            <!--<th>Quote</th>-->
+                                                            <!--<th>Comment</th>-->
+                                                            <!--<th></th>-->
+                                                        <!--</tr>-->
+                                                        <!--</thead>-->
+                                                        <!--<tbody>-->
+                                                        <!--<tr ng-repeat="bid in job.bids">-->
+                                                            <!--<td>{{$index+1}}</td>-->
+                                                            <!--<td>{{bid.user.firstName}} {{bid.user.lastName}}</td>-->
+                                                            <!--<td>{{bid.quote}}</td>-->
+                                                            <!--<td>{{bid.comment}}</td>-->
+                                                            <!--<td>-->
+                                                                <!--<button type="button" class="btn btn-default btn-sm" ng-click="myJobsCtrl.archiveJob(job)">-->
+                                                                    <!--<span class="glyphicon glyphicon-ok"></span>-->
+                                                                <!--</button>-->
+                                                            <!--</td>-->
+                                                        <!--</tr>-->
+                                                        <!--</tbody>-->
+                                                    <!--</table>-->
+                                                <!--</div>-->
+                                                <!--<div class="modal-footer">-->
+                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                <!--</div>-->
+                                            <!--</form>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

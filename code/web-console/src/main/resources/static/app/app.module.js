@@ -9,7 +9,6 @@
             'login',
             'admin',
             'client',
-            'freelancer',
-            'jobs'
+            'freelancer'
     ]);
 })();

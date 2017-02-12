@@ -12,7 +12,8 @@
 							<th>#</th>
 							<th>Title</th>
 							<th>Category</th>
-							<th>No. of Bids / Applications</th>
+							<th>Bids / Applications</th>
+							<th>Disputes</th>
 							<th>Deadline</th>
                             <th>Hired</th>
 							<th>Status</th>
@@ -25,12 +26,13 @@
 							<td><a ng-click="myJobsCtrl.modalDetail('lg', job)">{{job.title}}</a></td>
 							<td>{{job.category.name}}</td>
 							<td>{{job.bids.length}} / {{job.applications.length}}</td>
+							<td>{{job.disputes.length}}</td>
 							<td>{{job.deadline}}</td>
 							<td><span ng-repeat="hiredUser in job.hired">{{hiredUser.firstName}} {{hiredUser.lastName}} <button type="button" class="btn btn-primary btn-sm" ng-show="job.status == 'FINISHED'" ng-click="myJobsCtrl.modalFreelancerFeedback('lg', job, hiredUser)"><i class="glyphicon glyphicon-tasks"></i> Feedback</button></span></td>
 							<td><span class="label label-info">{{job.status}}</span></td>
 							<td>
 								<button type="button" class="btn btn-primary btn-sm" ng-show="job.status == 'STARTED'" ng-click="myJobsCtrl.finishJob(job)"><i class="glyphicon glyphicon-off"></i> Finish</button>
-								<button type="button" class="btn btn-primary btn-sm" ng-show="job.status == 'STARTED'" ng-click="myJobsCtrl.disputeJob(job)"><i class="glyphicon glyphicon-ban-circle"></i> Dispute</button>
+								<button type="button" class="btn btn-primary btn-sm" ng-show="job.status == 'STARTED'" ng-click="myJobsCtrl.modalDispute('lg', job)"><i class="glyphicon glyphicon-ban-circle"></i> Dispute</button>
 								<button type="button" class="btn btn-primary btn-sm" ng-show="job.status == 'FINISHED'" ng-click="myJobsCtrl.archiveJob(job)"><i class="glyphicon glyphicon-screenshot"></i> Archive</button>
 							</td>
 						</tr>

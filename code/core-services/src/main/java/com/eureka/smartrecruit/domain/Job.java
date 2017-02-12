@@ -71,6 +71,9 @@ public class Job extends BaseDomainObject {
     @OneToMany(mappedBy = "job")
     private Set<Feedback> feedback;
 
+    @OneToMany(mappedBy = "job")
+    private Set<Dispute> disputes;
+
     public Set<User> getHired() {
         return applications.stream().filter(i -> i.isAccepted()).map(t -> t.getUser()).collect(Collectors.toSet());
     }

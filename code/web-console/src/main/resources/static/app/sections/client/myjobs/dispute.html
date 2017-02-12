@@ -1,0 +1,21 @@
+<section ng-controller="ClientMyJobsController as myJobsCtrl">
+    <div class="modal-header">
+        <h3 class="modal-title">Dispute - {{job.title}}</h3>
+    </div>
+    <div class="modal-body">
+        <form name="myJobsCtrl.createDisputeForm" novalidate>
+            <div class="form-group" ng-class="{ 'has-error': jobCtrl.createDisputeForm.subject.$invalid && jobCtrl.createDisputeForm.subject.$dirty }">
+                <label for="subject">Subject:</label>
+                <input type="text" required class="form-control" ng-model="dispute.subject" id="subject" name="subject">
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': myJobsCtrl.createDisputeForm.complaint.$invalid && myJobsCtrl.createDisputeForm.complaint.$dirty }">
+                <label for="complaint">Comment:</label>
+                <textarea class="form-control" rows="5" ng-model="dispute.complaint" id="complaint" name="complaint"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" type="button" ng-click="myJobsCtrl.saveDispute(job, dispute);ok()" ng-disabled="myJobsCtrl.createDisputeForm.$invalid">Save</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+    </div>
+</section>

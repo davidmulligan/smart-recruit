@@ -88,6 +88,36 @@
             });
         };
 
+        vm.modalDispute = function(size, selectedJob) {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/sections/client/myjobs/dispute.html',
+                controller: function($scope, $uibModalInstance, job) {
+                    $scope.job = job;
+                    $scope.dispute = {};
+
+                    $scope.ok = function() {
+                        $uibModalInstance.close($scope.job, $scope.dispute);
+                    };
+
+                    $scope.cancel = function() {
+                        $uibModalInstance.dismiss('cancel');
+                    };
+                },
+                size: size,
+                resolve: {
+                    job: function() {
+                        return selectedJob;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(selectedItem) {}, function() {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
         vm.cancelJob = function(job) {
             $http.put(JOBS_URL + '/' + job.id + '/cancel')
 
@@ -150,6 +180,18 @@
 
         vm.saveFeedback = function(user, feedback) {
             $http.post(USERS_URL + '/' + user.id + '/feedback', feedback)
+
+            .success(function(res) {
+                vm.init();
+            })
+
+            .error(function(error) {
+                console.log(error.message);
+            });
+        };
+
+        vm.saveDispute = function(job, dispute) {
+            $http.post(JOBS_URL + '/' + job.id + '/disputes', dispute)
 
             .success(function(res) {
                 vm.init();

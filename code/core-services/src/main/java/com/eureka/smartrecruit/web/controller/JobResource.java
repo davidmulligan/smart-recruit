@@ -159,6 +159,7 @@ public class JobResource {
 
     @RequestMapping(value="/self", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<JobDto> findMyProjects() {
+        System.out.println();
         return jobService.findMyJobs().stream().map(job -> mapper.map(job, JobDto.class)).collect(Collectors.toList());
     }
 }

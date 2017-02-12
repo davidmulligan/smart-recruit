@@ -2,14 +2,14 @@
     'use strict';
 
     angular
-        .module('client.job.core', [])
+        .module('client.post.core', [])
         .controller('ClientJobController', controller);
 
     /** @ngInject */
-    function controller($http, JOBS_URL, jobData) {
+    function controller($http, JOBS_URL, referenceData) {
         var vm = this;
-        vm.categories = jobData.categories;
-        vm.skills = jobData.skills;
+        vm.categories = referenceData.categories;
+        vm.skills = referenceData.skills;
 
         vm.submit = function() {
             $http.post(JOBS_URL, vm.job)

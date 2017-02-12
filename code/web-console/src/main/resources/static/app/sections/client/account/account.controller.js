@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('client.myjobs.core', [])
-        .controller('ClientMyJobsController', controller);
+        .module('client.account.core', [])
+        .controller('ClientAccountController', controller);
 
     /** @ngInject */
     function controller($http, $uibModal, JOBS_URL, USERS_URL) {
@@ -29,7 +29,7 @@
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'app/sections/client/myjobs/myjobs_detail.html',
+                templateUrl: 'app/sections/client/account/job_detail.html',
                 controller: function($scope, $uibModalInstance, job) {
                     $scope.job = job;
 
@@ -58,7 +58,7 @@
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'app/sections/client/myjobs/feedback_freelancer.html',
+                templateUrl: 'app/sections/client/account/feedback_freelancer.html',
                 controller: function($scope, $uibModalInstance, job, user) {
                     $scope.job = job;
                     $scope.user = user;
@@ -92,7 +92,7 @@
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'app/sections/client/myjobs/dispute.html',
+                templateUrl: 'app/sections/client/account/dispute/dispute.html',
                 controller: function($scope, $uibModalInstance, job) {
                     $scope.job = job;
                     $scope.dispute = {};

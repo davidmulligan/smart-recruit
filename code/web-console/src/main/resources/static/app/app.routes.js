@@ -9,6 +9,7 @@
     function routes($stateProvider, $urlRouterProvider) {
 
         $stateProvider
+
             .state('nav', {
                 abstract : true,
                 url : '',
@@ -24,10 +25,10 @@
                 resolve: {
 
                     /* @ngInject */
-                    jobData: function($q, Categories, Skills) {
+                    referenceData: function($q, Categories, Skills) {
                         return $q.all({
-                             categories: Categories.getAll(),
-                             skills: Skills.getAll()
+                            categories: Categories.getAll(),
+                            skills: Skills.getAll()
                         });
                     }
                 }
@@ -74,55 +75,73 @@
                     }
                 }
             })
-
-
-
-
-
-
-            .state('projects', {
+            .state('help', {
                 parent : 'nav',
-                url : '/projects',
+                url : '/help',
                 data : {
-                    role : 'USER'
+                    secure : false
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/project/project.html',
-                        controller : 'ProjectController',
-                        controllerAs: 'projectCtrl'
-                    }
-                },
-                resolve: {
-
-                    /* @ngInject */
-                    projectData: function($q, Categories, Skills) {
-                        return $q.all({
-                             categories: Categories.getAll(),
-                             skills: Skills.getAll()
-                        });
+                        templateUrl : 'app/sections/help.html'
                     }
                 }
             })
-            .state('job', {
+            .state('guide', {
                 parent : 'nav',
-                url : '/job/:selectedJob',
+                url : '/guide',
                 data : {
-                    role : 'USER'
+                    secure : false
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/job/viewjob/viewjob.html',
-                        controller : 'ViewJobController',
-                        controllerAs: 'viewJobCtrl'
+                        templateUrl : 'app/sections/guide.html'
+                    }
+                }
+            })
+            .state('page-not-found', {
+                parent : 'nav',
+                url : '/page-not-found',
+                data : {
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/page-not-found.html'
+                    }
+                }
+            })
+            .state('access-denied', {
+                parent : 'nav',
+                url : '/access-denied',
+                data : {
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/access-denied.html'
                     }
                 }
             })
 
-
-            .state('postJob', {
+            // Client
+            .state('account', {
                 parent : 'nav',
-                url : '/postJob',
+                url : '/account',
+                data : {
+                    role : 'CLIENT'
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/client/account/account.html',
+                        controller : 'ClientAccountController',
+                        controllerAs : 'accountCtrl'
+                    }
+                }
+            })
+            .state('post', {
+                parent : 'nav',
+                url : '/post',
                 data : {
                     role : 'CLIENT'
                 },
@@ -134,20 +153,11 @@
                     }
                 }
             })
-            .state('myjobs', {
-                parent : 'nav',
-                url : '/myjobs',
-                data : {
-                    role : 'CLIENT'
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/client/myjobs/myjobs.html',
-                        controller : 'ClientMyJobsController',
-                        controllerAs : 'myJobsCtrl'
-                    }
-                }
-            })
+
+
+
+
+
             .state('freelancers', {
                 parent : 'nav',
                 url : '/freelancers',
@@ -247,44 +257,9 @@
                         controllerAs : 'userCtrl'
                     }
                 }
-            })
-
-            .state('help', {
-                parent : 'nav',
-                url : '/help',
-                data : {
-                    secure : false
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/help.html'
-                    }
-                }
-            })
-            .state('page-not-found', {
-                parent : 'nav',
-                url : '/page-not-found',
-                data : {
-                    secure : false
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/page-not-found.html'
-                    }
-                }
-            })
-            .state('access-denied', {
-                parent : 'nav',
-                url : '/access-denied',
-                data : {
-                    secure : false
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/access-denied.html'
-                    }
-                }
             });
+
+
 
             $urlRouterProvider.otherwise('/page-not-found');
     }

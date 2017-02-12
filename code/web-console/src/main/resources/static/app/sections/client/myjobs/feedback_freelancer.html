@@ -1,0 +1,25 @@
+<style>
+    .rating .glyphicon { font-size: 22px; }
+</style>
+
+<section ng-controller="ClientMyJobsController as myJobsCtrl">
+    <div class="modal-header">
+        <h3 class="modal-title">Feedback for {{user.firstName}} {{user.lastName}} - {{job.title}}</h3>
+    </div>
+    <div class="modal-body">
+        
+        <form name="myJobsCtrl.createReviewForm" novalidate>
+            <div class="form-group" ng-class="{ 'has-error': myJobsCtrl.createReviewForm.comment.$invalid && myJobsCtrl.createReviewForm.comment.$dirty }">
+                <label for="bidComment">Comment:</label>
+                <textarea class="form-control" rows="5" ng-model="feedback.comment" id="bidComment" name="bidComment"></textarea>
+            </div>
+            <div class="form-group rating">
+                <span uib-rating ng-model="feedback.rating" max="5" read-only="false" on-hover="myJobsCtrl.hoveringOver(value)" on-leave="overStar = null" state-on="'glyphicon glyphicon-star'" state-off="'glyphicon glyphicon-star-empty'"></span>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" type="button" ng-click="myJobsCtrl.saveFeedback(user, feedback);ok()" ng-disabled="myJobsCtrl.createReviewForm.$invalid">Save</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+    </div>
+</section>

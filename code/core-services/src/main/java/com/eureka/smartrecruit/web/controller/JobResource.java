@@ -53,7 +53,11 @@ public class JobResource {
         jobService.reject(jobService.findById(id));
     }
 
-
+    @RequestMapping(value="/{id}/finish", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
+    public void finishJob(@PathVariable("id") Long id) {
+        jobService.finish(jobService.findById(id));
+    }
 
 
 
@@ -106,13 +110,7 @@ public class JobResource {
         jobService.update(job);
     }
 
-    @RequestMapping(value="/{id}/finish", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
-    @ResponseStatus(HttpStatus.OK)
-    public void finishJob(@PathVariable("id") Long id) {
-        Job job = jobService.findById(id);
-        job.getStatus().finish(job);
-        jobService.update(job);
-    }
+
 
     @RequestMapping(value="/{id}/cancel", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.OK)

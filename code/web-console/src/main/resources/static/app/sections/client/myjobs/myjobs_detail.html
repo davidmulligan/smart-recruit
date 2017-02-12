@@ -1,4 +1,4 @@
-<section>
+<section ng-controller="ClientMyJobsController as myJobsCtrl">
     <div class="modal-header">
         <h3 class="modal-title">{{job.title}}</h3>
     </div>
@@ -19,7 +19,7 @@
                     <td>{{bid.user.firstName}} {{bid.user.lastName}}</td>
                     <td>{{bid.quote}}</td>
                     <td>{{bid.comment}}</td>
-                    <td><button type="button" class="btn btn-primary btn-sm" ng-click="myJobsCtrl.disputeJob(job)"><i class="glyphicon glyphicon-ok"></i> Accept</button></td>
+                    <td><button type="button" class="btn btn-primary btn-sm" ng-click="myJobsCtrl.acceptBid(job, bid);ok()"><i class="glyphicon glyphicon-ok"></i> Accept</button></td>
                 </tr>
             </tbody>
         </table>
@@ -37,7 +37,7 @@
                 <td>{{$index+1}}</td>
                 <td>{{application.user.firstName}} {{application.user.lastName}}</td>
                 <td>{{application.comment}}</td>
-                <td><button type="button" class="btn btn-primary btn-sm" ng-click="myJobsCtrl.disputeJob(job)"><i class="glyphicon glyphicon-ok"></i> Accept</button></td>
+                <td><button type="button" class="btn btn-primary btn-sm" ng-click="myJobsCtrl.acceptApplication(job, application);ok()"><i class="glyphicon glyphicon-ok"></i> Accept</button></td>
             </tr>
             </tbody>
         </table>

@@ -1,7 +1,6 @@
 package com.eureka.smartrecruit.domain;
 
 import com.eureka.smartrecruit.database.BaseDomainObject;
-import com.eureka.smartrecruit.domain.enumeration.Rating;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +19,7 @@ public class Feedback extends BaseDomainObject {
     private String comment;
 
     @Column(nullable = false)
-    private Rating rating;
+    private Integer rating;
 
     @ManyToOne
     private User author;

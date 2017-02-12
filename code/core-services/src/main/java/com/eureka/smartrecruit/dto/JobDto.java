@@ -28,4 +28,5 @@ public class JobDto {
     private List<SkillDto> skills;
     private List<BidDto> bids;
     private List<ApplicationDto> applications;
+    private List<UserDto> hired;
 }

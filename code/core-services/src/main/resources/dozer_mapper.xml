@@ -4,6 +4,19 @@
           xsi:schemaLocation="http://dozer.sourceforge.net
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
+    <configuration>
+        <custom-converters>
+            <converter type="io.craftsman.Jdk8CompatibilityConverter">
+                <class-a>java.time.LocalDate</class-a>
+                <class-b>java.time.LocalDate</class-b>
+            </converter>
+            <converter type="io.craftsman.Jdk8CompatibilityConverter">
+                <class-a>java.time.LocalDateTime</class-a>
+                <class-b>java.time.LocalDateTime</class-b>
+            </converter>
+        </custom-converters>
+    </configuration>
+
     <mapping>
         <class-a>com.eureka.smartrecruit.dto.CategoryDto</class-a>
         <class-b>com.eureka.smartrecruit.domain.Category</class-b>

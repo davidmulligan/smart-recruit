@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,4 +16,6 @@ public class ApplicationDto {
     private Long id;
     private String comment;
     private UserDto user;
+    private boolean accepted;
+    private LocalDateTime acceptedOn;
 }

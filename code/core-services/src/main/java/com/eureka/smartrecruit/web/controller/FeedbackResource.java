@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user/{userId}/feedback")
+@RequestMapping("/users/{userId}/feedback")
 public class FeedbackResource {
 
     private final FeedbackService feedbackService;

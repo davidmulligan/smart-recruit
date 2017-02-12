@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,5 +54,17 @@ public class ApplicationResource {
     public List<ApplicationDto> findAll(@PathVariable("jobId") Long jobId) {
         Job job = jobService.findById(jobId);
         return job.getApplications().stream().map(application -> mapper.map(application, ApplicationDto.class)).collect(Collectors.toList());
+    }
+
+    @RequestMapping(value="/{id}/accept", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @ResponseStatus(HttpStatus.OK)
+    public void accept(@PathVariable("jobId") Long jobId, @PathVariable("id") Long id) {
+        Application application = applicationService.findById(id);
+        application.setAccepted(true);
+        application.setAcceptedOn(LocalDateTime.now());
+        Job job = jobService.findById(jobId);
+        job.getStatus().start(job);
+        jobService.update(job);
+        applicationService.update(application);
     }
 }

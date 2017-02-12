@@ -45,6 +45,10 @@ public class JobService {
         jobRepository.save(job);
     }
 
+    public void finish(Job job) {
+        job.getStatus().finish(job);
+        jobRepository.save(job);
+    }
 
 
 
@@ -61,4 +65,6 @@ public class JobService {
     public List<Job> findMyJobs() {
         return jobRepository.findByCreatedBy(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
+
+
 }

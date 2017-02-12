@@ -73,7 +73,11 @@ public enum JobStatus {
 
         @Override
         public void start(Job job) {
-            throw new IllegalStateException("You can not start an open job.");
+            if (job.isFixedPrice()) {
+                job.setStatus(STARTED);
+            } else {
+                throw new IllegalStateException("You can not start an open job.");
+            }
         }
 
         @Override

@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -69,4 +70,8 @@ public class Job extends BaseDomainObject {
 
     @OneToMany(mappedBy = "job")
     private Set<Feedback> feedback;
+
+    public Set<User> getHired() {
+        return applications.stream().filter(i -> i.isAccepted()).map(t -> t.getUser()).collect(Collectors.toSet());
+    }
 }

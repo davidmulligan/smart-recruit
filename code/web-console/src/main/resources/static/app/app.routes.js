@@ -139,6 +139,11 @@
                     }
                 }
             })
+            .state("account.jobs", { url: "/jobs", templateUrl: "app/sections/client/account/jobs/jobs.html" })
+            .state("account.disputes", { url: "/disputes", templateUrl: "app/sections/client/account/disputes/disputes.html" })
+            .state("account.messages", { url: "/messages", templateUrl: "app/sections/client/account/messages/messages.html" })
+            .state("account.notifications", { url: "/notifications", templateUrl: "app/sections/client/account/notifications/notifications.html" })
+
             .state('post', {
                 parent : 'nav',
                 url : '/post',

@@ -6,12 +6,8 @@
         .controller('ClientAccountController', controller);
 
     /** @ngInject */
-    function controller($http, $uibModal, JOBS_URL, USERS_URL) {
+    function controller($http, $uibModal, JOBS_URL, USERS_URL, $scope, $state) {
         var vm = this;
-
-        vm.hoveringOver = function(value) {
-            vm.overStar = value;
-        };
 
         vm.init = function() {
             $http.get(JOBS_URL + '/self')
@@ -24,6 +20,14 @@
                 console.log(error.message);
             });
         };
+
+
+
+        vm.hoveringOver = function(value) {
+            vm.overStar = value;
+        };
+
+
 
         vm.modalDetail = function(size, selectedJob) {
 
@@ -92,7 +96,7 @@
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'app/sections/client/account/dispute/dispute.html',
+                templateUrl: 'app/sections/client/account/disputes/dispute.html',
                 controller: function($scope, $uibModalInstance, job) {
                     $scope.job = job;
                     $scope.dispute = {};
@@ -202,6 +206,8 @@
             });
         };
 
+
         vm.init();
+        $state.go('account.jobs');
     }
 })();

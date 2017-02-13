@@ -1,6 +1,5 @@
 package com.eureka.smartrecruit.domain;
 
-import com.eureka.smartrecruit.database.BaseDomainObject;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +11,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Address extends BaseDomainObject {
+public class Address extends DomainObject {
 
     @Column
     private String street1;

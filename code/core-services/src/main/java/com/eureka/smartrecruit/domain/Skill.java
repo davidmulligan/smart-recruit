@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Skill extends BaseDomainObject {
+public class Skill extends DomainObject {
 
     @Column(nullable = false)
     private String name;

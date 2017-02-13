@@ -5,6 +5,7 @@ import com.eureka.smartrecruit.dto.SkillDto;
 import com.eureka.smartrecruit.service.SkillService;
 import lombok.RequiredArgsConstructor;
 import org.dozer.Mapper;
+import org.jooq.lambda.Seq;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,14 +25,13 @@ public class SkillResource {
     private final SkillService skillService;
     private final Mapper mapper;
 
-    @RequestMapping(method=RequestMethod.POST, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody SkillDto skillDto) {
-        Skill skill = mapper.map(skillDto, Skill.class);
-        skillService.create(skill);
+        skillService.create(mapper.map(skillDto, Skill.class));
     }
 
-    @RequestMapping(method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody SkillDto skillDto) {
         Skill skill = skillService.findById(skillDto.getId());
@@ -43,7 +42,7 @@ public class SkillResource {
         skillService.update(skill);
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value="/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         skillService.delete(skillService.findById(id));
@@ -51,11 +50,11 @@ public class SkillResource {
 
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<SkillDto> findAll() {
-        return skillService.findAll().stream().map(skill -> mapper.map(skill, SkillDto.class)).collect(Collectors.toList());
+        return Seq.seq(skillService.findAll()).map(skill -> mapper.map(skill, SkillDto.class)).toList();
     }
 
     @RequestMapping(value="/principals", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<SkillDto> findPrincipals() {
-        return skillService.findPrincipals().stream().map(skill -> mapper.map(skill, SkillDto.class)).collect(Collectors.toList());
+        return Seq.seq(skillService.findPrincipals()).map(skill -> mapper.map(skill, SkillDto.class)).toList();
     }
 }

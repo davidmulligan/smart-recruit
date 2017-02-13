@@ -8,6 +8,7 @@ import com.eureka.smartrecruit.service.JobService;
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.dozer.Mapper;
+import org.jooq.lambda.Seq;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,49 +29,13 @@ public class JobResource {
     private final JobService jobService;
     private final Mapper mapper;
 
-    @RequestMapping(method=RequestMethod.POST, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody JobDto jobDto) {
-        Job job = mapper.map(jobDto, Job.class);
-        jobService.create(job);
+        jobService.create(mapper.map(jobDto, Job.class));
     }
 
-    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public List<JobDto> find(@QuerydslPredicate(root = Job.class) Predicate predicate) {
-        return jobService.find(predicate).stream().map(job -> mapper.map(job, JobDto.class)).collect(Collectors.toList());
-    }
-
-    @RequestMapping(value="/{id}/approve", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
-    @ResponseStatus(HttpStatus.OK)
-    public void approve(@PathVariable("id") Long id) {
-        jobService.approve(jobService.findById(id));
-    }
-
-    @RequestMapping(value="/{id}/reject", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
-    @ResponseStatus(HttpStatus.OK)
-    public void reject(@PathVariable("id") Long id) {
-        jobService.reject(jobService.findById(id));
-    }
-
-    @RequestMapping(value="/{id}/finish", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
-    @ResponseStatus(HttpStatus.OK)
-    public void finishJob(@PathVariable("id") Long id) {
-        jobService.finish(jobService.findById(id));
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @RequestMapping(method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody JobDto jobDto) {
         Job job = jobService.findById(jobDto.getId());
@@ -82,84 +46,53 @@ public class JobResource {
         job.setDuration(jobDto.getDuration());
         job.setNumberPositions(jobDto.getNumberPositions());
         job.setDeadline(jobDto.getDeadline());
-        job.setSkills(jobDto.getSkills().stream().map(skill -> mapper.map(skill, Skill.class)).collect(Collectors.toList()));
+        job.setSkills(Seq.seq(jobDto.getSkills()).map(skill -> mapper.map(skill, Skill.class)).toList());
         jobService.update(job);
     }
 
-    @RequestMapping(value="/{id}/open", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value="/{id}/approve", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void openJob(@PathVariable("id") Long id) {
-        Job job = jobService.findById(id);
-        job.getStatus().open(job);
-        jobService.update(job);
+    public void approve(@PathVariable("id") Long id) {
+        jobService.approve(jobService.findById(id));
     }
 
-    @RequestMapping(value="/{id}/negotiate", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value="/{id}/reject", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void negotiateJob(@PathVariable("id") Long id) {
-        Job job = jobService.findById(id);
-        job.getStatus().negotiate(job);
-        jobService.update(job);
+    public void reject(@PathVariable("id") Long id) {
+        jobService.reject(jobService.findById(id));
     }
 
-    @RequestMapping(value="/{id}/start", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value="/{id}/finish", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void startJob(@PathVariable("id") Long id) {
-        Job job = jobService.findById(id);
-        job.getStatus().start(job);
-        jobService.update(job);
+    public void finish(@PathVariable("id") Long id) {
+        jobService.finish(jobService.findById(id));
     }
 
-
-
-    @RequestMapping(value="/{id}/cancel", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value="/{id}/dispute", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void cancelJob(@PathVariable("id") Long id) {
-        Job job = jobService.findById(id);
-        job.getStatus().cancel(job);
-        jobService.update(job);
+    public void dispute(@PathVariable("id") Long id) {
+        jobService.dispute(jobService.findById(id));
     }
 
-    @RequestMapping(value="/{id}/dispute", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value="/{id}/archive", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void disputeJob(@PathVariable("id") Long id) {
-        Job job = jobService.findById(id);
-        job.getStatus().dispute(job);
-        jobService.update(job);
+    public void archive(@PathVariable("id") Long id) {
+        jobService.archive(jobService.findById(id));
     }
 
-    @RequestMapping(value="/{id}/archive", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value="/{id}/cancel", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void archiveJob(@PathVariable("id") Long id) {
-        Job job = jobService.findById(id);
-        job.getStatus().archive(job);
-        jobService.update(job);
+    public void cancel(@PathVariable("id") Long id) {
+        jobService.cancel(jobService.findById(id));
     }
 
-    @RequestMapping(value="/{id}/expire", method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
-    @ResponseStatus(HttpStatus.OK)
-    public void expireJob(@PathVariable("id") Long id) {
-        Job job = jobService.findById(id);
-        job.getStatus().expire(job);
-        jobService.update(job);
+    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public List<JobDto> find(@QuerydslPredicate(root = Job.class) Predicate predicate) {
+        return Seq.seq(jobService.find(predicate)).map(job -> mapper.map(job, JobDto.class)).toList();
     }
-
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE, produces={ MediaType.APPLICATION_JSON_VALUE })
-    @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable("id") Long id) {
-        jobService.delete(id);
-    }
-
-    @RequestMapping(value="/{id}", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public JobDto findById(@PathVariable("id") Long id) {
-        return mapper.map(jobService.findById(id), JobDto.class);
-    }
-
-
 
     @RequestMapping(value="/self", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public List<JobDto> findMyProjects() {
-        System.out.println();
-        return jobService.findMyJobs().stream().map(job -> mapper.map(job, JobDto.class)).collect(Collectors.toList());
+    public List<JobDto> findMyJobs() {
+        return Seq.seq(jobService.findMyJobs()).map(job -> mapper.map(job, JobDto.class)).toList();
     }
 }

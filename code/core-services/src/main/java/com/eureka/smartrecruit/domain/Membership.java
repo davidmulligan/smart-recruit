@@ -15,7 +15,7 @@ import javax.persistence.Enumerated;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Membership extends BaseDomainObject {
+public class Membership extends DomainObject {
 
     @Column(nullable = false)
     private String name;

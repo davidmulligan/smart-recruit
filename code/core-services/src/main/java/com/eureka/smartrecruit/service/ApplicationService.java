@@ -1,7 +1,6 @@
 package com.eureka.smartrecruit.service;
 
 import com.eureka.smartrecruit.domain.Application;
-import com.eureka.smartrecruit.domain.Job;
 import com.eureka.smartrecruit.domain.User;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.ApplicationRepository;
@@ -17,8 +16,7 @@ public class ApplicationService {
 
     private final ApplicationRepository applicationRepository;
 
-    public void create(final Application application, final Job job) {
-        application.setJob(job);
+    public void create(final Application application) {
         application.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         applicationRepository.save(application);
     }

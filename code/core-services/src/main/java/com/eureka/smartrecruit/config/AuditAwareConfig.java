@@ -14,13 +14,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class AuditAwareConfig {
 
     @Bean
-    public AuditorAware<Long> auditorProvider() {
+    public AuditorAware<User> auditorProvider() {
         return () -> {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (authentication == null || !authentication.isAuthenticated() || authentication instanceof AnonymousAuthenticationToken) {
                 return null;
             } else {
-                return ((User) authentication.getPrincipal()).getId();
+                return (User) authentication.getPrincipal();
             }
         };
     }

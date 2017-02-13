@@ -8,6 +8,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.jooq.lambda.Seq;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -16,7 +17,6 @@ import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -34,7 +34,7 @@ public class JwtTokenFactory {
 
         ZonedDateTime now = ZonedDateTime.now();
         Claims claims = Jwts.claims().setSubject(userDetails.getUsername());
-        claims.put("scopes", userDetails.getAuthorities().stream().map(s -> s.toString()).collect(Collectors.toList()));
+        claims.put("scopes", Seq.seq(userDetails.getAuthorities()).map(s -> s.toString()).toList());
         String token = Jwts.builder()
                 .setClaims(claims)
                 .setIssuer(settings.getTokenIssuer())

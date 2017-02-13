@@ -1,12 +1,13 @@
 package com.eureka.smartrecruit.domain;
 
-import com.eureka.smartrecruit.database.BaseDomainObject;
 import com.eureka.smartrecruit.domain.enumeration.JobStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jooq.lambda.Seq;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -19,13 +20,12 @@ import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Job extends BaseDomainObject {
+public class Job extends DomainObject {
 
     @Column(nullable = false)
     private String title;
@@ -65,7 +65,7 @@ public class Job extends BaseDomainObject {
     @OneToMany(mappedBy = "job")
     private Set<Bid> bids;
 
-    @OneToMany(mappedBy = "job")
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
     private Set<Application> applications;
 
     @OneToMany(mappedBy = "job")
@@ -75,6 +75,6 @@ public class Job extends BaseDomainObject {
     private Set<Dispute> disputes;
 
     public Set<User> getHired() {
-        return applications.stream().filter(i -> i.isAccepted()).map(t -> t.getUser()).collect(Collectors.toSet());
+        return Seq.seq(applications).filter(i -> i.isAccepted()).map(t -> t.getUser()).toSet();
     }
 }

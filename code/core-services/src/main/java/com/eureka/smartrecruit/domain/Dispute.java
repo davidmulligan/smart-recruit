@@ -1,6 +1,5 @@
 package com.eureka.smartrecruit.domain;
 
-import com.eureka.smartrecruit.database.BaseDomainObject;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +12,7 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Dispute extends BaseDomainObject {
+public class Dispute extends DomainObject {
 
     @Column(nullable = false)
     private String subject;
@@ -22,7 +21,7 @@ public class Dispute extends BaseDomainObject {
     private String complaint;
 
     @Column
-    private String userReply;
+    private String reply;
 
     @Column
     private String adminReply;

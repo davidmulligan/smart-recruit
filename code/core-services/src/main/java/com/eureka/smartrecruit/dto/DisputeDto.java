@@ -14,8 +14,7 @@ public class DisputeDto {
     private Long id;
     private String subject;
     private String complaint;
-    private String userReply;
+    private String reply;
     private String adminReply;
     private boolean resolved;
-//    private JobDto job;
 }

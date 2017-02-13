@@ -6,6 +6,7 @@ import com.eureka.smartrecruit.dto.UserDto;
 import com.eureka.smartrecruit.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.dozer.Mapper;
+import org.jooq.lambda.Seq;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,56 +26,44 @@ public class UserResource {
     private final UserService userService;
     private final Mapper mapper;
 
-    @RequestMapping(value="/freelancers", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public List<UserDto> getFreelancers() {
-        return userService.findByType(UserType.FREELANCER).stream().map(user -> mapper.map(user, UserDto.class)).collect(Collectors.toList());
-    }
-
-
-
-
-
-
-
-
-    @RequestMapping(method=RequestMethod.POST, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody UserDto userDto) {
-        User user = mapper.map(userDto, User.class);
-        userService.create(user);
+        userService.create(mapper.map(userDto, User.class));
     }
 
-    @RequestMapping(method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody UserDto userDto) {
         User user = userService.findById(userDto.getId());
-        //user.setName(userDto.getName());
-        //user.setDescription(userDto.getDescription());
-        //user.setActive(userDto.isActive());
-        ///user.setSubCategories(userDto.getSubCategories().stream().map(subUser -> mapper.map(subUser, User.class)).collect(Collectors.toList()));
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
         userService.update(user);
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         userService.delete(id);
     }
 
+    @RequestMapping(value="/{id}", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public UserDto findById(@PathVariable("id") Long id) {
+        return mapper.map(userService.findById(id), UserDto.class);
+    }
+
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<UserDto> findAll() {
-        return userService.findAll().stream().map(user -> mapper.map(user, UserDto.class)).collect(Collectors.toList());
+        return Seq.seq(userService.findAll()).map(user -> mapper.map(user, UserDto.class)).toList();
+    }
+
+    @RequestMapping(value="/freelancers", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public List<UserDto> getFreelancers() {
+        return Seq.seq(userService.findByType(UserType.FREELANCER)).map(user -> mapper.map(user, UserDto.class)).toList();
     }
 
     @RequestMapping(value="/clients", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<UserDto> getClients() {
-        return userService.findByType(UserType.CLIENT).stream().map(user -> mapper.map(user, UserDto.class)).collect(Collectors.toList());
-    }
-
-
-
-    @RequestMapping(value="/{id}", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public UserDto findById(@PathVariable("id") Long id) {
-        return mapper.map(userService.findById(id), UserDto.class);
+        return Seq.seq(userService.findByType(UserType.CLIENT)).map(user -> mapper.map(user, UserDto.class)).toList();
     }
 }

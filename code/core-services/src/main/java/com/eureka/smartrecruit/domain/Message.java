@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Message extends BaseDomainObject {
+public class Message extends DomainObject {
 
     @ManyToOne
     @JoinColumn

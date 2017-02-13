@@ -5,6 +5,7 @@ import com.eureka.smartrecruit.dto.CategoryDto;
 import com.eureka.smartrecruit.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.dozer.Mapper;
+import org.jooq.lambda.Seq;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,14 +25,13 @@ public class CategoryResource {
     private final CategoryService categoryService;
     private final Mapper mapper;
 
-    @RequestMapping(method=RequestMethod.POST, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody CategoryDto categoryDto) {
-        Category category = mapper.map(categoryDto, Category.class);
-        categoryService.create(category);
+        categoryService.create(mapper.map(categoryDto, Category.class));
     }
 
-    @RequestMapping(method=RequestMethod.PUT, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody CategoryDto categoryDto) {
         Category category = categoryService.findById(categoryDto.getId());
@@ -42,7 +41,7 @@ public class CategoryResource {
         categoryService.update(category);
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE, produces={ MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value="/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         categoryService.delete(id);
@@ -50,6 +49,6 @@ public class CategoryResource {
 
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<CategoryDto> findAll() {
-        return categoryService.findAll().stream().map(category -> mapper.map(category, CategoryDto.class)).collect(Collectors.toList());
+        return Seq.seq(categoryService.findAll()).map(category -> mapper.map(category, CategoryDto.class)).toList();
     }
 }

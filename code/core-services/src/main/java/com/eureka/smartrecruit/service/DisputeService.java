@@ -1,7 +1,6 @@
 package com.eureka.smartrecruit.service;
 
 import com.eureka.smartrecruit.domain.Dispute;
-import com.eureka.smartrecruit.domain.Job;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.DisputeRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +14,7 @@ public class DisputeService {
 
     private final DisputeRepository disputeRepository;
 
-    public void create(final Dispute dispute, final Job job) {
-        dispute.setJob(job);
+    public void create(final Dispute dispute) {
         disputeRepository.save(dispute);
     }
 

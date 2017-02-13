@@ -1,5 +1,6 @@
 package com.eureka.smartrecruit.security.util;
 
+import org.jooq.lambda.Seq;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -16,7 +17,7 @@ public class SkipPathRequestMatcher implements RequestMatcher {
 
     public SkipPathRequestMatcher(List<String> pathsToSkip, String processingPath) {
         Assert.notNull(pathsToSkip);
-        orRequestMatcher = new OrRequestMatcher(pathsToSkip.stream().map(path -> new AntPathRequestMatcher(path)).collect(Collectors.toList()));
+        orRequestMatcher = new OrRequestMatcher(Seq.seq(pathsToSkip).map(path -> new AntPathRequestMatcher(path)).collect(Collectors.toList()));
         processingMatcher = new AntPathRequestMatcher(processingPath);
     }
 

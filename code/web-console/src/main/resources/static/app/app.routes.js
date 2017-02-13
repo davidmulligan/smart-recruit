@@ -152,7 +152,7 @@
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/client/job/job.html',
+                        templateUrl : 'app/sections/client/post/post.html',
                         controller : 'ClientJobController',
                         controllerAs : 'jobCtrl'
                     }

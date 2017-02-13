@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Bid extends BaseDomainObject {
+public class Bid extends DomainObject {
 
     @Column
     private String comment;

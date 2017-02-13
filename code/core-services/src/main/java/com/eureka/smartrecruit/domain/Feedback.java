@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Feedback extends BaseDomainObject {
+public class Feedback extends DomainObject {
 
     @Column
     private String comment;

@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Notification extends BaseDomainObject {
+public class Notification extends DomainObject {
 
     @ManyToOne
     @JoinColumn

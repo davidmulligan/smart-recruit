@@ -1,6 +1,5 @@
 package com.eureka.smartrecruit.domain;
 
-import com.eureka.smartrecruit.database.BaseDomainObject;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +11,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Category extends BaseDomainObject {
+public class Category extends DomainObject {
 
     @Column(nullable = false)
     private String name;

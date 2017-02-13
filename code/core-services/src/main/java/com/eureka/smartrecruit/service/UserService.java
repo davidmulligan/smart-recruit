@@ -31,13 +31,13 @@ public class UserService implements org.springframework.security.core.userdetail
         userRepository.delete(id);
     }
 
+    public User findById(final Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Could not find user with id: %s", id)));
+    }
+
     @Override
     public User loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
-    }
-
-    public User findById(final Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Could not find user with id: %s", id)));
     }
 
     public List<User> findAll() {

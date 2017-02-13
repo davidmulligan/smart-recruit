@@ -16,8 +16,7 @@ public class FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
 
-    public void create(final Feedback feedback, final User user) {
-        feedback.setUser(user);
+    public void create(final Feedback feedback) {
         feedback.setAuthor((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         feedbackRepository.save(feedback);
     }

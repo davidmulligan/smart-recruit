@@ -1,10 +1,10 @@
 package com.eureka.smartrecruit.domain;
 
-import com.eureka.smartrecruit.database.BaseDomainObject;
 import com.eureka.smartrecruit.domain.enumeration.UserType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jooq.lambda.Seq;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,13 +24,12 @@ import javax.persistence.Transient;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class User extends BaseDomainObject implements UserDetails {
+public class User extends DomainObject implements UserDetails {
 
     @Column(nullable = false)
     private String email;
@@ -89,7 +88,7 @@ public class User extends BaseDomainObject implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole())).collect(Collectors.toSet());
+        return Seq.seq(roles).map(role -> new SimpleGrantedAuthority(role.getRole())).toList();
     }
 
     @Transient

@@ -4,6 +4,7 @@ import com.eureka.smartrecruit.domain.Application;
 import com.eureka.smartrecruit.domain.Bid;
 import com.eureka.smartrecruit.domain.Job;
 import com.eureka.smartrecruit.domain.User;
+import com.eureka.smartrecruit.domain.Workroom;
 import com.eureka.smartrecruit.domain.enumeration.JobStatus;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.JobRepository;
@@ -26,6 +27,7 @@ public class JobService {
 
     public void create(final Job job) {
         job.setStatus(JobStatus.NEW);
+        job.setWorkroom(new Workroom());
         jobRepository.save(job);
     }
 

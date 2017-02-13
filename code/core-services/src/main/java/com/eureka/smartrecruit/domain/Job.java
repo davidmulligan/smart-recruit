@@ -49,14 +49,20 @@ public class Job extends DomainObject {
     private Integer numberPositions;
 
     @Column
+    private boolean fixed;
+
+    @Column
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime deadline;
 
-    @Column
-    private boolean fixedPrice;
-
     @Enumerated(EnumType.STRING)
     private JobStatus status;
+
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    private Workroom workroom;
+
+
+
 
     @ManyToMany
     @JoinTable(name = "JobSkills")
@@ -75,6 +81,6 @@ public class Job extends DomainObject {
     private Set<Dispute> disputes;
 
     public Set<User> getHired() {
-        return Seq.seq(applications).filter(i -> i.isAccepted()).map(t -> t.getUser()).toSet();
+        return Seq.seq(applications).filter(i -> i.isAccepted()).map(t -> t.getCreatedBy()).toSet();
     }
 }

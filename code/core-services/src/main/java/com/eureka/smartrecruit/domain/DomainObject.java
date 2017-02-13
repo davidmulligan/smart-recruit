@@ -1,6 +1,8 @@
 package com.eureka.smartrecruit.domain;
 
 import com.eureka.smartrecruit.database.BaseDomainObject;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -17,6 +19,8 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Getter
+@Setter
 public class DomainObject extends BaseDomainObject {
 
     @Column

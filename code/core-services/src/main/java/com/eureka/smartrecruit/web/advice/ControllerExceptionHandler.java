@@ -21,7 +21,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     @ExceptionHandler(SystemException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected ErrorDto handleResourceNotFoundException(SystemException e) {
+    protected ErrorDto handleSystemException(SystemException e) {
         return new ErrorDto(e.getMessage());
     }
 

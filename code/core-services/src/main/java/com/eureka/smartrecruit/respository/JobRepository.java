@@ -1,21 +1,18 @@
 package com.eureka.smartrecruit.respository;
 
+import com.eureka.smartrecruit.database.BaseRepository;
 import com.eureka.smartrecruit.domain.Job;
 import com.eureka.smartrecruit.domain.QJob;
 import com.eureka.smartrecruit.domain.User;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface JobRepository extends CrudRepository<Job, Long>, QueryDslPredicateExecutor<Job>, QuerydslBinderCustomizer<QJob> {
-
-    Optional<Job> findById(Long id);
+public interface JobRepository extends BaseRepository<Job>, QueryDslPredicateExecutor<Job>, QuerydslBinderCustomizer<QJob> {
 
     List<Job> findByCreatedBy(User user);
 

@@ -1,7 +1,6 @@
 package com.eureka.smartrecruit.dto;
 
 import com.eureka.smartrecruit.database.BaseDomainObject;
-import com.eureka.smartrecruit.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,11 +14,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class MessageDto extends BaseDomainObject {
 
-    private User receiver;
     private String subject;
     private String content;
-    private boolean read;
-    private LocalDateTime readOn;
+    private boolean opened;
+    private LocalDateTime openedOn;
     private boolean deleted;
     private LocalDateTime deletedOn;
+    private UserDto sender;
+    private UserDto recipient;
 }

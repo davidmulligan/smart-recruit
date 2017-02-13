@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 @Configuration
 @EnableJpaAuditing
-public class AuditAwareConfig {
+public class AuditConfig {
 
     @Bean
     public AuditorAware<User> auditorProvider() {

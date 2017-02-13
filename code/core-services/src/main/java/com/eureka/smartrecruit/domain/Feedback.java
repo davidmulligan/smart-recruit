@@ -1,6 +1,5 @@
 package com.eureka.smartrecruit.domain;
 
-import com.eureka.smartrecruit.database.BaseDomainObject;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,9 +19,6 @@ public class Feedback extends DomainObject {
 
     @Column(nullable = false)
     private Integer rating;
-
-    @ManyToOne
-    private User author;
 
     @ManyToOne
     private User user;

@@ -16,7 +16,7 @@ public class BidDto {
     private Long id;
     private String comment;
     private Double quote;
-    private UserDto user;
     private boolean accepted;
     private LocalDateTime acceptedOn;
+    private UserDto createdBy;
 }

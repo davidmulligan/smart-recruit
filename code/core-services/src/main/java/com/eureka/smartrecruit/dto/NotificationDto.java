@@ -14,10 +14,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class NotificationDto extends BaseDomainObject {
 
-    private UserDto sender;
-    private UserDto recipient;
     private String content;
     private String type;
-    private boolean read;
-    private LocalDateTime readOn;
+    private boolean opened;
+    private LocalDateTime openedOn;
+    private UserDto recipient;
 }

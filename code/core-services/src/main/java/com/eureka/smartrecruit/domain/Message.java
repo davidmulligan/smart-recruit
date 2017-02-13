@@ -17,20 +17,12 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Message extends DomainObject {
-
-    @ManyToOne
-    @JoinColumn
-    private User sender;
-
-    @ManyToOne
-    @JoinColumn
-    private User receiver;
+public class Message extends BaseDomainObject {
 
     @Column(nullable = false)
     private String subject;
 
-    @Column(nullable = false)
+    @Column
     private String content;
 
     @Column(nullable = false)
@@ -46,4 +38,12 @@ public class Message extends DomainObject {
     @Column
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime deletedOn;
+
+    @ManyToOne
+    @JoinColumn
+    private User sender;
+
+    @ManyToOne
+    @JoinColumn
+    private User recipient;
 }

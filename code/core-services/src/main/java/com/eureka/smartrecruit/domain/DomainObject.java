@@ -11,6 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.EntityListeners;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
@@ -23,7 +24,7 @@ public class DomainObject extends BaseDomainObject {
     @CreatedDate
     private LocalDateTime createdOn;
 
-    @Column
+    @ManyToOne
     @CreatedBy
     private User createdBy;
 
@@ -32,7 +33,7 @@ public class DomainObject extends BaseDomainObject {
     @LastModifiedDate
     private LocalDateTime modifiedOn;
 
-    @Column
+    @ManyToOne
     @LastModifiedBy
     private User modifiedBy;
 }

@@ -16,12 +16,13 @@ public class UserDto {
     private Long id;
     private String username;
     private String password;
-    private String email;
     private String firstName;
     private String lastName;
+    private String email;
     private String companyName;
     private String profile;
-    private String userType;
+    private String type;
     private boolean enabled;
     private List<SkillDto> skills;
+    private List<RoleDto> roles;
 }

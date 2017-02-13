@@ -15,5 +15,5 @@ import javax.persistence.Entity;
 public class Role extends BaseDomainObject {
 
     @Column(nullable = false)
-    private String role;
+    private String name;
 }

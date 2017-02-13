@@ -1,6 +1,5 @@
 package com.eureka.smartrecruit.domain;
 
-import com.eureka.smartrecruit.database.BaseDomainObject;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +16,7 @@ public class Skill extends DomainObject {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column
     private String description;
 
     @Column(nullable = false)

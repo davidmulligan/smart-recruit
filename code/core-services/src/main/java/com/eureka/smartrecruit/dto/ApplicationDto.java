@@ -15,7 +15,7 @@ public class ApplicationDto {
 
     private Long id;
     private String comment;
-    private UserDto user;
     private boolean accepted;
     private LocalDateTime acceptedOn;
+    private UserDto createdBy;
 }

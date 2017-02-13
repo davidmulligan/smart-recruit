@@ -1,6 +1,11 @@
 package com.eureka.smartrecruit.domain;
 
-import com.eureka.smartrecruit.database.BaseDomainObject;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 public class Workroom extends DomainObject {
+
+    @ManyToOne
+    @JoinColumn
+    private Job job;
 }

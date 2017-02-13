@@ -28,7 +28,7 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final RestAuthenticationEntryPoint authenticationEntryPoint;
     private final AuthenticationSuccessHandler successHandler;

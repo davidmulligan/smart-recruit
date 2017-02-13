@@ -9,11 +9,5 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FeedbackDto {
-
-    private Long id;
-    private String comment;
-    private Integer rating;
-    private UserDto createdBy;
-    private UserDto user;
+public class WorkroomDto {
 }

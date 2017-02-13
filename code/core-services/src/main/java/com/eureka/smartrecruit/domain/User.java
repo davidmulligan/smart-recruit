@@ -88,7 +88,7 @@ public class User extends DomainObject implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Seq.seq(roles).map(role -> new SimpleGrantedAuthority(role.getRole())).toList();
+        return Seq.seq(roles).map(role -> new SimpleGrantedAuthority(role.getName())).toList();
     }
 
     @Transient

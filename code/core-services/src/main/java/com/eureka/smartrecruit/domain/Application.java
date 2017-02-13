@@ -1,6 +1,5 @@
 package com.eureka.smartrecruit.domain;
 
-import com.eureka.smartrecruit.database.BaseDomainObject;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,8 +31,4 @@ public class Application extends DomainObject {
     @ManyToOne
     @JoinColumn
     private Job job;
-
-    @ManyToOne
-    @JoinColumn
-    private User user;
 }

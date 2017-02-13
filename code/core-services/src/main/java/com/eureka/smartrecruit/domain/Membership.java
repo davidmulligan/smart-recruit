@@ -1,6 +1,5 @@
 package com.eureka.smartrecruit.domain;
 
-import com.eureka.smartrecruit.database.BaseDomainObject;
 import com.eureka.smartrecruit.domain.enumeration.UserType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,7 @@ public class Membership extends DomainObject {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column
     private String description;
 
     @Column
@@ -31,9 +30,6 @@ public class Membership extends DomainObject {
 
     @Column
     private Integer jobBidLimit;
-
-    @Column
-    private Integer jobApplicationLimit;
 
     @Column(nullable = false)
     private boolean active;

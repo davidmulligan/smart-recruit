@@ -20,15 +20,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Notification extends DomainObject {
-
-    @ManyToOne
-    @JoinColumn
-    private User sender;
-
-    @ManyToOne
-    @JoinColumn
-    private User recipient;
+public class Notification extends BaseDomainObject {
 
     @Column(nullable = false)
     private String content;
@@ -42,4 +34,8 @@ public class Notification extends DomainObject {
     @Column
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime openedOn;
+
+    @ManyToOne
+    @JoinColumn
+    private User recipient;
 }

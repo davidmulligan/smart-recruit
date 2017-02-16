@@ -6,7 +6,7 @@
         .controller('AdminUserController', controller);
 
     /** @ngInject */
-    function controller($http, USERS_URL) {
+    function controller($http, ngToast, USERS_URL) {
         var vm = this;
         vm.edit = false;
 	    vm.buttonText = 'Create';
@@ -18,12 +18,11 @@
                 vm.users = result;
                 vm.user = null;
                 vm.userForm.$setPristine();
-                vm.message = '';
                 vm.buttonText = 'Create';
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -31,15 +30,13 @@
             vm.edit = true;
             vm.user = user;
             vm.userForm.$setPristine();
-            vm.message = '';
             vm.buttonText = 'Update';
         };
 
-        vm.initAddUser = function() {
+        vm.initCreate = function() {
             vm.edit = false;
             vm.user = null;
             vm.userForm.$setPristine();
-            vm.message = '';
             vm.buttonText = 'Create';
         };
 
@@ -47,12 +44,12 @@
             $http.delete(USERS_URL + '/' + user.id)
 
             .success(function(result) {
-                vm.deleteMessage = "Deleted User";
+                ngToast.info("Deleted user: " + user.firstName + user.lastName);
                 vm.init();
             })
 
             .error(function(error) {
-                vm.deleteMessage = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -60,15 +57,15 @@
             $http.put(USERS_URL, vm.user)
 
             .success(function(result) {
+                ngToast.info("Updated user: " + vm.user.firstName + vm.user.lastName);
                 vm.user = null;
                 vm.confirmPassword = null;
                 vm.userForm.$setPristine();
-                vm.message = "User Updated";
                 vm.init();
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -76,15 +73,15 @@
             $http.post(USERS_URL, vm.user)
 
             .success(function(result) {
+                ngToast.info("Created user: " + vm.user.firstName + vm.user.lastName);
                 vm.user = null;
                 vm.confirmPassword = null;
                 vm.userForm.$setPristine();
-                vm.message = "User Created";
                 vm.init();
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 

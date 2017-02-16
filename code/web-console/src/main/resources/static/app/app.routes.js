@@ -204,7 +204,7 @@
                     'content@' : {
                         templateUrl : 'app/sections/admin/category/category.html',
                         controller : 'AdminCategoryController',
-                        controllerAs : 'categoryCtrl'
+                        controllerAs : 'ctrl'
                     }
                 }
             })
@@ -232,7 +232,7 @@
                     'content@' : {
                         templateUrl : 'app/sections/admin/membership/membership.html',
                         controller : 'AdminMembershipController',
-                        controllerAs : 'membershipCtrl'
+                        controllerAs : 'ctrl'
                     }
                 }
             })
@@ -246,7 +246,7 @@
                     'content@' : {
                         templateUrl : 'app/sections/admin/skill/skill.html',
                         controller : 'AdminSkillController',
-                        controllerAs : 'skillCtrl'
+                        controllerAs : 'ctrl'
                     }
                 }
             })
@@ -260,7 +260,7 @@
                     'content@' : {
                         templateUrl : 'app/sections/admin/user/user.html',
                         controller : 'AdminUserController',
-                        controllerAs : 'userCtrl'
+                        controllerAs : 'ctrl'
                     }
                 }
             });

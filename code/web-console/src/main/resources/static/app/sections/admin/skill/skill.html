@@ -4,31 +4,30 @@
 			<div class="panel-heading">Skill</div>
 			<div class="panel-body">
 				<div class="col-md-12">
-					<form ng-submit="skillCtrl.submit()" name="skillCtrl.skillForm" novalidate>
-						<div class="form-group" ng-class="{ 'has-error': skillCtrl.skillForm.name.$invalid && skillCtrl.skillForm.name.$dirty }">
+					<form ng-submit="ctrl.submit()" name="ctrl.skillForm" novalidate>
+						<div class="form-group" ng-class="{ 'has-error': ctrl.skillForm.name.$invalid && ctrl.skillForm.name.$dirty }">
 							<label for="name">Name:</label>
-							<input type="text" required class="form-control" ng-model="skillCtrl.skill.name" id="name" name="name">
+							<input type="text" required class="form-control" ng-model="ctrl.skill.name" id="name" name="name">
 						</div>
-						<div class="form-group" ng-class="{ 'has-error': skillCtrl.skillForm.description.$invalid && skillCtrl.skillForm.description.$dirty }">
+						<div class="form-group" ng-class="{ 'has-error': ctrl.skillForm.description.$invalid && ctrl.skillForm.description.$dirty }">
 							<label for="description">Description:</label>
-							<input type="text" required class="form-control" ng-model="skillCtrl.skill.description" id="description" name="description">
+							<input type="text" required class="form-control" ng-model="ctrl.skill.description" id="description" name="description">
 						</div>
 						<div class="form-group">
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="skillCtrl.skill.principal"> Principal
+									<input type="checkbox" ng-model="ctrl.skill.principal"> Principal
 								</label>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="skillCtrl.skill.active"> Enabled
+									<input type="checkbox" ng-model="ctrl.skill.active"> Enabled
 								</label>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-default" ng-disabled="skillCtrl.skillForm.$invalid">{{skillCtrl.buttonText}}</button>
-						<div class="alert alert-info margin-top-5" ng-show="skillCtrl.message">{{skillCtrl.message}}</div>
+						<button type="submit" class="btn btn-default" ng-disabled="ctrl.skillForm.$invalid">{{ctrl.buttonText}}</button>
 					</form>
 				</div>
 			</div>
@@ -38,12 +37,11 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Skills
-				<button type="button" class="btn btn-default btn-sm" ng-click="skillCtrl.initAddSkill()">
+				<button type="button" class="btn btn-default btn-sm" ng-click="ctrl.initCreate()">
 					<span class="glyphicon glyphicon-plus"></span> New Skill
 				</button>
 			</div>
 			<div class="panel-body">
-				<div class="alert alert-info margin-top-5" ng-show="skillCtrl.deleteMessage">{{skillCtrl.deleteMessage}}</div>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -56,7 +54,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="skill in skillCtrl.skills">
+						<tr ng-repeat="skill in ctrl.skills">
 							<td>{{$index+1}}</td>
 							<td>{{skill.name}}</td>
                             <td>
@@ -68,12 +66,12 @@
 								<span ng-hide="skill.active">No</span>
 							</td>
 							<td>
-								<button type="button" class="btn btn-default btn-sm" ng-click="skillCtrl.initEdit(skill)">
+								<button type="button" class="btn btn-default btn-sm" ng-click="ctrl.initEdit(skill)">
 									<span class="glyphicon glyphicon-edit"></span>
 								</button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-default btn-sm" ng-click="skillCtrl.deleteSkill(skill)">
+								<button type="button" class="btn btn-default btn-sm" ng-click="ctrl.deleteSkill(skill)">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 							</td>

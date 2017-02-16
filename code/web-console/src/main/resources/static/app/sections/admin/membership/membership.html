@@ -4,40 +4,35 @@
 			<div class="panel-heading">Membership</div>
 			<div class="panel-body">
 				<div class="col-md-12">
-					<form ng-submit="membershipCtrl.submit()" name="membershipCtrl.membershipForm" novalidate>
-						<div class="form-group" ng-class="{ 'has-error': membershipCtrl.membershipForm.name.$invalid && membershipCtrl.membershipForm.name.$dirty }">
+					<form ng-submit="ctrl.submit()" name="ctrl.membershipForm" novalidate>
+						<div class="form-group" ng-class="{ 'has-error': ctrl.membershipForm.name.$invalid && ctrl.membershipForm.name.$dirty }">
 							<label for="name">Name:</label>
-							<input type="text" required class="form-control" ng-model="membershipCtrl.membership.name" id="name" name="name">
+							<input type="text" required class="form-control" ng-model="ctrl.membership.name" id="name" name="name">
 						</div>
-						<div class="form-group" ng-class="{ 'has-error': membershipCtrl.membershipForm.description.$invalid && membershipCtrl.membershipForm.description.$dirty }">
+						<div class="form-group" ng-class="{ 'has-error': ctrl.membershipForm.description.$invalid && ctrl.membershipForm.description.$dirty }">
 							<label for="description">Description:</label>
-							<input type="text" required class="form-control" ng-model="membershipCtrl.membership.description" id="description" name="description">
+							<input type="text" required class="form-control" ng-model="ctrl.membership.description" id="description" name="description">
 						</div>
-						<div class="form-group" ng-class="{ 'has-error': membershipCtrl.membershipForm.cost.$invalid && membershipCtrl.membershipForm.cost.$dirty }">
+						<div class="form-group" ng-class="{ 'has-error': ctrl.membershipForm.cost.$invalid && ctrl.membershipForm.cost.$dirty }">
 							<label for="cost">Cost:</label>
-							<input type="text" required class="form-control" ng-model="membershipCtrl.membership.cost" id="cost" name="cost">
+							<input type="number" required class="form-control" ng-model="ctrl.membership.cost" id="cost" name="cost">
 						</div>
-						<div class="form-group" ng-class="{ 'has-error': membershipCtrl.membershipForm.jobPostLimit.$invalid && membershipCtrl.membershipForm.jobPostLimit.$dirty }">
+						<div class="form-group" ng-class="{ 'has-error': ctrl.membershipForm.jobPostLimit.$invalid && ctrl.membershipForm.jobPostLimit.$dirty }">
 							<label for="jobPostLimit">Post Limit:</label>
-							<input type="text" required class="form-control" ng-model="membershipCtrl.membership.jobPostLimit" id="jobPostLimit" name="jobPostLimit">
+							<input type="number" required class="form-control" ng-model="ctrl.membership.jobPostLimit" id="jobPostLimit" name="jobPostLimit">
 						</div>
-						<div class="form-group" ng-class="{ 'has-error': membershipCtrl.membershipForm.jobBidLimit.$invalid && membershipCtrl.membershipForm.jobBidLimit.$dirty }">
+						<div class="form-group" ng-class="{ 'has-error': ctrl.membershipForm.jobBidLimit.$invalid && ctrl.membershipForm.jobBidLimit.$dirty }">
 							<label for="jobBidLimit">Bid Limit:</label>
-							<input type="text" required class="form-control" ng-model="membershipCtrl.membership.jobBidLimit" id="jobBidLimit" name="jobBidLimit">
-						</div>
-						<div class="form-group" ng-class="{ 'has-error': membershipCtrl.membershipForm.jobApplicationLimit.$invalid && membershipCtrl.membershipForm.jobApplicationLimit.$dirty }">
-							<label for="jobApplicationLimit">Application Limit:</label>
-							<input type="text" required class="form-control" ng-model="membershipCtrl.membership.jobApplicationLimit" id="jobApplicationLimit" name="jobApplicationLimit">
+							<input type="number" required class="form-control" ng-model="ctrl.membership.jobBidLimit" id="jobBidLimit" name="jobBidLimit">
 						</div>
 						<div class="form-group">
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="membershipCtrl.membership.active"> Enabled
+									<input type="checkbox" ng-model="ctrl.membership.active"> Enabled
 								</label>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-default" ng-disabled="membershipCtrl.membershipForm.$invalid">{{membershipCtrl.buttonText}}</button>
-						<div class="alert alert-info margin-top-5" ng-show="membershipCtrl.message">{{membershipCtrl.message}}</div>
+						<button type="submit" class="btn btn-default" ng-disabled="ctrl.membershipForm.$invalid">{{ctrl.buttonText}}</button>
 					</form>
 				</div>
 			</div>
@@ -47,12 +42,11 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Memberships
-				<button type="button" class="btn btn-default btn-sm" ng-click="membershipCtrl.initAddMembership()">
+				<button type="button" class="btn btn-default btn-sm" ng-click="ctrl.initCreate()">
 					<span class="glyphicon glyphicon-plus"></span> New Membership
 				</button>
 			</div>
 			<div class="panel-body">
-				<div class="alert alert-info margin-top-5" ng-show="membershipCtrl.deleteMessage">{{membershipCtrl.deleteMessage}}</div>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -61,31 +55,29 @@
 							<th>Cost</th>
 							<th>Post Limit</th>
 							<th>Bid Limit</th>
-							<th>Application Limit</th>
 							<th>Enabled</th>
 							<th></th>
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="membership in membershipCtrl.memberships">
+						<tr ng-repeat="membership in ctrl.memberships">
 							<td>{{$index+1}}</td>
 							<td>{{membership.name}}</td>
 							<td>{{membership.cost}}</td>
 							<td>{{membership.jobPostLimit}}</td>
 							<td>{{membership.jobBidLimit}}</td>
-							<td>{{membership.jobApplicationLimit}}</td>
 							<td>
 								<span ng-show="membership.active">Yes</span>
 								<span ng-hide="membership.active">No</span>
 							</td>
 							<td>
-								<button type="button" class="btn btn-default btn-sm" ng-click="membershipCtrl.initEdit(membership)">
+								<button type="button" class="btn btn-default btn-sm" ng-click="ctrl.initEdit(membership)">
 									<span class="glyphicon glyphicon-edit"></span>
 								</button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-default btn-sm" ng-click="membershipCtrl.deleteMembership(membership)">
+								<button type="button" class="btn btn-default btn-sm" ng-click="ctrl.deleteMembership(membership)">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 							</td>

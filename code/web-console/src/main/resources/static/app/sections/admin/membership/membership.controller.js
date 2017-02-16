@@ -6,7 +6,7 @@
         .controller('AdminMembershipController', controller);
 
     /** @ngInject */
-    function controller($http, MEMBERSHIPS_URL) {
+    function controller($http, ngToast, MEMBERSHIPS_URL) {
         var vm = this;
         vm.edit = false;
         vm.buttonText = 'Create';
@@ -18,12 +18,11 @@
                 vm.memberships = result;
                 vm.membership = null;
                 vm.membershipForm.$setPristine();
-                vm.message = '';
                 vm.buttonText = 'Create';
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -31,28 +30,26 @@
             vm.edit = true;
             vm.membership = membership;
             vm.membershipForm.$setPristine();
-            vm.message = '';
             vm.buttonText = 'Update';
         };
 
-        vm.initAddMembership = function() {
+        vm.initCreate = function() {
             vm.edit = false;
             vm.membership = null;
             vm.membershipForm.$setPristine();
-            vm.message = '';
             vm.buttonText = 'Create';
         };
 
         vm.deleteMembership = function(membership) {
             $http.delete(MEMBERSHIPS_URL + '/' + membership.id)
 
-            .success(function(res) {
-                vm.deleteMessage = "Deleted Membership";
+            .success(function(result) {
+                ngToast.info("Deleted membership: " + membership.name);
                 vm.init();
             })
 
             .error(function(error) {
-                vm.deleteMessage = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -60,14 +57,14 @@
             $http.put(MEMBERSHIPS_URL, vm.membership)
 
             .success(function(result) {
+            ngToast.info("Updated membership: " + vm.membership.name);
                 vm.membership = null;
                 vm.membershipForm.$setPristine();
-                vm.message = "Membership Updated";
                 vm.init();
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -75,14 +72,14 @@
             $http.post(MEMBERSHIPS_URL, vm.membership)
 
             .success(function(result) {
+                ngToast.info("Created membership: " + vm.membership.name);
                 vm.membership = null;
                 vm.membershipForm.$setPristine();
-                vm.message = "Membership Created";
                 vm.init();
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 

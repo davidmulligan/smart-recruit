@@ -5,6 +5,7 @@ import com.eureka.smartrecruit.domain.enumeration.UserType;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.jooq.lambda.Seq;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,10 +49,18 @@ public class UserService implements org.springframework.security.core.userdetail
     }
 
     public List<User> findAll() {
-        return userRepository.findAllByOrderByEmailAsc();
+        List<User> users = userRepository.findAllByOrderByEmailAsc();
+        removePasswords(users);
+        return users;
     }
 
     public List<User> findByType(UserType userType) {
-        return userRepository.findByTypeOrderByLastNameAscFirstNameAsc(userType);
+        List<User> users = userRepository.findByTypeOrderByLastNameAscFirstNameAsc(userType);
+        removePasswords(users);
+        return users;
+    }
+
+    private static void removePasswords(List<User> users) {
+        Seq.seq(users).forEach(user -> user.setPassword(null));
     }
 }

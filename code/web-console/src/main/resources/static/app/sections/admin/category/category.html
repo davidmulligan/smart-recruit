@@ -4,24 +4,30 @@
 			<div class="panel-heading">Category</div>
 			<div class="panel-body">
 				<div class="col-md-12">
-					<form ng-submit="categoryCtrl.submit()" name="categoryCtrl.categoryForm" novalidate>
-						<div class="form-group" ng-class="{ 'has-error': categoryCtrl.categoryForm.name.$invalid && categoryCtrl.categoryForm.name.$dirty }">
+					<form ng-submit="ctrl.submit()" name="ctrl.categoryForm" novalidate>
+						<div class="form-group" ng-class="{ 'has-error': ctrl.categoryForm.name.$invalid && ctrl.categoryForm.name.$dirty }">
 							<label for="name">Name:</label>
-							<input type="text" required class="form-control" ng-model="categoryCtrl.category.name" id="name" name="name">
+							<input type="text" required class="form-control" ng-model="ctrl.category.name" id="name" name="name">
 						</div>
-						<div class="form-group" ng-class="{ 'has-error': categoryCtrl.categoryForm.description.$invalid && categoryCtrl.categoryForm.description.$dirty }">
+						<div class="form-group" ng-class="{ 'has-error': ctrl.categoryForm.description.$invalid && ctrl.categoryForm.description.$dirty }">
 							<label for="description">Description:</label>
-							<input type="text" required class="form-control" ng-model="categoryCtrl.category.description" id="description" name="description">
+							<input type="text" required class="form-control" ng-model="ctrl.category.description" id="description" name="description">
 						</div>
 						<div class="form-group">
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="categoryCtrl.category.active"> Enabled
+									<input type="checkbox" ng-model="ctrl.category.principal"> Principal
 								</label>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-default" ng-disabled="categoryCtrl.categoryForm.$invalid">{{categoryCtrl.buttonText}}</button>
-						<div class="alert alert-info margin-top-5" ng-show="categoryCtrl.message">{{categoryCtrl.message}}</div>
+						<div class="form-group">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" ng-model="ctrl.category.active"> Enabled
+								</label>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-default" ng-disabled="ctrl.categoryForm.$invalid">{{ctrl.buttonText}}</button>
 					</form>
 				</div>
 			</div>
@@ -31,37 +37,41 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Categories
-				<button type="button" class="btn btn-default btn-sm" ng-click="categoryCtrl.initAddCategory()">
+				<button type="button" class="btn btn-default btn-sm" ng-click="ctrl.initCreate()">
 					<span class="glyphicon glyphicon-plus"></span> New Category
 				</button>
 			</div>
 			<div class="panel-body">
-				<div class="alert alert-info margin-top-5" ng-show="categoryCtrl.deleteMessage">{{categoryCtrl.deleteMessage}}</div>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
 							<th>#</th>
 							<th>Name</th>
+							<th>Principal</th>
 							<th>Enabled</th>
 							<th></th>
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="category in categoryCtrl.categories">
+						<tr ng-repeat="category in ctrl.categories">
 							<td>{{$index+1}}</td>
 							<td>{{category.name}}</td>
+							<td>
+								<span ng-show="category.principal">Yes</span>
+								<span ng-hide="category.principal">No</span>
+							</td>
 							<td>
 								<span ng-show="category.active">Yes</span>
 								<span ng-hide="category.active">No</span>
 							</td>
 							<td>
-								<button type="button" class="btn btn-default btn-sm" ng-click="categoryCtrl.initEdit(category)">
+								<button type="button" class="btn btn-default btn-sm" ng-click="ctrl.initEdit(category)">
 									<span class="glyphicon glyphicon-edit"></span>
 								</button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-default btn-sm" ng-click="categoryCtrl.deleteCategory(category)">
+								<button type="button" class="btn btn-default btn-sm" ng-click="ctrl.deleteCategory(category)">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 							</td>

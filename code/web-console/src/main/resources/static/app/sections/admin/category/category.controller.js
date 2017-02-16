@@ -6,7 +6,7 @@
         .controller('AdminCategoryController', controller);
 
     /** @ngInject */
-    function controller($http, CATEGORIES_URL) {
+    function controller($http, ngToast, CATEGORIES_URL) {
         var vm = this;
         vm.edit = false;
 	    vm.buttonText = 'Create';
@@ -18,12 +18,11 @@
                 vm.categories = result;
                 vm.category = null;
                 vm.categoryForm.$setPristine();
-                vm.message = '';
                 vm.buttonText = 'Create';
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -31,28 +30,26 @@
             vm.edit = true;
             vm.category = category;
             vm.categoryForm.$setPristine();
-            vm.message = '';
             vm.buttonText = 'Update';
         };
 
-        vm.initAddCategory = function() {
+        vm.initCreate = function() {
             vm.edit = false;
             vm.category = null;
             vm.categoryForm.$setPristine();
-            vm.message = '';
             vm.buttonText = 'Create';
         };
 
         vm.deleteCategory = function(category) {
             $http.delete(CATEGORIES_URL + '/' + category.id)
 
-            .success(function(res) {
-                vm.deleteMessage = "Deleted Category";
+            .success(function(result) {
+                ngToast.info("Deleted category: " + category.name);
                 vm.init();
             })
 
             .error(function(error) {
-                vm.deleteMessage = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -60,14 +57,14 @@
             $http.put(CATEGORIES_URL, vm.category)
 
             .success(function(result) {
+                ngToast.info("Updated category: " + vm.category.name);
                 vm.category = null;
                 vm.categoryForm.$setPristine();
-                vm.message = "Category Updated";
                 vm.init();
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -75,14 +72,14 @@
             $http.post(CATEGORIES_URL, vm.category)
 
             .success(function(result) {
+                ngToast.info("Created category: " + vm.category.name);
                 vm.category = null;
                 vm.categoryForm.$setPristine();
-                vm.message = "Category Created";
                 vm.init();
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 

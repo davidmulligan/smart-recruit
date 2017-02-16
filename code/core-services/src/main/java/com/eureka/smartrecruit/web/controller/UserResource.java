@@ -1,5 +1,6 @@
 package com.eureka.smartrecruit.web.controller;
 
+import com.eureka.smartrecruit.domain.Role;
 import com.eureka.smartrecruit.domain.User;
 import com.eureka.smartrecruit.domain.enumeration.UserType;
 import com.eureka.smartrecruit.dto.UserDto;
@@ -26,16 +27,6 @@ public class UserResource {
     private final UserService userService;
     private final Mapper mapper;
 
-    @RequestMapping(value="/register", method=RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public void register(@RequestBody UserDto userDto) {
-        userService.create(mapper.map(userDto, User.class));
-    }
-
-
-
-
-
     @RequestMapping(method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody UserDto userDto) {
@@ -48,6 +39,11 @@ public class UserResource {
         User user = userService.findById(userDto.getId());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
+        user.setCompanyName(userDto.getCompanyName());
+        user.setProfile(userDto.getProfile());
+        user.setType(UserType.valueOf(userDto.getType()));
+        user.setEnabled(userDto.isEnabled());
+        user.setRoles(Seq.seq(userDto.getRoles()).map(role -> mapper.map(role, Role.class)).toSet());
         userService.update(user);
     }
 
@@ -55,6 +51,12 @@ public class UserResource {
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id) {
         userService.delete(id);
+    }
+
+    @RequestMapping(value="/register", method=RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void register(@RequestBody UserDto userDto) {
+        userService.create(mapper.map(userDto, User.class));
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
@@ -66,6 +68,17 @@ public class UserResource {
     public List<UserDto> findAll() {
         return Seq.seq(userService.findAll()).map(user -> mapper.map(user, UserDto.class)).toList();
     }
+
+
+
+
+
+
+
+
+
+
+
 
     @RequestMapping(value="/freelancers", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<UserDto> getFreelancers() {

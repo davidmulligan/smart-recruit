@@ -25,11 +25,11 @@
         $rootScope.$stateParams = $stateParams;
 
         $rootScope.$on('LoginSuccessful', function() {
-            $rootScope.user = AuthenticationService.getCurrentUser();
+            $rootScope.currentUser = AuthenticationService.getCurrentUser();
     	});
 
     	$rootScope.$on('LogoutSuccessful', function() {
-            $rootScope.user = null;
+            $rootScope.currentUser = null;
     		AuthenticationService.clearCurrentUser();
     	});
 

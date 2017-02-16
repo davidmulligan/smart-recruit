@@ -6,7 +6,7 @@
         .controller('AdminSkillController', controller);
 
     /** @ngInject */
-    function controller($http, SKILLS_URL) {
+    function controller($http, ngToast, SKILLS_URL) {
         var vm = this;
         vm.edit = false;
         vm.buttonText = 'Create';
@@ -18,12 +18,11 @@
                 vm.skills = result;
                 vm.skill = null;
                 vm.skillForm.$setPristine();
-                vm.message = '';
                 vm.buttonText = 'Create';
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -31,28 +30,26 @@
             vm.edit = true;
             vm.skill = skill;
             vm.skillForm.$setPristine();
-            vm.message = '';
             vm.buttonText = 'Update';
         };
 
-        vm.initAddSkill = function() {
+        vm.initCreate = function() {
             vm.edit = false;
             vm.skill = null;
             vm.skillForm.$setPristine();
-            vm.message = '';
             vm.buttonText = 'Create';
         };
 
         vm.deleteSkill = function(skill) {
             $http.delete(SKILLS_URL + '/' + skill.id)
 
-            .success(function(res) {
-                vm.deleteMessage = "Deleted Skill";
+            .success(function(result) {
+                ngToast.info("Deleted skill: " + skill.name);
                 vm.init();
             })
 
             .error(function(error) {
-                vm.deleteMessage = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -60,14 +57,14 @@
             $http.put(SKILLS_URL, vm.skill)
 
             .success(function(result) {
+                ngToast.info("Updated skill: " + vm.skill.name);
                 vm.skill = null;
                 vm.skillForm.$setPristine();
-                vm.message = "Skill Updated";
                 vm.init();
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -75,14 +72,14 @@
             $http.post(SKILLS_URL, vm.skill)
 
             .success(function(result) {
+                ngToast.info("Created skill: " + vm.skill.name);
                 vm.skill = null;
                 vm.skillForm.$setPristine();
-                vm.message = "Skill Created";
                 vm.init();
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 

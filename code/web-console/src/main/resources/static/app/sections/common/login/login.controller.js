@@ -17,12 +17,12 @@
                 if (AuthenticationService.isAuthenticated()) {
                     $state.go('home');
                 } else {
-                    ngToast.error('Please check you have entered your email address and password correctly and try again.');
+                    ngToast.danger('Please check you have entered your email address and password correctly and try again.');
                 }
             })
 
             .catch(function() {
-                ngToast.error('Please check you have entered your email address and password correctly and try again.');
+                ngToast.danger('Please check you have entered your email address and password correctly and try again.');
             });
     	};
     }

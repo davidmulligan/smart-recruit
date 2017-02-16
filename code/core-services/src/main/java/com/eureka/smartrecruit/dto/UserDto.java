@@ -23,6 +23,5 @@ public class UserDto {
     private String profile;
     private String type;
     private boolean enabled;
-    private List<SkillDto> skills;
     private List<RoleDto> roles;
 }

@@ -5,9 +5,8 @@
         .module('app.module', [
             'app.config',
             'common',
-            'login',
-            'admin',
             'client',
-            'freelancer'
+            'freelancer',
+            'admin'
     ]);
 })();

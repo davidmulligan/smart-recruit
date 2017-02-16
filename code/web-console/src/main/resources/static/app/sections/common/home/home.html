@@ -32,7 +32,7 @@
         <h3>Top Skills</h3>
         <table class="table table-bordered table-striped">
             <tbody>
-            <tr ng-repeat="skill in homeCtrl.skills">
+            <tr ng-repeat="skill in ctrl.skills">
                 <td>{{$index+1}}</td>
                 <td>{{skill.name}}</td>
             </tr>
@@ -43,7 +43,7 @@
         <h3>Top Categories</h3>
         <table class="table table-bordered table-striped">
             <tbody>
-            <tr ng-repeat="category in homeCtrl.categories">
+            <tr ng-repeat="category in ctrl.categories">
                 <td>{{$index+1}}</td>
                 <td>{{category.name}}</td>
             </tr>

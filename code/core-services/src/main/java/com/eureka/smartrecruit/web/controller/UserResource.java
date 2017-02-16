@@ -26,6 +26,16 @@ public class UserResource {
     private final UserService userService;
     private final Mapper mapper;
 
+    @RequestMapping(value="/register", method=RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void register(@RequestBody UserDto userDto) {
+        userService.create(mapper.map(userDto, User.class));
+    }
+
+
+
+
+
     @RequestMapping(method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody UserDto userDto) {

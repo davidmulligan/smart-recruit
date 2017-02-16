@@ -42,11 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationManager authenticationManager;
 
     public static final String JWT_TOKEN_HEADER_PARAM = "X-Authorization";
-
     private static final String FORM_BASED_LOGIN_ENTRY_POINT = "/auth/login";
-    private static final String REGISTRATION_ENTRY_POINT = "/auth/register";
     private static final String TOKEN_REFRESH_ENTRY_POINT = "/auth/token";
     private static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/**";
+    private static final String REGISTRATION_ENTRY_POINT = "/users/register";
     private static final String FREELANCERS_ENTRY_POINT = "/users/freelancers";
     private static final String JOBS_ENTRY_POINT = "/jobs";
 

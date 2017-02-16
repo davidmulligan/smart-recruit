@@ -4,6 +4,8 @@
     angular
         .module('common', [
             'common.navigation',
-            'common.home'
+            'common.login',
+            'common.home',
+            'common.register'
         ]);
 })();

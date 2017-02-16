@@ -46,7 +46,35 @@
                     'content@' : {
                         templateUrl : 'app/sections/common/home/home.html',
                         controller : 'HomeController',
-                        controllerAs : 'homeCtrl'
+                        controllerAs : 'ctrl'
+                    }
+                }
+            })
+            .state('login', {
+                parent : 'nav',
+                url : '/login',
+                data : {
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/common/login/login.html',
+                        controller : 'LoginController',
+                        controllerAs : 'ctrl'
+                    }
+                }
+            })
+            .state('register', {
+                parent : 'nav',
+                url : '/register',
+                data : {
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/common/register/register.html',
+                        controller : 'RegisterController',
+                        controllerAs : 'ctrl'
                     }
                 }
             })
@@ -58,7 +86,7 @@
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/help.html'
+                        templateUrl : 'app/sections/common/help/help.html'
                     }
                 }
             })
@@ -70,7 +98,7 @@
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/guide.html'
+                        templateUrl : 'app/sections/common/help/guide.html'
                     }
                 }
             })
@@ -82,7 +110,7 @@
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/page-not-found.html'
+                        templateUrl : 'app/sections/common/page-not-found/page-not-found.html'
                     }
                 }
             })
@@ -94,48 +122,10 @@
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/access-denied.html'
+                        templateUrl : 'app/sections/common/access-denied/access-denied.html'
                     }
                 }
             })
-
-
-
-            .state('login', {
-                parent : 'nav',
-                url : '/login',
-                data : {
-                    secure : false
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/login/login.html',
-                        controller : 'LoginController',
-                        controllerAs : 'loginCtrl'
-                    }
-                }
-            })
-
-
-
-
-            .state('register', {
-                parent : 'nav',
-                url : '/register',
-                data : {
-                    secure : false
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/user/register/register.html',
-                        controller : 'RegisterController',
-                        controllerAs : 'registerCtrl'
-                    }
-                }
-            })
-
-
-
 
             // Client
             .state('account', {
@@ -173,9 +163,7 @@
             })
 
 
-
-
-
+            // Freelancer
             .state('freelancers', {
                 parent : 'nav',
                 url : '/freelancers',

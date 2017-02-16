@@ -9,7 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +22,11 @@ public class UserService implements org.springframework.security.core.userdetail
 
     public void create(final User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActivationCode(UUID.randomUUID().toString());
+        user.setActivationExpiry(LocalDateTime.now().plusDays(7));
+        if (user.getRoles() != null) {
+            user.getRoles().clear();
+        }
         userRepository.save(user);
     }
 

@@ -1,6 +1,5 @@
 package com.eureka.smartrecruit.service;
 
-import com.eureka.smartrecruit.domain.Application;
 import com.eureka.smartrecruit.domain.Bid;
 import com.eureka.smartrecruit.domain.Job;
 import com.eureka.smartrecruit.domain.User;
@@ -62,13 +61,6 @@ public class JobService {
 
     public void cancel(final Job job) {
         job.setStatus(job.getStatus().cancel(job));
-        update(job);
-    }
-
-    public void accept(final Job job, Application application) {
-        application.setAccepted(true);
-        application.setAcceptedOn(LocalDateTime.now());
-        job.setStatus(job.getStatus().start(job));
         update(job);
     }
 

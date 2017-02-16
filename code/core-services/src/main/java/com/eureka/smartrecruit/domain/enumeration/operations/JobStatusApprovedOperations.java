@@ -7,7 +7,7 @@ public class JobStatusApprovedOperations extends JobStatusBaseOperations {
 
     @Override
     public JobStatus start(Job job) {
-        if (job.isFixedPrice()) {
+        if (job.isFixed()) {
             return JobStatus.STARTED;
         } else {
             return super.start(job);

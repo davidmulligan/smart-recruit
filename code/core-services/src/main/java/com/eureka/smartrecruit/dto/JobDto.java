@@ -27,7 +27,6 @@ public class JobDto {
     private String status;
     private List<SkillDto> skills;
     private List<BidDto> bids;
-    private List<ApplicationDto> applications;
     private List<DisputeDto> disputes;
     private List<UserDto> hired;
 }

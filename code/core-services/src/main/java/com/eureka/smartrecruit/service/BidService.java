@@ -1,11 +1,9 @@
 package com.eureka.smartrecruit.service;
 
 import com.eureka.smartrecruit.domain.Bid;
-import com.eureka.smartrecruit.domain.User;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.BidRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +15,6 @@ public class BidService {
     private final BidRepository bidRepository;
 
     public void create(final Bid bid) {
-        bid.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         bidRepository.save(bid);
     }
 

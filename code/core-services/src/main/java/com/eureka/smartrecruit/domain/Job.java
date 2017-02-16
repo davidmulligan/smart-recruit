@@ -58,7 +58,7 @@ public class Job extends DomainObject {
     @Enumerated(EnumType.STRING)
     private JobStatus status;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "job", cascade = CascadeType.ALL)
     private Workroom workroom;
 
 
@@ -71,9 +71,6 @@ public class Job extends DomainObject {
     @OneToMany(mappedBy = "job")
     private Set<Bid> bids;
 
-    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
-    private Set<Application> applications;
-
     @OneToMany(mappedBy = "job")
     private Set<Feedback> feedback;
 
@@ -81,6 +78,6 @@ public class Job extends DomainObject {
     private Set<Dispute> disputes;
 
     public Set<User> getHired() {
-        return Seq.seq(applications).filter(i -> i.isAccepted()).map(t -> t.getCreatedBy()).toSet();
+        return Seq.seq(bids).filter(i -> i.isAccepted()).map(t -> t.getCreatedBy()).toSet();
     }
 }

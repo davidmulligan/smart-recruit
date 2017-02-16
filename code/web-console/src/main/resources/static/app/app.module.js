@@ -4,8 +4,7 @@
     angular
         .module('app.module', [
             'app.config',
-            'navigation',
-            'home',
+            'common',
             'login',
             'admin',
             'client',

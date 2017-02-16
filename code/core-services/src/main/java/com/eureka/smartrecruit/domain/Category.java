@@ -20,5 +20,8 @@ public class Category extends DomainObject {
     private String description;
 
     @Column(nullable = false)
+    private boolean principal;
+
+    @Column(nullable = false)
     private boolean active;
 }

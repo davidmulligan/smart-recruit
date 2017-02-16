@@ -35,4 +35,8 @@ public class CategoryService {
     public List<Category> findAll() {
         return categoryRepository.findAllByOrderByNameAsc();
     }
+
+    public List<Category> findPrincipal() {
+        return categoryRepository.findPrincipalByOrderByNameAsc();
+    }
 }

@@ -13,6 +13,8 @@
         <!-- CSS Libs -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/ngToast.min.css">
+        <link rel="stylesheet" href="assets/css/ngToast-animations.min.css">
 
         <!-- CSS App -->
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -27,6 +29,8 @@
     </head>
 
     <body ng-app="sr-app">
+
+        <toast></toast>
 
         <div id="wrap">
             <div ui-view="nav"></div>
@@ -43,9 +47,12 @@
 
         <!-- Including Scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
         <script src="assets/js/ui-bootstrap-tpls-1.2.4.min.js"></script>
+        <script src="assets/js/ngToast.min.js"></script>
 
         <!-- Including jquery and twitter bootstrap -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -73,10 +80,15 @@
         <script type="text/javascript" src="app/app.routes.js"></script>
 
         <!-- Sections -->
-        <script type="text/javascript" src="app/sections/navigation/navigation.module.js"></script>
-        <script type="text/javascript" src="app/sections/navigation/navigation.controller.js"></script>
-        <script type="text/javascript" src="app/sections/home/home.module.js"></script>
-        <script type="text/javascript" src="app/sections/home/home.controller.js"></script>
+
+        <!-- Common Section -->
+        <script type="text/javascript" src="app/sections/common/common.module.js"></script>
+        <script type="text/javascript" src="app/sections/common/navigation/navigation.module.js"></script>
+        <script type="text/javascript" src="app/sections/common/navigation/navigation.controller.js"></script>
+        <script type="text/javascript" src="app/sections/common/home/home.module.js"></script>
+        <script type="text/javascript" src="app/sections/common/home/home.controller.js"></script>
+
+
         <script type="text/javascript" src="app/sections/login/login.module.js"></script>
         <script type="text/javascript" src="app/sections/login/login.controller.js"></script>
 

@@ -18,8 +18,9 @@
                 },
                 views : {
                     'nav@' : {
-                        templateUrl : 'app/sections/navigation/navigation.html',
-                        controller : 'NavigationController'
+                        templateUrl : 'app/sections/common/navigation/navigation.html',
+                        controller : 'NavigationController',
+                        controllerAs : 'ctrl'
                     }
                 },
                 resolve: {
@@ -33,34 +34,8 @@
                     }
                 }
             })
-            .state('login', {
-                parent : 'nav',
-                url : '/login',
-                data : {
-                    secure : false
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/login/login.html',
-                        controller : 'LoginController',
-                        controllerAs : 'loginCtrl'
-                    }
-                }
-            })
-            .state('register', {
-                parent : 'nav',
-                url : '/register',
-                data : {
-                    secure : false
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/user/register/register.html',
-                        controller : 'RegisterController',
-                        controllerAs : 'registerCtrl'
-                    }
-                }
-            })
+
+            // Common
             .state('home', {
                 parent : 'nav',
                 url : '/',
@@ -69,7 +44,7 @@
                 },
                 views : {
                     'content@' : {
-                        templateUrl : 'app/sections/home/home.html',
+                        templateUrl : 'app/sections/common/home/home.html',
                         controller : 'HomeController',
                         controllerAs : 'homeCtrl'
                     }
@@ -123,6 +98,44 @@
                     }
                 }
             })
+
+
+
+            .state('login', {
+                parent : 'nav',
+                url : '/login',
+                data : {
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/login/login.html',
+                        controller : 'LoginController',
+                        controllerAs : 'loginCtrl'
+                    }
+                }
+            })
+
+
+
+
+            .state('register', {
+                parent : 'nav',
+                url : '/register',
+                data : {
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/user/register/register.html',
+                        controller : 'RegisterController',
+                        controllerAs : 'registerCtrl'
+                    }
+                }
+            })
+
+
+
 
             // Client
             .state('account', {

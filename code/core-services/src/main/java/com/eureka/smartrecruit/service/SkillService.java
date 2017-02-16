@@ -36,7 +36,7 @@ public class SkillService {
         return skillRepository.findAllByOrderByNameAsc();
     }
 
-    public List<Skill> findPrincipals() {
+    public List<Skill> findPrincipal() {
         return skillRepository.findPrincipalByOrderByNameAsc();
     }
 }

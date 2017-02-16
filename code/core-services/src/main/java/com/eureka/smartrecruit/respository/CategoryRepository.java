@@ -10,4 +10,6 @@ import java.util.List;
 public interface CategoryRepository extends BaseRepository<Category> {
 
     List<Category> findAllByOrderByNameAsc();
+
+    List<Category> findPrincipalByOrderByNameAsc();
 }

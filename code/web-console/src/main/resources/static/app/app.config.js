@@ -4,6 +4,8 @@
     angular
         .module('app.config', [
             'ngResource',
+            'ngToast',
+            'ngAnimate',
             'ui.router',
             'ui.bootstrap',
             'app.constants',
@@ -13,6 +15,7 @@
     ])
     .run(runner)
     .config(state)
+    .config(toaster)
     .config(config)
     .config(resources);
 
@@ -20,6 +23,15 @@
     function runner($rootScope, $state, $stateParams, AuthenticationService, AccessTokenStorage) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
+
+        $rootScope.$on('LoginSuccessful', function() {
+            $rootScope.user = AuthenticationService.getCurrentUser();
+    	});
+
+    	$rootScope.$on('LogoutSuccessful', function() {
+            $rootScope.user = null;
+    		AuthenticationService.clearCurrentUser();
+    	});
 
         // The following method will run at the time of initializing the module, running once.
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
@@ -34,14 +46,14 @@
                 }
             } else {
                 if (toState.data && toState.data.role) {
-                    var hasAccess = true;
-    //				for (var i = 0; i < AuthenticationService.getCurrentUser().roles.length; i++) {
-    //					var role = AuthenticationService.user.roles[i];
-    //					if (toState.data.role == role) {
-    //						hasAccess = true;
-    //						break;
-    //					}
-    //				}
+                    var hasAccess = false;
+    				for (var i = 0; i < AuthenticationService.getCurrentUser().roles.length; i++) {
+    					var role = AuthenticationService.getCurrentUser().roles[i];
+    					if (toState.data.role === role) {
+    						hasAccess = true;
+    						break;
+    					}
+    				}
                     if (!hasAccess) {
                         event.preventDefault();
                         $state.go('access-denied');
@@ -54,6 +66,14 @@
     /* @ngInject */
     function state($stateProvider) {
         $stateProvider.linkState = angular.linkState;
+    }
+
+    /* @ngInject */
+    function toaster(ngToastProvider) {
+        ngToastProvider.configure({
+            animation: 'fade',
+            dismissButton : true
+        });
     }
 
     /* @ngInject */

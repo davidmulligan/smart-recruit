@@ -48,7 +48,7 @@
             if (typeof decoded.sub === "undefined") {
                 return null;
             } else {
-                return decoded.sub;
+                return {username: decoded.sub, roles: decoded.scopes};
             }
         };
 

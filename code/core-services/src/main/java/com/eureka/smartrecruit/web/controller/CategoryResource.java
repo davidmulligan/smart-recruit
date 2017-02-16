@@ -51,4 +51,9 @@ public class CategoryResource {
     public List<CategoryDto> findAll() {
         return Seq.seq(categoryService.findAll()).map(category -> mapper.map(category, CategoryDto.class)).toList();
     }
+
+    @RequestMapping(value="/principal", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public List<CategoryDto> findPrincipal() {
+        return Seq.seq(categoryService.findPrincipal()).map(category -> mapper.map(category, CategoryDto.class)).toList();
+    }
 }

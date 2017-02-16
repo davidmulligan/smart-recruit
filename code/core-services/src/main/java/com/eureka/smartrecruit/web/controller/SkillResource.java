@@ -53,8 +53,8 @@ public class SkillResource {
         return Seq.seq(skillService.findAll()).map(skill -> mapper.map(skill, SkillDto.class)).toList();
     }
 
-    @RequestMapping(value="/principals", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public List<SkillDto> findPrincipals() {
-        return Seq.seq(skillService.findPrincipals()).map(skill -> mapper.map(skill, SkillDto.class)).toList();
+    @RequestMapping(value="/principal", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public List<SkillDto> findPrincipal() {
+        return Seq.seq(skillService.findPrincipal()).map(skill -> mapper.map(skill, SkillDto.class)).toList();
     }
 }

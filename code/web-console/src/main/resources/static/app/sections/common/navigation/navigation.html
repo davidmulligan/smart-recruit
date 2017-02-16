@@ -15,9 +15,9 @@
                 <li><a ui-sref="freelancers">Freelancers</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a ng-show="user" ui-sref="post">Post a Job</a></li>
+                <li ng-show="user && user.roles.indexOf('CLIENT') != -1"><a ui-sref="post">Post a Job</a></li>
                 <li ng-show="user"><a ui-sref="account">My Account</a></li>
-                <li ng-show="user" class="dropdown">
+                <li ng-show="user && user.roles.indexOf('ADMIN') != -1" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a ui-sref="categories">Categories</a></li>
@@ -29,7 +29,7 @@
                 </li>
                 <li ng-show="!user"><a ui-sref="login">Login</a></li>
                 <li ng-show="!user"><a ui-sref="register">Create Account</a></li>
-                <li ng-show="user"><a><span ng-click="logout()" href="">Logout</span></a></li>
+                <li ng-show="user"><a ng-click="ctrl.logout()">Logout</a></li>
             </ul>
         </div>
     </div>

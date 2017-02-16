@@ -41,22 +41,22 @@ VALUES
 (1,7),
 (1,6);
 
-INSERT INTO `smartrecruit`.`CATEGORY` (`id`, `created_by_id`, `created_on`, `modified_by_id`, `modified_on`, `active`, `description`, `name`)
+INSERT INTO `smartrecruit`.`CATEGORY` (`id`, `created_by_id`, `created_on`, `modified_by_id`, `modified_on`, `active`, `description`, `name`, `principal`)
 VALUES
-('1', 1, now(), 1, now(), b'1', 'Health & Safety', 'Health & Safety'),
-('2', 1, now(), 1, now(), b'1', 'Set Builders', 'Set Builders'),
-('3', 1, now(), 1, now(), b'1', 'Stewards', 'Stewards'),
-('4', 1, now(), 1, now(), b'1', 'General Crew', 'General Crew'),
-('5', 1, now(), 1, now(), b'1', 'Drivers', 'Drivers'),
-('6', 1, now(), 1, now(), b'1', 'Riggers', 'Riggers'),
-('7', 1, now(), 1, now(), b'1', 'Cleaning Crew', 'Cleaning Crew'),
-('8', 1, now(), 1, now(), b'1', 'Set Painters' , 'Set Painters'),
-('9', 1, now(), 1, now(), b'1', 'AV Technicians' , 'AV Technicians'),
-('10', 1, now(), 1, now(), b'1', 'Electricians', 'Electricians'),
-('11', 1, now(), 1, now(), b'1', 'Stage Hand', 'Stage Hand'),
-('12', 1, now(), 1, now(), b'1', 'Runners', 'Runners'),
-('13', 1, now(), 1, now(), b'1', 'Lighting Technicians', 'Lighting Technicians'),
-('14', 1, now(), 1, now(), b'1', 'Sound Engineers', 'Sound Engineers');
+('1', 1, now(), 1, now(), b'1', 'Health & Safety', 'Health & Safety', b'1'),
+('2', 1, now(), 1, now(), b'1', 'Set Builders', 'Set Builders', b'1'),
+('3', 1, now(), 1, now(), b'1', 'Stewards', 'Stewards', b'1'),
+('4', 1, now(), 1, now(), b'1', 'General Crew', 'General Crew', b'1'),
+('5', 1, now(), 1, now(), b'1', 'Drivers', 'Drivers', b'1'),
+('6', 1, now(), 1, now(), b'1', 'Riggers', 'Riggers', b'1'),
+('7', 1, now(), 1, now(), b'1', 'Cleaning Crew', 'Cleaning Crew', b'1'),
+('8', 1, now(), 1, now(), b'1', 'Set Painters' , 'Set Painters', b'1'),
+('9', 1, now(), 1, now(), b'1', 'AV Technicians' , 'AV Technicians', b'1'),
+('10', 1, now(), 1, now(), b'1', 'Electricians', 'Electricians', b'1'),
+('11', 1, now(), 1, now(), b'1', 'Stage Hand', 'Stage Hand', b'1'),
+('12', 1, now(), 1, now(), b'1', 'Runners', 'Runners', b'1'),
+('13', 1, now(), 1, now(), b'1', 'Lighting Technicians', 'Lighting Technicians', b'1'),
+('14', 1, now(), 1, now(), b'1', 'Sound Engineers', 'Sound Engineers', b'1');
 
 INSERT INTO `smartrecruit`.`JOB`
 (`id`,`created_on`,`modified_on`,`deadline`,`description`,`duration`,`fixed`,`location`,`number_positions`,`remuneration`,`status`,`title`,`created_by_id`,`modified_by_id`,`category_id`)

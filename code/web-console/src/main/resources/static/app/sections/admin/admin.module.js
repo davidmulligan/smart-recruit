@@ -3,6 +3,7 @@
 
     angular
         .module('admin', [
+            'admin.core',
             'admin.category',
             'admin.job',
             'admin.membership',

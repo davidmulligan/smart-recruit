@@ -127,6 +127,52 @@
                 }
             })
 
+            // Admin
+            .state('admin', {
+                parent : 'nav',
+                url : '/admin',
+                data : {
+                    role : 'ADMIN'
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/admin/admin.html',
+                        controller : 'AdminController',
+                        controllerAs : 'ctrl'
+                    }
+                }
+            })
+            .state("admin.jobs", {
+                url: "/jobs",
+                templateUrl: "app/sections/admin/job/job.html",
+                controller : 'AdminJobController',
+                controllerAs : 'ctrl'
+            })
+            .state("admin.categories", {
+                url: "/categories",
+                templateUrl: "app/sections/admin/category/category.html",
+                controller : 'AdminCategoryController',
+                controllerAs : 'ctrl'
+            })
+            .state("admin.skills", {
+                url: "/skills",
+                templateUrl: "app/sections/admin/skill/skill.html",
+                controller : 'AdminSkillController',
+                controllerAs : 'ctrl'
+            })
+            .state("admin.memberships", {
+                url: "/memberships",
+                templateUrl: "app/sections/admin/membership/membership.html",
+                controller : 'AdminMembershipController',
+                controllerAs : 'ctrl'
+            })
+            .state("admin.users", {
+                url: "/users",
+                templateUrl: "app/sections/admin/user/user.html",
+                controller : 'AdminUserController',
+                controllerAs : 'ctrl'
+            })
+
             // Client
             .state('account', {
                 parent : 'nav',

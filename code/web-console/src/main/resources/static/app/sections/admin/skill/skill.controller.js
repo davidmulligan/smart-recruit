@@ -44,7 +44,7 @@
             $http.delete(SKILLS_URL + '/' + skill.id)
 
             .success(function(result) {
-                ngToast.info("Deleted skill: " + skill.name);
+                ngToast.success("Deleted skill: " + skill.name);
                 vm.init();
             })
 
@@ -57,7 +57,7 @@
             $http.put(SKILLS_URL, vm.skill)
 
             .success(function(result) {
-                ngToast.info("Updated skill: " + vm.skill.name);
+                ngToast.success("Updated skill: " + vm.skill.name);
                 vm.skill = null;
                 vm.skillForm.$setPristine();
                 vm.init();
@@ -72,7 +72,7 @@
             $http.post(SKILLS_URL, vm.skill)
 
             .success(function(result) {
-                ngToast.info("Created skill: " + vm.skill.name);
+                ngToast.success("Created skill: " + vm.skill.name);
                 vm.skill = null;
                 vm.skillForm.$setPristine();
                 vm.init();

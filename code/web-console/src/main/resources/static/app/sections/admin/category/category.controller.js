@@ -44,7 +44,7 @@
             $http.delete(CATEGORIES_URL + '/' + category.id)
 
             .success(function(result) {
-                ngToast.info("Deleted category: " + category.name);
+                ngToast.success("Deleted category: " + category.name);
                 vm.init();
             })
 
@@ -57,7 +57,7 @@
             $http.put(CATEGORIES_URL, vm.category)
 
             .success(function(result) {
-                ngToast.info("Updated category: " + vm.category.name);
+                ngToast.success("Updated category: " + vm.category.name);
                 vm.category = null;
                 vm.categoryForm.$setPristine();
                 vm.init();
@@ -72,7 +72,7 @@
             $http.post(CATEGORIES_URL, vm.category)
 
             .success(function(result) {
-                ngToast.info("Created category: " + vm.category.name);
+                ngToast.success("Created category: " + vm.category.name);
                 vm.category = null;
                 vm.categoryForm.$setPristine();
                 vm.init();

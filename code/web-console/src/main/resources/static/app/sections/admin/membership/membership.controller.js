@@ -44,7 +44,7 @@
             $http.delete(MEMBERSHIPS_URL + '/' + membership.id)
 
             .success(function(result) {
-                ngToast.info("Deleted membership: " + membership.name);
+                ngToast.success("Deleted membership: " + membership.name);
                 vm.init();
             })
 
@@ -57,7 +57,7 @@
             $http.put(MEMBERSHIPS_URL, vm.membership)
 
             .success(function(result) {
-            ngToast.info("Updated membership: " + vm.membership.name);
+            ngToast.success("Updated membership: " + vm.membership.name);
                 vm.membership = null;
                 vm.membershipForm.$setPristine();
                 vm.init();
@@ -72,7 +72,7 @@
             $http.post(MEMBERSHIPS_URL, vm.membership)
 
             .success(function(result) {
-                ngToast.info("Created membership: " + vm.membership.name);
+                ngToast.success("Created membership: " + vm.membership.name);
                 vm.membership = null;
                 vm.membershipForm.$setPristine();
                 vm.init();

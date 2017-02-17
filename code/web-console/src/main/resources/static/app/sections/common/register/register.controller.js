@@ -13,7 +13,7 @@
             $http.post(USERS_URL + '/register', vm.user)
 
             .success(function(result) {
-                ngToast.info('Registration Successful');
+                ngToast.success('Registration Successful');
                 $state.go('home');
             })
 

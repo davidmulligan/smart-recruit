@@ -23,8 +23,9 @@ public class JobDto {
     private String location;
     private Integer numberPositions;
     private LocalDateTime deadline;
-    private boolean fixedPrice;
+    private boolean fixed;
     private String status;
+    private UserDto createdBy;
     private List<SkillDto> skills;
     private List<BidDto> bids;
     private List<DisputeDto> disputes;

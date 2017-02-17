@@ -44,7 +44,7 @@
             $http.delete(USERS_URL + '/' + user.id)
 
             .success(function(result) {
-                ngToast.info("Deleted user: " + user.firstName + user.lastName);
+                ngToast.success("Deleted user: " + user.firstName + user.lastName);
                 vm.init();
             })
 
@@ -57,7 +57,7 @@
             $http.put(USERS_URL, vm.user)
 
             .success(function(result) {
-                ngToast.info("Updated user: " + vm.user.firstName + vm.user.lastName);
+                ngToast.success("Updated user: " + vm.user.firstName + vm.user.lastName);
                 vm.user = null;
                 vm.confirmPassword = null;
                 vm.userForm.$setPristine();
@@ -73,7 +73,7 @@
             $http.post(USERS_URL, vm.user)
 
             .success(function(result) {
-                ngToast.info("Created user: " + vm.user.firstName + vm.user.lastName);
+                ngToast.success("Created user: " + vm.user.firstName + vm.user.lastName);
                 vm.user = null;
                 vm.confirmPassword = null;
                 vm.userForm.$setPristine();

@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 public class Feedback extends DomainObject {
 
     @Column
+    private String title;
+
+    @Column
     private String comment;
 
     @Column(nullable = false)

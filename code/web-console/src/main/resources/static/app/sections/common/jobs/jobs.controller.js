@@ -2,23 +2,22 @@
     'use strict';
 
     angular
-        .module('freelancer.job.core', [])
-        .controller('FreelancerJobController', controller);
+        .module('common.jobs.core', [])
+        .controller('CommonJobsController', controller);
 
     /** @ngInject */
-    function controller($http, $uibModal, JOBS_URL) {
+    function controller($http, $uibModal, $log, ngToast, JOBS_URL) {
         var vm = this;
-        vm.application = {};
 
         vm.init = function() {
-            $http.get(JOBS_URL)
+            $http.get(JOBS_URL + '?status=APPROVED')
 
             .success(function(result) {
                 vm.jobs = result;
             })
 
             .error(function(error) {
-                console.log(error.message);
+                ngToast.danger(error.message);
             });
         };
 
@@ -26,7 +25,7 @@
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'app/sections/freelancer/job/job_detail.html',
+                templateUrl: 'app/sections/common/jobs/job_detail.html',
                 controller: function($scope, $uibModalInstance, job) {
                     $scope.job = job;
 
@@ -51,25 +50,15 @@
             });
         };
 
-        vm.applyJob = function(job) {
-            $http.post(JOBS_URL + '/' + job.id + '/applications', vm.application)
+        vm.bidJob = function(job, bid) {
+            $http.post(JOBS_URL + '/' + job.id + '/bids', bid)
 
             .success(function(result) {
+                ngToast.success('Successfully placed bid');
             })
 
             .error(function(error) {
-                console.log(error.message);
-            });
-        };
-
-        vm.bidJob = function(job) {
-            $http.post(JOBS_URL + '/' + job.id + '/bids', vm.bid)
-
-            .success(function(result) {
-            })
-
-            .error(function(error) {
-                console.log(error.message);
+                ngToast.danger(error.message);
             });
         };
 

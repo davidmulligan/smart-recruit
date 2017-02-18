@@ -37,6 +37,6 @@ public class FeedbackResource {
 
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<FeedbackDto> findAll(@PathVariable("userId") Long userId) {
-        return Seq.seq(userService.findById(userId).getFeedback()).map(feedback -> mapper.map(feedback, FeedbackDto.class)).toList();
+        return Seq.seq(feedbackService.findByUser(userService.findById(userId))).map(feedback -> mapper.map(feedback, FeedbackDto.class)).toList();
     }
 }

@@ -67,7 +67,7 @@
 							<td>{{$index+1}}</td>
 							<td>{{user.email}}</td>
 							<td>
-								<span ng-repeat="role in user.roles">{{role.name}}<span ng-if="$index < (user.roles.length-1)">, </span></span>
+								<span ng-repeat="role in user.roles">{{role.name}}</span><span ng-if="$index < (user.roles.length-1)">, </span>
 							</td>
 							<td>
 								<span ng-show="user.enabled">Yes</span>

@@ -77,7 +77,8 @@ public class Job extends DomainObject {
     @OneToMany(mappedBy = "job")
     private Set<Dispute> disputes;
 
-    public Set<User> getHired() {
+    
+    public Set<User> getFreelancers() {
         return Seq.seq(bids).filter(i -> i.isAccepted()).map(t -> t.getCreatedBy()).toSet();
     }
 }

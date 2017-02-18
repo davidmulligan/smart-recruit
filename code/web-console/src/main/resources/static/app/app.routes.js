@@ -64,6 +64,34 @@
                     }
                 }
             })
+            .state('freelancers', {
+                parent : 'nav',
+                url : '/freelancers',
+                data : {
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/common/freelancers/freelancers.html',
+                        controller : 'CommonFreelancersController',
+                        controllerAs : 'ctrl'
+                    }
+                }
+            })
+            .state('jobs', {
+                parent : 'nav',
+                url : '/jobs',
+                data : {
+                    secure : false
+                },
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/common/jobs/jobs.html',
+                        controller : 'CommonJobsController',
+                        controllerAs : 'ctrl'
+                    }
+                }
+            })
             .state('register', {
                 parent : 'nav',
                 url : '/register',
@@ -184,15 +212,34 @@
                     'content@' : {
                         templateUrl : 'app/sections/client/account/account.html',
                         controller : 'ClientAccountController',
-                        controllerAs : 'accountCtrl'
+                        controllerAs : 'ctrl'
                     }
                 }
             })
-            .state("account.jobs", { url: "/jobs", templateUrl: "app/sections/client/account/jobs/jobs.html" })
-            .state("account.disputes", { url: "/disputes", templateUrl: "app/sections/client/account/disputes/disputes.html" })
-            .state("account.messages", { url: "/messages", templateUrl: "app/sections/client/account/messages/messages.html" })
-            .state("account.notifications", { url: "/notifications", templateUrl: "app/sections/client/account/notifications/notifications.html" })
-
+            .state("account.disputes", {
+                url: "/disputes",
+                templateUrl: "app/sections/client/account/dispute/dispute.html",
+                controller : 'ClientAccountDisputeController',
+                controllerAs : 'ctrl'
+            })
+            .state("account.jobs", {
+                url: "/jobs",
+                templateUrl: "app/sections/client/account/job/job.html",
+                controller : 'ClientAccountJobController',
+                controllerAs : 'ctrl'
+            })
+            .state("account.messages", {
+                url: "/messages",
+                templateUrl: "app/sections/client/account/message/message.html",
+                controller : 'ClientAccountMessageController',
+                controllerAs : 'ctrl'
+            })
+            .state("account.notifications", {
+                url: "/notifications",
+                templateUrl: "app/sections/client/account/notification/notification.html",
+                controller : 'ClientAccountNotificationController',
+                controllerAs : 'ctrl'
+            })
             .state('post', {
                 parent : 'nav',
                 url : '/post',
@@ -202,116 +249,13 @@
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/client/post/post.html',
-                        controller : 'ClientJobController',
-                        controllerAs : 'jobCtrl'
+                        controller : 'ClientPostController',
+                        controllerAs : 'ctrl'
                     }
                 }
             })
-
 
             // Freelancer
-            .state('freelancers', {
-                parent : 'nav',
-                url : '/freelancers',
-                data : {
-                    secure : false
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/client/freelancer/freelancer.html',
-                        controller : 'ClientFreelancerController',
-                        controllerAs : 'freelancersCtrl'
-                    }
-                }
-            })
-            .state('jobs', {
-                parent : 'nav',
-                url : '/jobs',
-                data : {
-                    secure : false
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/freelancer/job/job.html',
-                        controller : 'FreelancerJobController',
-                        controllerAs : 'jobCtrl'
-                    }
-                }
-            })
-
-
-            .state('categories', {
-                parent : 'nav',
-                url : '/categories',
-                data : {
-                    role : 'ADMIN'
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/admin/category/category.html',
-                        controller : 'AdminCategoryController',
-                        controllerAs : 'ctrl'
-                    }
-                }
-            })
-            .state('adminJobs', {
-                parent : 'nav',
-                url : '/adminJobs',
-                data : {
-                    role : 'ADMIN'
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/admin/job/job.html',
-                        controller : 'AdminJobController',
-                        controllerAs : 'adminJobCtrl'
-                    }
-                }
-            })
-            .state('memberships', {
-                parent : 'nav',
-                url : '/memberships',
-                data : {
-                    role : 'ADMIN'
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/admin/membership/membership.html',
-                        controller : 'AdminMembershipController',
-                        controllerAs : 'ctrl'
-                    }
-                }
-            })
-            .state('skills', {
-                parent : 'nav',
-                url : '/skills',
-                data : {
-                    role : 'ADMIN'
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/admin/skill/skill.html',
-                        controller : 'AdminSkillController',
-                        controllerAs : 'ctrl'
-                    }
-                }
-            })
-            .state('users', {
-                parent : 'nav',
-                url : '/users',
-                data : {
-                    role : 'ADMIN'
-                },
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/admin/user/user.html',
-                        controller : 'AdminUserController',
-                        controllerAs : 'ctrl'
-                    }
-                }
-            });
-
-
 
             $urlRouterProvider.otherwise('/page-not-found');
     }

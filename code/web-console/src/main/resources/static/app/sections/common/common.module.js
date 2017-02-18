@@ -6,6 +6,8 @@
             'common.navigation',
             'common.login',
             'common.home',
+            'common.freelancers',
+            'common.jobs',
             'common.register'
         ]);
 })();

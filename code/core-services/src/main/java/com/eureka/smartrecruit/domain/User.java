@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.jooq.lambda.Seq;
+import org.jooq.lambda.tuple.Tuple;
+import org.jooq.lambda.tuple.Tuple2;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,7 +28,12 @@ import javax.persistence.Transient;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+
+import static org.jooq.lambda.Agg.avg;
+import static org.jooq.lambda.Agg.count;
+
 
 @Entity
 @Getter
@@ -102,6 +109,12 @@ public class User extends DomainObject implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    @Transient
+    public Integer getRating() {
+        Tuple summary = Seq.seq(feedback).collect(count(), avg(Feedback::getRating));
+        return (Integer) ((Optional) ((Tuple2) summary).v2()).orElse(0);
     }
 
     @Override

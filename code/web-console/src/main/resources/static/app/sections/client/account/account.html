@@ -2,16 +2,16 @@
     .top-buffer { margin-top:20px; }
 </style>
 <uib-tabset>
-    <uib-tab heading="Jobs ({{accountCtrl.jobs.length}})" ui-sref="account.jobs" active="true">
-        <div ui-view></div>
+    <uib-tab heading="Jobs" ui-sref="account.jobs" active="true">
+        <div ui-view class="top-buffer"></div>
     </uib-tab>
     <uib-tab heading="Dispute Management" ui-sref="account.disputes">
-        <div ui-view></div>
+        <div ui-view class="top-buffer"></div>
     </uib-tab>
     <uib-tab heading="Messages" ui-sref="account.messages">
-        <div ui-view></div>
+        <div ui-view class="top-buffer"></div>
     </uib-tab>
     <uib-tab heading="Notifications" ui-sref="account.notifications">
-        <div ui-view></div>
+        <div ui-view class="top-buffer"></div>
     </uib-tab>
 </uib-tabset>

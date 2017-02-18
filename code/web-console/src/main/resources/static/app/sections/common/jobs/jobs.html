@@ -1,0 +1,19 @@
+<style>
+    .label { margin-left: 5px; }
+</style>
+<div class="row" ng-repeat="job in ctrl.jobs">
+    <h1><a ng-click="ctrl.modalDetail('lg', job)">{{job.title}}</a></h1>
+    <p>{{job.description}}</p>
+    <div>
+        <span class="label label-default">Posted: {{job.createdOn}}</span>
+        <span class="label label-default">Category: {{job.category.name}}</span>
+        <span class="label label-default">Location: {{job.location}}</span>
+        <span class="label label-default">Remuneration: {{job.remuneration}}</span>
+        <span class="label label-default">Duration: {{job.duration}}</span>
+        <span class="label label-default" ng-show="job.fixed">Fixed Price</span>
+        <div class="pull-right">
+            <span class="label label-primary" ng-repeat="skill in job.skills">{{skill.name}}</span>
+        </div>
+    </div>
+    <hr>
+</div>

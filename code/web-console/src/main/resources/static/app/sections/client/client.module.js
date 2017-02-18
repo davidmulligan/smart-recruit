@@ -4,7 +4,6 @@
     angular
         .module('client', [
             'client.account',
-            'client.post',
-            'client.freelancer'
+            'client.post'
         ]);
 })();

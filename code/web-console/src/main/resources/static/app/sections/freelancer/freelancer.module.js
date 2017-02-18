@@ -3,6 +3,5 @@
 
     angular
         .module('freelancer', [
-            'freelancer.job'
         ]);
 })();

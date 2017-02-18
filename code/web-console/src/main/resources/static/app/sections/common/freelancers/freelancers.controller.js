@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('client.freelancer.core', [])
-        .controller('ClientFreelancerController', controller);
+        .module('common.freelancers.core', [])
+        .controller('CommonFreelancersController', controller);
 
     /** @ngInject */
-    function controller($http, $uibModal, USERS_URL, ModalService) {
+    function controller($http, $uibModal, $log, ngToast, USERS_URL) {
         var vm = this;
 
         vm.init = function() {
@@ -14,11 +14,10 @@
 
             .success(function(result) {
                 vm.freelancers = result;
-                vm.message = '';
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
 
@@ -26,12 +25,21 @@
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'app/sections/client/freelancer/freelancer_detail.html',
-                controller: function($scope, $uibModalInstance, user) {
-                    $scope.user = user;
+                templateUrl: 'app/sections/common/freelancers/freelancer_detail.html',
+                controller: function($scope, $http, $uibModalInstance, USERS_URL, freelancer) {
+                    $scope.freelancer = freelancer;
+
+                    $http.get(USERS_URL + '/' + freelancer.id + '/feedback')
+                    .success(function(result) {
+                        $scope.feedback = result;
+                        $scope.ratingBreakdown = _.groupBy(result, "rating");
+                    })
+                    .error(function(error) {
+                        ngToast.danger(error.message);
+                    });
 
                     $scope.ok = function() {
-                        $uibModalInstance.close($scope.user);
+                        $uibModalInstance.close($scope.freelancer);
                     };
 
                     $scope.cancel = function() {
@@ -40,7 +48,7 @@
                 },
                 size: size,
                 resolve: {
-                    user: function() {
+                    freelancer: function() {
                         return selectedFreelancer;
                     }
                 }

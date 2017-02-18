@@ -1,0 +1,37 @@
+<style>
+    .label { margin-left: 5px; }
+    .glyphicon { margin-right: 5px; }
+    .rating .glyphicon { font-size: 22px; }
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-md-6" ng-repeat="freelancer in ctrl.freelancers">
+                <div class="well">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h4><a ng-click="ctrl.modalDetail('lg', freelancer)">{{freelancer.firstName}} {{freelancer.lastName}}</a></h4>
+                            <p>{{freelancer.profile}}</p>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="rating pull-right">
+                                <span class="glyphicon glyphicon-star" ng-show="freelancer.rating >= 1"></span>
+                                <span class="glyphicon glyphicon-star" ng-show="freelancer.rating >= 2"></span>
+                                <span class="glyphicon glyphicon-star" ng-show="freelancer.rating >= 3"></span>
+                                <span class="glyphicon glyphicon-star" ng-show="freelancer.rating >= 4"></span>
+                                <span class="glyphicon glyphicon-star" ng-show="freelancer.rating >= 5"></span>
+                                <span class="glyphicon glyphicon-star-empty" ng-show="freelancer.rating < 1"></span>
+                                <span class="glyphicon glyphicon-star-empty" ng-show="freelancer.rating < 2"></span>
+                                <span class="glyphicon glyphicon-star-empty" ng-show="freelancer.rating < 3"></span>
+                                <span class="glyphicon glyphicon-star-empty" ng-show="freelancer.rating < 4"></span>
+                                <span class="glyphicon glyphicon-star-empty" ng-show="freelancer.rating < 5"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <p><span class="label label-primary" ng-repeat="skill in freelancer.skills">{{skill.name}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

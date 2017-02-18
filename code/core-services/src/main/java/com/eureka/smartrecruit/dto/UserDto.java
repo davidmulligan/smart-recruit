@@ -22,6 +22,7 @@ public class UserDto {
     private String companyName;
     private String profile;
     private String type;
+    private Double rating;
     private boolean enabled;
     private List<RoleDto> roles;
 }

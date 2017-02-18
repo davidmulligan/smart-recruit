@@ -4,48 +4,49 @@
 			<div class="panel-heading">Post a Job</div>
 			<div class="panel-body">
 				<div class="col-md-12">
-					<form ng-submit="jobCtrl.submit()" name="jobCtrl.createJobForm" novalidate>
-                        <div class="alert alert-info margin-top-5" ng-show="jobCtrl.message">{{jobCtrl.message}}</div>
-						<div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.title.$invalid && jobCtrl.jobForm.title.$dirty }">
+					<form ng-submit="ctrl.submit()" name="ctrl.createJobForm" novalidate>
+						<div class="col-md-12 form-group" ng-class="{ 'has-error': ctrl.jobForm.title.$invalid && ctrl.jobForm.title.$dirty }">
 							<label for="title">Title:</label>
-							<input type="text" required class="form-control" ng-model="jobCtrl.job.title" id="title" name="title">
+							<input type="text" required class="form-control" ng-model="ctrl.job.title" id="title" name="title">
 						</div>
-						<div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.description.$invalid && jobCtrl.jobForm.description.$dirty }">
+						<div class="col-md-12 form-group" ng-class="{ 'has-error': ctrl.jobForm.description.$invalid && ctrl.jobForm.description.$dirty }">
 							<label for="description">Description:</label>
-                            <textarea class="form-control" rows="5" ng-model="jobCtrl.job.description" id="description" name="description"></textarea>
+                            <textarea class="form-control" rows="5" ng-model="ctrl.job.description" id="description" name="description"></textarea>
 						</div>
-                        <div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.category.$invalid && jobCtrl.jobForm.category.$dirty }">
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error': ctrl.jobForm.category.$invalid && ctrl.jobForm.category.$dirty }">
                             <label for="category">Category:</label>
-                            <select class="form-control" id="category" ng-model="jobCtrl.job.category" ng-options="item as item.name for item in jobCtrl.categories" typeahead-editable="false" required></select>
+                            <select class="form-control" id="category" ng-model="ctrl.job.category" ng-options="item as item.name for item in ctrl.categories" typeahead-editable="false" required></select>
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.remuneration.$invalid && jobCtrl.jobForm.remuneration.$dirty }">
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error': ctrl.jobForm.remuneration.$invalid && ctrl.jobForm.remuneration.$dirty }">
                             <label for="remuneration">Remuneration:</label>
-                            <input type="text" required class="form-control" ng-model="jobCtrl.job.remuneration" id="remuneration" name="remuneration">
+                            <input type="text" required class="form-control" ng-model="ctrl.job.remuneration" id="remuneration" name="remuneration">
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.duration.$invalid && jobCtrl.jobForm.duration.$dirty }">
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error': ctrl.jobForm.duration.$invalid && ctrl.jobForm.duration.$dirty }">
                             <label for="duration">Duration:</label>
-                            <input type="text" required class="form-control" ng-model="jobCtrl.job.duration" id="duration" name="duration">
+                            <input type="text" required class="form-control" ng-model="ctrl.job.duration" id="duration" name="duration">
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.location.$invalid && jobCtrl.jobForm.location.$dirty }">
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error': ctrl.jobForm.location.$invalid && ctrl.jobForm.location.$dirty }">
                             <label for="location">Location:</label>
-                            <input type="text" required class="form-control" ng-model="jobCtrl.job.location" id="location" name="location">
+                            <input type="text" required class="form-control" ng-model="ctrl.job.location" id="location" name="location">
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.numberPositions.$invalid && jobCtrl.jobForm.numberPositions.$dirty }">
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error': ctrl.jobForm.skills.$invalid && ctrl.jobForm.skills.$dirty }">
+                            <label for="skills">Skills:</label>
+                            <select class="form-control" id="skills" ng-model="ctrl.job.skills" ng-options="item as item.name for item in ctrl.skills" typeahead-editable="false" multiple required></select>
+                        </div>
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error': ctrl.jobForm.numberPositions.$invalid && ctrl.jobForm.numberPositions.$dirty }">
                             <label for="numberPositions">Number Positions:</label>
-                            <input type="text" class="form-control" ng-model="jobCtrl.job.numberPositions" id="numberPositions" name="numberPositions">
+                            <input type="number" class="form-control" ng-model="ctrl.job.numberPositions" id="numberPositions" name="numberPositions">
                         </div>
-                        <div class="form-group">
+                        <div class="col-md-12 form-group">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" ng-model="jobCtrl.job.fixedPrice"> Fixed Price
+                                    <input type="checkbox" ng-model="ctrl.job.fixed"> Fixed
                                 </label>
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{ 'has-error': jobCtrl.jobForm.skills.$invalid && jobCtrl.jobForm.skills.$dirty }">
-                            <label for="skills">Skills:</label>
-                            <select class="form-control" id="skills" ng-model="jobCtrl.job.skills" ng-options="item as item.name for item in jobCtrl.skills" typeahead-editable="false" multiple required></select>
+                        <div class="col-md-12 form-group">
+						    <button type="submit" class="btn btn-default" ng-disabled="ctrl.jobForm.$invalid">Post</button>
                         </div>
-						<button type="submit" class="btn btn-default" ng-disabled="jobCtrl.jobForm.$invalid">Create</button>
 					</form>
 				</div>
 			</div>

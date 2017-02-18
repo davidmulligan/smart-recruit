@@ -3,10 +3,10 @@
 
     angular
         .module('client.post.core', [])
-        .controller('ClientJobController', controller);
+        .controller('ClientPostController', controller);
 
     /** @ngInject */
-    function controller($http, JOBS_URL, referenceData) {
+    function controller($http, ngToast, JOBS_URL, referenceData) {
         var vm = this;
         vm.categories = referenceData.categories;
         vm.skills = referenceData.skills;
@@ -15,13 +15,13 @@
             $http.post(JOBS_URL, vm.job)
 
             .success(function(result) {
+                ngToast.success("Job created: " + vm.job.title);
                 vm.job = null;
                 vm.createJobForm.$setPristine();
-                vm.message = "Job Created";
             })
 
             .error(function(error) {
-                vm.message = error.message;
+                ngToast.danger(error.message);
             });
         };
     }

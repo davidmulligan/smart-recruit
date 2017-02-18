@@ -1,0 +1,36 @@
+<section ng-controller="CommonJobsController as ctrl">
+    <div class="modal-header">
+        <h3 class="modal-title">More About {{job.title}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-left"><strong>Description: </strong><br>{{job.description}}</p>
+                <p class="text-left"><strong>Category: </strong><br>{{job.category.name}}</p>
+                <p class="text-left"><strong>Location: </strong><br>{{job.location}}</p>
+                <p class="text-left"><strong>Remuneration: </strong><br>{{job.remuneration}}</p>
+                <p class="text-left"><strong>Duration: </strong><br>{{job.duration}}</p>
+                <p class="text-left"><strong>Number of Positions: </strong><br>{{job.numberPositions}}</p>
+                <p class="text-left"><strong>Deadline: </strong><br>{{job.deadline}}</p>
+                <p class="text-left"><strong>Skills: </strong><br><span class="label label-primary" ng-repeat="skill in job.skills">{{skill.name}} </span></p>
+            </div>
+            <div class="col-md-6">
+                <form name="createBidForm" novalidate>
+                    <div class="form-group" ng-class="{ 'has-error': createBidForm.comment.$invalid && createBidForm.comment.$dirty }">
+                        <label for="bidComment">Comment:</label>
+                        <textarea class="form-control" rows="5" ng-model="bid.comment" id="bidComment" name="bidComment"></textarea>
+                    </div>
+                    <div class="form-group" ng-show="!job.fixed" ng-class="{ 'has-error': createBidForm.quote.$invalid && createBidForm.quote.$dirty }">
+                        <label for="quote">Quote:</label>
+                        <input type="text" ng-required="!job.fixed" class="form-control" ng-model="bid.quote" id="quote" name="quote">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" type="button" ng-click="ctrl.bidJob(job, bid);ok()" ng-disabled="createBidForm.$invalid" ng-show="job.fixed">Apply</button>
+        <button class="btn btn-success" type="button" ng-click="ctrl.bidJob(job, bid);ok()" ng-disabled="createBidForm.$invalid" ng-show="!job.fixed">Bid</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+    </div>
+</section>

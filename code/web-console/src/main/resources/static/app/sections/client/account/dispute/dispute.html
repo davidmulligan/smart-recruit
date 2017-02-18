@@ -1,0 +1,26 @@
+<div class="row top-buffer">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Dispute Management</div>
+            <div class="panel-body">
+                <table class="table table-bordered" ng-show="ctrl.disputes.length > 0">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Subject</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="dispute in ctrl.disputes">
+                        <td>{{$index+1}}</td>
+                        <td><a ng-click="ctrl.modalDetail('lg', job)">{{dispute.subject}}</a></td>
+                        <td>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -20,7 +20,7 @@
     .config(resources);
 
     /* @ngInject */
-    function runner($rootScope, $state, $stateParams, AuthenticationService, AccessTokenStorage) {
+    function runner($rootScope, $state, $stateParams, AuthenticationService, AccessTokenStorage, NotifyService) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
 
@@ -28,10 +28,10 @@
             $rootScope.currentUser = AuthenticationService.getCurrentUser();
     	});
 
-    	$rootScope.$on('LogoutSuccessful', function() {
-            $rootScope.currentUser = null;
-    		AuthenticationService.clearCurrentUser();
-    	});
+    	NotifyService.getMessage('LogoutEvent', function(event, data) {
+    	    $rootScope.currentUser = null;
+            AuthenticationService.clearCurrentUser();
+        });
 
         // The following method will run at the time of initializing the module, running once.
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
@@ -79,6 +79,7 @@
     /* @ngInject */
     function config($logProvider, $httpProvider) {
         $logProvider.debugEnabled(true);
+        $httpProvider.interceptors.push('ErrorInterceptor');
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/json';

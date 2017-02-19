@@ -4,8 +4,11 @@
     angular
         .module('app.factories', [
             'factories.accessTokenStorage',
-            'factories.refreshTokenStorage',
+            'factories.bids',
             'factories.categories',
+            'factories.errorInterceptor',
+            'factories.jobs',
+            'factories.refreshTokenStorage',
             'factories.skills'
         ]);
 })();

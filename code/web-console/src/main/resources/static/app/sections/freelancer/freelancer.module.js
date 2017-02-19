@@ -3,5 +3,6 @@
 
     angular
         .module('freelancer', [
+            'freelancer.account',
         ]);
 })();

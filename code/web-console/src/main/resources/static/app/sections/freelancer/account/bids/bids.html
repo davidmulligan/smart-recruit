@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Bids ({{ctrl.bids.length}})</div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Job Title</th>
+                        <th>Quote</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="bid in ctrl.bids">
+                        <td>{{$index+1}}</td>
+                        <td>{{bid.job.title}}</td>
+                        <td>{{bid.quote}}</td>
+                        <td><span class="label label-info">{{bid.status}}</span></td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm" ng-show="job.status != 'CANCELLED'" ng-click="ctrl.cancel(bid)"><i class="glyphicon glyphicon-remove-circle"></i> Cancel</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

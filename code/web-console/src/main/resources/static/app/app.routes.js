@@ -202,7 +202,15 @@
             })
 
             // Client
-            .state('account', {
+            .state('client', {
+                parent : 'nav',
+                url: "/client",
+                abstract: true,
+                data : {
+                    role : 'CLIENT'
+                }
+            })
+            .state('client.account', {
                 parent : 'nav',
                 url : '/account',
                 data : {
@@ -216,31 +224,31 @@
                     }
                 }
             })
-            .state("account.disputes", {
-                url: "/disputes",
+            .state("client.account.disputeManagement", {
+                url: "/disputeManagement",
                 templateUrl: "app/sections/client/account/dispute/dispute.html",
                 controller : 'ClientAccountDisputeController',
                 controllerAs : 'ctrl'
             })
-            .state("account.jobs", {
+            .state("client.account.jobs", {
                 url: "/jobs",
                 templateUrl: "app/sections/client/account/job/job.html",
                 controller : 'ClientAccountJobController',
                 controllerAs : 'ctrl'
             })
-            .state("account.messages", {
+            .state("client.account.messages", {
                 url: "/messages",
                 templateUrl: "app/sections/client/account/message/message.html",
                 controller : 'ClientAccountMessageController',
                 controllerAs : 'ctrl'
             })
-            .state("account.notifications", {
+            .state("client.account.notifications", {
                 url: "/notifications",
                 templateUrl: "app/sections/client/account/notification/notification.html",
                 controller : 'ClientAccountNotificationController',
                 controllerAs : 'ctrl'
             })
-            .state('post', {
+            .state('client.post', {
                 parent : 'nav',
                 url : '/post',
                 data : {
@@ -256,6 +264,54 @@
             })
 
             // Freelancer
+            .state('freelancer', {
+                parent : 'nav',
+                url: "/freelancer",
+                abstract: true,
+                data : {
+                    role : 'FREELANCER'
+                }
+            })
+            .state('freelancer.account', {
+                url : '/account',
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/freelancer/account/account.html',
+                        controller : 'FreelancerAccountController',
+                        controllerAs : 'ctrl'
+                    }
+                }
+            })
+            .state("freelancer.account.bids", {
+                url: "/bids",
+                templateUrl: "app/sections/freelancer/account/bids/bids.html",
+                controller : 'FreelancerAccountBidsController',
+                controllerAs : 'ctrl'
+            })
+            .state("freelancer.account.disputeManagement", {
+                url: "/disputeManagement",
+                templateUrl: "app/sections/freelancer/account/dispute_management/dispute_management.html",
+                controller : 'FreelancerAccountDisputeManagementController',
+                controllerAs : 'ctrl'
+            })
+            .state("freelancer.account.jobs", {
+                url: "/jobs",
+                templateUrl: "app/sections/freelancer/account/jobs/jobs.html",
+                controller : 'FreelancerAccountJobsController',
+                controllerAs : 'ctrl'
+            })
+            .state("freelancer.account.messages", {
+                url: "/messages",
+                templateUrl: "app/sections/freelancer/account/messages/messages.html",
+                controller : 'FreelancerAccountMessagesController',
+                controllerAs : 'ctrl'
+            })
+            .state("freelancer.account.notifications", {
+                url: "/notifications",
+                templateUrl: "app/sections/freelancer/account/notifications/notifications.html",
+                controller : 'FreelancerAccountNotificationsController',
+                controllerAs : 'ctrl'
+            })
 
             $urlRouterProvider.otherwise('/page-not-found');
     }

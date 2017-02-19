@@ -6,11 +6,11 @@
         .controller('NavigationController', controller);
 
     /** @ngInject */
-    function controller($rootScope, $state) {
+    function controller($state, NotifyService) {
         var vm = this;
 
     	vm.logout = function() {
-            $rootScope.$broadcast('LogoutSuccessful');
+    	    NotifyService.sendMessage('LogoutEvent');
     		$state.go('login');
     	};
     }

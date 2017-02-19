@@ -7,11 +7,12 @@
 
     /* @ngInject */
     function factory($resource, CATEGORIES_URL) {
-        var mt = $resource(CATEGORIES_URL);
-        return {
-            getAll: function() {
-                return mt.getAll();
+        return $resource(CATEGORIES_URL, { id: '@_id' }, {
+            principal: {
+                method: 'GET',
+                isArray: true,
+                url: CATEGORIES_URL + "/principal"
             }
-        };
+        });
     }
 })();

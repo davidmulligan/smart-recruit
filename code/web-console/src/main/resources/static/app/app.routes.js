@@ -22,16 +22,6 @@
                         controller : 'NavigationController',
                         controllerAs : 'ctrl'
                     }
-                },
-                resolve: {
-
-                    /* @ngInject */
-                    referenceData: function($q, Categories, Skills) {
-                        return $q.all({
-                            categories: Categories.getAll(),
-                            skills: Skills.getAll()
-                        });
-                    }
                 }
             })
 
@@ -75,6 +65,16 @@
                         templateUrl : 'app/sections/common/freelancers/freelancers.html',
                         controller : 'CommonFreelancersController',
                         controllerAs : 'ctrl'
+                    }
+                },
+                resolve: {
+
+                    /* @ngInject */
+                    referenceData: function($q, Categories, Skills) {
+                        return $q.all({
+                            categories: Categories.getAll(),
+                            skills: Skills.getAll()
+                        });
                     }
                 }
             })

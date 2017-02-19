@@ -7,11 +7,12 @@
 
     /* @ngInject */
     function factory($resource, SKILLS_URL) {
-        var mt = $resource(SKILLS_URL);
-        return {
-            getAll: function() {
-                return mt.getAll();
+        return $resource(SKILLS_URL, { id: '@_id' }, {
+            principal: {
+                method: 'GET',
+                isArray: true,
+                url: SKILLS_URL + "/principal"
             }
-        };
+        });
     }
 })();

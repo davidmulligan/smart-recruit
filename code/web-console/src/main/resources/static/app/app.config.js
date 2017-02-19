@@ -24,9 +24,9 @@
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
 
-        $rootScope.$on('LoginSuccessful', function() {
-            $rootScope.currentUser = AuthenticationService.getCurrentUser();
-    	});
+    	NotifyService.getMessage('LoginEvent', function(event, data) {
+            $rootScope.currentUser = data;
+        });
 
     	NotifyService.getMessage('LogoutEvent', function(event, data) {
     	    $rootScope.currentUser = null;
@@ -36,7 +36,7 @@
         // The following method will run at the time of initializing the module, running once.
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
             if (!AuthenticationService.isAuthenticated()) {
-                if (toState.data.secure) {
+                if (toState.data.role) {
                     if (AccessTokenStorage.retrieve()) {
                         AuthenticationService.recoverToken();
                     } else {

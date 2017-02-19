@@ -9,6 +9,7 @@
             'factories.errorInterceptor',
             'factories.jobs',
             'factories.refreshTokenStorage',
-            'factories.skills'
+            'factories.skills',
+            'factories.users'
         ]);
 })();

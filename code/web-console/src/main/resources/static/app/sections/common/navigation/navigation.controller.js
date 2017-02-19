@@ -11,7 +11,7 @@
 
     	vm.logout = function() {
     	    NotifyService.sendMessage('LogoutEvent');
-    		$state.go('login');
+    		$state.go('home');
     	};
     }
 })();

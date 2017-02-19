@@ -3,11 +3,11 @@
 
     angular
         .module('common', [
-            'common.navigation',
-            'common.login',
-            'common.home',
             'common.freelancers',
+            'common.home',
             'common.jobs',
+            'common.login',
+            'common.navigation',
             'common.register'
         ]);
 })();

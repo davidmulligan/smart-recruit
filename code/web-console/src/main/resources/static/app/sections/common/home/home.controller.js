@@ -6,7 +6,7 @@
         .controller('HomeController', controller);
 
     /** @ngInject */
-    function controller($http, ngToast, SKILLS_URL, CATEGORIES_URL) {
+    function controller(Skills, Categories, $log) {
         var vm = this;
 
         vm.init = function() {
@@ -15,27 +15,21 @@
         };
 
         vm.fetchSkills = function() {
-            $http.get(SKILLS_URL + '/principal')
-
-            .success(function(result) {
-                vm.skills = result;
-            })
-
-            .error(function(error) {
-                ngToast.danger('Error: ' + error.message);
-            });
+            Skills.principal(
+                function(data) {
+                   vm.skills = data;
+                   $log.info('Successfully fetched ' + data.length + ' skills.');
+                }
+            );
         };
 
         vm.fetchCategories = function() {
-            $http.get(CATEGORIES_URL + '/principal')
-
-            .success(function(result) {
-                vm.categories = result;
-            })
-
-            .error(function(error) {
-                ngToast.danger('Error: ' + error.message);
-            });
+            Categories.principal(
+                function(data) {
+                   vm.categories = data;
+                   $log.info('Successfully fetched ' + data.length + ' categories.');
+                }
+            );
         }
 
         vm.init();

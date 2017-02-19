@@ -6,7 +6,7 @@
         .service('AuthenticationService', service);
 
     /* @ngInject */
-    function service($rootScope, $http, AccessTokenStorage, RefreshTokenStorage, JwtService) {
+    function service($http, AccessTokenStorage, RefreshTokenStorage, JwtService, NotifyService) {
         var currentUser;
         return {
             setCurrentUser: function(user) {
@@ -17,6 +17,9 @@
             },
             clearCurrentUser: function() {
                 currentUser = null;
+                AccessTokenStorage.clear();
+                RefreshTokenStorage.clear();
+                $http.defaults.headers.common['X-Authorization'] = null;
             },
             isAuthenticated: function() {
                 return (currentUser) ? currentUser : false;
@@ -29,7 +32,7 @@
                             RefreshTokenStorage.store(result.data.refreshToken);
                             currentUser = JwtService.getUser(AccessTokenStorage.retrieve());
                             $http.defaults.headers.common['X-Authorization'] = 'Bearer ' + AccessTokenStorage.retrieve();
-                            $rootScope.$broadcast('LoginSuccessful');
+                            NotifyService.sendMessage('LoginEvent', currentUser);
                         }
                     })
                     .catch(function(e) {
@@ -41,6 +44,7 @@
             recoverToken: function() {
                 currentUser = JwtService.getUser(AccessTokenStorage.retrieve());
                 $http.defaults.headers.common['X-Authorization'] = 'Bearer ' + AccessTokenStorage.retrieve();
+                NotifyService.sendMessage('LoginEvent', currentUser);
             }
         }
     }

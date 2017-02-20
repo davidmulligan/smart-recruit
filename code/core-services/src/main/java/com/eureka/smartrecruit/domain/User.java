@@ -34,7 +34,6 @@ import java.util.Set;
 import static org.jooq.lambda.Agg.avg;
 import static org.jooq.lambda.Agg.count;
 
-
 @Entity
 @Getter
 @Setter
@@ -57,6 +56,9 @@ public class User extends DomainObject implements UserDetails {
     private String companyName;
 
     @Column
+    private String profile;
+
+    @Column
     private String securityQuestion;
 
     @Column
@@ -69,9 +71,6 @@ public class User extends DomainObject implements UserDetails {
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime activationExpiry;
 
-    @Column
-    private String profile;
-
     @Enumerated(EnumType.STRING)
     private UserType type;
 
@@ -81,6 +80,9 @@ public class User extends DomainObject implements UserDetails {
     @OneToOne
     private Address address;
 
+    @OneToOne
+    private Membership membership;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "UserRole")
     private Set<Role> roles;
@@ -89,16 +91,13 @@ public class User extends DomainObject implements UserDetails {
     @OrderBy("name")
     private Set<Job> jobs;
 
-    @OneToMany(mappedBy = "user")
-    @OrderBy("createdOn")
-    private Set<Feedback> feedback;
-
-    @OneToOne
-    private Membership membership;
-
     @ManyToMany
     @JoinTable(name = "UserSkills")
     private List<Skill> skills;
+
+    @OneToMany(mappedBy = "user")
+    @OrderBy("createdOn")
+    private Set<Feedback> feedback;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -109,6 +108,11 @@ public class User extends DomainObject implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    @Transient
+    public String getFullName() {
+        return String.format("%s %s", firstName, lastName);
     }
 
     @Transient

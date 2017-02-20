@@ -1,16 +1,16 @@
 package com.eureka.smartrecruit.domain;
 
+import com.eureka.smartrecruit.domain.enumeration.BidStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -24,12 +24,8 @@ public class Bid extends DomainObject {
     @Column
     private Double quote;
 
-    @Column
-    private boolean accepted;
-
-    @Column
-    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
-    private LocalDateTime acceptedOn;
+    @Enumerated(EnumType.STRING)
+    private BidStatus status;
 
     @ManyToOne
     @JoinColumn

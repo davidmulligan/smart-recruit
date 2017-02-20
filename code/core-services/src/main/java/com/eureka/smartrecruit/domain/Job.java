@@ -1,5 +1,6 @@
 package com.eureka.smartrecruit.domain;
 
+import com.eureka.smartrecruit.domain.enumeration.BidStatus;
 import com.eureka.smartrecruit.domain.enumeration.JobStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -61,9 +62,6 @@ public class Job extends DomainObject {
     @OneToOne(mappedBy = "job", cascade = CascadeType.ALL)
     private Workroom workroom;
 
-
-
-
     @ManyToMany
     @JoinTable(name = "JobSkills")
     private List<Skill> skills;
@@ -77,8 +75,7 @@ public class Job extends DomainObject {
     @OneToMany(mappedBy = "job")
     private Set<Dispute> disputes;
 
-    
     public Set<User> getFreelancers() {
-        return Seq.seq(bids).filter(i -> i.isAccepted()).map(t -> t.getCreatedBy()).toSet();
+        return Seq.seq(bids).filter(i -> i.getStatus().equals(BidStatus.ACCEPTED)).map(Bid::getCreatedBy).toSet();
     }
 }

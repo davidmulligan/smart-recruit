@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 public class Feedback extends DomainObject {
 
-    @Column
+    @Column(nullable = false)
     private String title;
 
     @Column

@@ -86,13 +86,13 @@ public class JobResource {
         jobService.cancel(jobService.findById(id));
     }
 
-    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public List<JobDto> find(@QuerydslPredicate(root = Job.class) Predicate predicate) {
-        return Seq.seq(jobService.find(predicate)).map(job -> mapper.map(job, JobDto.class)).toList();
-    }
-
     @RequestMapping(value="/self", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<JobDto> findMyJobs() {
         return Seq.seq(jobService.findMyJobs()).map(job -> mapper.map(job, JobDto.class)).toList();
+    }
+
+    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public List<JobDto> find(@QuerydslPredicate(root = Job.class) Predicate predicate) {
+        return Seq.seq(jobService.find(predicate)).map(job -> mapper.map(job, JobDto.class)).toList();
     }
 }

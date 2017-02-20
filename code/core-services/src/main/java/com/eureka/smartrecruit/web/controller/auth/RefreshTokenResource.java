@@ -1,7 +1,6 @@
 package com.eureka.smartrecruit.web.controller.auth;
 
 import com.eureka.smartrecruit.config.SecurityConfig;
-import com.eureka.smartrecruit.domain.User;
 import com.eureka.smartrecruit.security.auth.extractor.TokenExtractor;
 import com.eureka.smartrecruit.security.auth.verifier.TokenVerifier;
 import com.eureka.smartrecruit.security.config.JwtSettings;
@@ -38,11 +37,10 @@ public class RefreshTokenResource {
     public @ResponseBody JwtToken refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String tokenPayload = tokenExtractor.extract(request.getHeader(SecurityConfig.JWT_TOKEN_HEADER_PARAM));
         UnverifiedJwtToken unverifiedJwtToken = new UnverifiedJwtToken(tokenPayload);
-        RefreshToken refreshToken = RefreshToken.create(unverifiedJwtToken, jwtSettings.getTokenSigningKey()).orElseThrow(() -> new InvalidJwtToken());
+        RefreshToken refreshToken = RefreshToken.create(unverifiedJwtToken, jwtSettings.getTokenSigningKey()).orElseThrow(InvalidJwtToken::new);
         if (!tokenVerifier.verify(refreshToken.getJti())) {
             throw new InvalidJwtToken();
         }
-        User user = userService.loadUserByUsername(refreshToken.getSubject());
-        return tokenFactory.createAccessJwtToken(user);
+        return tokenFactory.createAccessJwtToken(userService.loadUserByUsername(refreshToken.getSubject()));
     }
 }

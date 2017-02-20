@@ -37,6 +37,7 @@ public class CategoryResource {
         Category category = categoryService.findById(categoryDto.getId());
         category.setName(categoryDto.getName());
         category.setDescription(categoryDto.getDescription());
+        category.setPrincipal(categoryDto.isPrincipal());
         category.setActive(categoryDto.isActive());
         categoryService.update(category);
     }

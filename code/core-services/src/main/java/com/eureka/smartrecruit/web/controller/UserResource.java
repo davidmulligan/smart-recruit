@@ -5,9 +5,11 @@ import com.eureka.smartrecruit.domain.User;
 import com.eureka.smartrecruit.domain.enumeration.UserType;
 import com.eureka.smartrecruit.dto.UserDto;
 import com.eureka.smartrecruit.service.UserService;
+import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.dozer.Mapper;
 import org.jooq.lambda.Seq;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +43,6 @@ public class UserResource {
         user.setLastName(userDto.getLastName());
         user.setCompanyName(userDto.getCompanyName());
         user.setProfile(userDto.getProfile());
-        user.setType(UserType.valueOf(userDto.getType()));
         user.setEnabled(userDto.isEnabled());
         user.setRoles(Seq.seq(userDto.getRoles()).map(role -> mapper.map(role, Role.class)).toSet());
         userService.update(user);
@@ -69,20 +70,9 @@ public class UserResource {
         return Seq.seq(userService.findAll()).map(user -> mapper.map(user, UserDto.class)).toList();
     }
 
-
-
-
-
-
-
-
-
-
-
-
     @RequestMapping(value="/freelancers", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public List<UserDto> getFreelancers() {
-        return Seq.seq(userService.findByType(UserType.FREELANCER)).map(user -> mapper.map(user, UserDto.class)).toList();
+    public List<UserDto> getFreelancers(@QuerydslPredicate(root = User.class) Predicate predicate) {
+        return Seq.seq(userService.find(predicate)).map(job -> mapper.map(job, UserDto.class)).toList();
     }
 
     @RequestMapping(value="/clients", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })

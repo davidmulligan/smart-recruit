@@ -47,12 +47,6 @@ public class DisputeResource {
         disputeService.update(dispute);
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable("id") Long id) {
-        disputeService.delete(id);
-    }
-
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<DisputeDto> findAll(@PathVariable("jobId") Long jobId) {
         return Seq.seq(jobService.findById(jobId).getDisputes()).map(dispute -> mapper.map(dispute, DisputeDto.class)).toList();

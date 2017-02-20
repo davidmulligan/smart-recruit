@@ -11,8 +11,8 @@
             freelancers: {
                 method: 'GET',
                 isArray: true,
-                url: USERS_URL + "/freelancers?firstNameOrLastName=:query",
-                params: {query: '@query'}
+                url: USERS_URL + "/freelancers?skills=:skill",
+                params: {skill: '@skill'}
             }
         });
     }

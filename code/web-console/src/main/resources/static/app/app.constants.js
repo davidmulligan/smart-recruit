@@ -7,6 +7,7 @@
         .constant('SKILLS_URL', 'http://localhost:8888/skills')
         .constant('MEMBERSHIPS_URL', 'http://localhost:8888/memberships')
         .constant('USERS_URL', 'http://localhost:8888/users')
+        .constant('FEEDBACK_URL', 'http://localhost:8888/users/:userId/feedback')
 
-        .constant('DefaultErrorMessage', 'An error has occurred please contact Technical Support.');
+        .constant('DefaultErrorMessage', 'An error has occurred please contact technical support.');
 })();

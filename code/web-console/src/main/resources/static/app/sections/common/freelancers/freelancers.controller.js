@@ -6,37 +6,37 @@
         .controller('CommonFreelancersController', controller);
 
     /** @ngInject */
-    function controller($http, $uibModal, $log, ngToast, USERS_URL) {
+    function controller($uibModal, $log, Users, referenceData) {
         var vm = this;
+        vm.isSearchOpen = true;
+        vm.skills = referenceData.skills;
 
-        vm.init = function() {
-            $http.get(USERS_URL + '/freelancers')
-
-            .success(function(result) {
-                vm.freelancers = result;
-            })
-
-            .error(function(error) {
-                ngToast.danger(error.message);
-            });
+        vm.search = function() {
+            vm.freelancers = [];
+            vm.isSearchOpen = false;
+            Users.freelancers( {skill: vm.skill ? vm.skill.id : ''},
+                function(data) {
+                   vm.freelancers = data;
+                   $log.info('Successfully fetched ' + data.length + ' freelancers.');
+                }
+            );
         };
 
-        vm.modalDetail = function(size, selectedFreelancer) {
+        vm.modalDetail = function(selectedFreelancer) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/sections/common/freelancers/freelancer_detail.html',
-                controller: function($scope, $http, $uibModalInstance, USERS_URL, freelancer) {
+                controller: function($scope, $uibModalInstance, Feedback, freelancer) {
                     $scope.freelancer = freelancer;
 
-                    $http.get(USERS_URL + '/' + freelancer.id + '/feedback')
-                    .success(function(result) {
-                        $scope.feedback = result;
-                        $scope.ratingBreakdown = _.groupBy(result, "rating");
-                    })
-                    .error(function(error) {
-                        ngToast.danger(error.message);
-                    });
+                    Feedback.getAll({userId: $scope.freelancer.id},
+                        function(data) {
+                            $scope.feedback = data;
+                            $scope.ratingBreakdown = _.groupBy(data, "rating");
+                            $log.info('Successfully fetched feedback for freelancer : ' + $scope.freelancer.fullName);
+                        }
+                    );
 
                     $scope.ok = function() {
                         $uibModalInstance.close($scope.freelancer);
@@ -46,7 +46,7 @@
                         $uibModalInstance.dismiss('cancel');
                     };
                 },
-                size: size,
+                size: 'lg',
                 resolve: {
                     freelancer: function() {
                         return selectedFreelancer;
@@ -58,7 +58,5 @@
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
-
-        vm.init();
     }
 })();

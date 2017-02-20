@@ -7,6 +7,7 @@
             'factories.bids',
             'factories.categories',
             'factories.errorInterceptor',
+            'factories.feedback',
             'factories.jobs',
             'factories.refreshTokenStorage',
             'factories.skills',

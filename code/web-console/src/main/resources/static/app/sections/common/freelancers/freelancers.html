@@ -2,16 +2,37 @@
     .label { margin-left: 5px; }
     .glyphicon { margin-right: 5px; }
     .rating .glyphicon { font-size: 22px; }
+    .well { border: 1px dotted #428bca }
 </style>
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-12">
+        <uib-accordion>
+            <div uib-accordion-group class="panel-default" is-open="ctrl.isSearchOpen">
+                <uib-accordion-heading>Search <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': ctrl.isSearchOpen, 'glyphicon-chevron-right': !ctrl.isSearchOpen}"></i></uib-accordion-heading>
+                <form ng-submit="ctrl.search()" novalidate>
+                    <div class="col-md-6 form-group">
+                        <label for="skill">Skill:</label>
+                        <select class="form-control" id="skill" ng-model="ctrl.skill" ng-options="item as item.name for item in ctrl.skills" typeahead-editable="false">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </uib-accordion>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
         <div class="row">
             <div class="col-md-6" ng-repeat="freelancer in ctrl.freelancers">
-                <div class="well">
+                <div class="well well-sm">
                     <div class="row">
                         <div class="col-md-7">
-                            <h4><a ng-click="ctrl.modalDetail('lg', freelancer)">{{freelancer.firstName}} {{freelancer.lastName}}</a></h4>
+                            <h4><a ng-click="ctrl.modalDetail(freelancer)">{{freelancer.fullName}}</a></h4>
                             <p>{{freelancer.profile}}</p>
                         </div>
                         <div class="col-md-5">

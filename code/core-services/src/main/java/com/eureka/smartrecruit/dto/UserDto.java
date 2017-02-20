@@ -18,6 +18,7 @@ public class UserDto {
     private String password;
     private String firstName;
     private String lastName;
+    private String fullName;
     private String email;
     private String companyName;
     private String profile;
@@ -25,4 +26,5 @@ public class UserDto {
     private Double rating;
     private boolean enabled;
     private List<RoleDto> roles;
+    private List<SkillDto> skills;
 }

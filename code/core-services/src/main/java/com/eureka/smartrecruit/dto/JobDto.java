@@ -26,8 +26,7 @@ public class JobDto {
     private boolean fixed;
     private String status;
     private UserDto createdBy;
+    private LocalDateTime createdOn;
     private List<SkillDto> skills;
-    private List<BidDto> bids;
-    private List<DisputeDto> disputes;
     private List<UserDto> freelancers;
 }

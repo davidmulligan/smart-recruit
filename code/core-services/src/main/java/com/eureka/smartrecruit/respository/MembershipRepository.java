@@ -1,13 +1,9 @@
 package com.eureka.smartrecruit.respository;
 
-import com.eureka.smartrecruit.database.BaseRepository;
 import com.eureka.smartrecruit.domain.Membership;
+import com.eureka.smartrecruit.domain.QMembership;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface MembershipRepository extends BaseRepository<Membership> {
-
-    List<Membership> findAllByOrderByNameAsc();
+public interface MembershipRepository extends QueryableRepository<Membership, QMembership> {
 }

@@ -2,25 +2,26 @@ package com.eureka.smartrecruit.service;
 
 import com.eureka.smartrecruit.domain.Bid;
 import com.eureka.smartrecruit.domain.Job;
-import com.eureka.smartrecruit.domain.User;
 import com.eureka.smartrecruit.domain.Workroom;
+import com.eureka.smartrecruit.domain.enumeration.BidStatus;
 import com.eureka.smartrecruit.domain.enumeration.JobStatus;
+import com.eureka.smartrecruit.domain.enumeration.UserType;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.JobRepository;
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.jooq.lambda.Seq;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
+
+import static com.eureka.smartrecruit.domain.QJob.job;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class JobService {
+public class JobService extends BaseService {
 
     private final JobRepository jobRepository;
 
@@ -65,8 +66,7 @@ public class JobService {
     }
 
     public void accept(final Job job, Bid bid) {
-        bid.setAccepted(true);
-        bid.setAcceptedOn(LocalDateTime.now());
+        bid.setStatus(BidStatus.ACCEPTED);
         job.setStatus(job.getStatus().start(job));
         update(job);
     }
@@ -75,11 +75,15 @@ public class JobService {
         return jobRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Could not find job with id: %s", id)));
     }
 
-    public List<Job> find(Predicate predicate) {
-        return Seq.seq(jobRepository.findAll(predicate)).toList();
+    public List<Job> findMyJobs() {
+        if (getCurrentUser().getType() == UserType.CLIENT) {
+            return Seq.seq(jobRepository.findAll(job.createdBy.eq(getCurrentUser()), job.createdOn.desc())).toList();
+        } else {
+            return Seq.seq(jobRepository.findAll(job.bids.any().createdBy.eq(getCurrentUser()).and(job.bids.any().status.eq(BidStatus.ACCEPTED)), job.createdOn.desc())).toList();
+        }
     }
 
-    public List<Job> findMyJobs() {
-        return jobRepository.findByCreatedBy((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    public List<Job> find(Predicate predicate) {
+        return Seq.seq(jobRepository.findAll(predicate)).toList();
     }
 }

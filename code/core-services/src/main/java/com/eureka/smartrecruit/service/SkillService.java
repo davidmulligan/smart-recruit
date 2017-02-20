@@ -4,10 +4,13 @@ import com.eureka.smartrecruit.domain.Skill;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.SkillRepository;
 import lombok.RequiredArgsConstructor;
+import org.jooq.lambda.Seq;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static com.eureka.smartrecruit.domain.QSkill.skill;
 
 @Service
 @Transactional
@@ -33,10 +36,10 @@ public class SkillService {
     }
 
     public List<Skill> findAll() {
-        return skillRepository.findAllByOrderByNameAsc();
+        return Seq.seq(skillRepository.findAll(skill.name.asc())).toList();
     }
 
     public List<Skill> findPrincipal() {
-        return skillRepository.findPrincipalByOrderByNameAsc();
+        return Seq.seq(skillRepository.findAll(skill.principal.eq(true), skill.name.asc())).toList();
     }
 }

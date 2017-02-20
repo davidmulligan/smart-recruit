@@ -4,8 +4,10 @@ import com.eureka.smartrecruit.domain.User;
 import com.eureka.smartrecruit.domain.enumeration.UserType;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.UserRepository;
+import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.jooq.lambda.Seq;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import static com.eureka.smartrecruit.domain.QUser.user;
+
 @Service
 @RequiredArgsConstructor
-public class UserService implements org.springframework.security.core.userdetails.UserDetailsService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -43,21 +47,25 @@ public class UserService implements org.springframework.security.core.userdetail
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Could not find user with id: %s", id)));
     }
 
-    @Override
-    public User loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
-    }
-
     public List<User> findAll() {
-        List<User> users = userRepository.findAllByOrderByEmailAsc();
+        List<User> users = Seq.seq(userRepository.findAll(user.email.asc())).toList();
         removePasswords(users);
         return users;
     }
 
     public List<User> findByType(UserType userType) {
-        List<User> users = userRepository.findByTypeOrderByLastNameAscFirstNameAsc(userType);
+        List<User> users = Seq.seq(userRepository.findAll(user.type.eq(userType), user.email.asc())).toList();
         removePasswords(users);
         return users;
+    }
+
+    @Override
+    public User loadUserByUsername(String email) {
+        return userRepository.tryFindOne(user.email.eq(email)).orElseThrow(() -> new UsernameNotFoundException(email));
+    }
+
+    public List<User> find(Predicate predicate) {
+        return Seq.seq(userRepository.findAll(predicate)).toList();
     }
 
     private static void removePasswords(List<User> users) {

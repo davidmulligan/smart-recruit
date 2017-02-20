@@ -4,10 +4,13 @@ import com.eureka.smartrecruit.domain.Membership;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.MembershipRepository;
 import lombok.RequiredArgsConstructor;
+import org.jooq.lambda.Seq;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static com.eureka.smartrecruit.domain.QMembership.membership;
 
 @Service
 @Transactional
@@ -33,6 +36,6 @@ public class MembershipService {
     }
 
     public List<Membership> findAll() {
-        return membershipRepository.findAllByOrderByNameAsc();
+        return Seq.seq(membershipRepository.findAll(membership.name.asc())).toList();
     }
 }

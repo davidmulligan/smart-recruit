@@ -4,10 +4,13 @@ import com.eureka.smartrecruit.domain.Category;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.jooq.lambda.Seq;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static com.eureka.smartrecruit.domain.QCategory.category;
 
 @Service
 @Transactional
@@ -33,10 +36,10 @@ public class CategoryService {
     }
 
     public List<Category> findAll() {
-        return categoryRepository.findAllByOrderByNameAsc();
+        return Seq.seq(categoryRepository.findAll(category.name.asc())).toList();
     }
 
     public List<Category> findPrincipal() {
-        return categoryRepository.findPrincipalByOrderByNameAsc();
+        return Seq.seq(categoryRepository.findAll(category.principal.eq(true), category.name.asc())).toList();
     }
 }

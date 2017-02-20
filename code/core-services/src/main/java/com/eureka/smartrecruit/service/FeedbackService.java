@@ -5,10 +5,13 @@ import com.eureka.smartrecruit.domain.User;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.FeedbackRepository;
 import lombok.RequiredArgsConstructor;
+import org.jooq.lambda.Seq;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static com.eureka.smartrecruit.domain.QFeedback.feedback;
 
 @Service
 @Transactional
@@ -26,6 +29,6 @@ public class FeedbackService {
     }
 
     public List<Feedback> findByUser(User user) {
-        return feedbackRepository.findByUser(user);
+        return Seq.seq(feedbackRepository.findAll(feedback.user.eq(user), feedback.createdOn.desc())).toList();
     }
 }

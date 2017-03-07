@@ -6,23 +6,19 @@
         .controller('ClientPostController', controller);
 
     /** @ngInject */
-    function controller($http, ngToast, JOBS_URL, referenceData) {
+    function controller($http, ngToast, referenceData, Jobs) {
         var vm = this;
         vm.categories = referenceData.categories;
         vm.skills = referenceData.skills;
 
         vm.submit = function() {
-            $http.post(JOBS_URL, vm.job)
-
-            .success(function(result) {
-                ngToast.success("Job created: " + vm.job.title);
-                vm.job = null;
-                vm.createJobForm.$setPristine();
-            })
-
-            .error(function(error) {
-                ngToast.danger(error.message);
-            });
+            Jobs.post(vm.job,
+                function(result) {
+                    ngToast.success("Successfully posted job: " + vm.job.title);
+                    vm.job = null;
+                    vm.form.$setPristine();
+                }
+            );
         };
     }
 })();

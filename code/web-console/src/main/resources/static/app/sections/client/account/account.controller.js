@@ -6,7 +6,7 @@
         .controller('ClientAccountController', controller);
 
     /** @ngInject */
-    function controller($http, $state, ngToast) {
-        $state.go('account.jobs');
+    function controller($state) {
+        $state.go('client.account.jobs');
     }
 })();

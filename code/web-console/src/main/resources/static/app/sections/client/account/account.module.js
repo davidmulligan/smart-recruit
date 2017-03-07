@@ -4,8 +4,7 @@
     angular
         .module('client.account', [
             'client.account.core',
-            'client.account.dispute',
-            'client.account.job',
+            'client.account.jobs',
             'client.account.message',
             'client.account.notification'
         ]);

@@ -1,0 +1,20 @@
+<style>
+    .label { margin-left: 5px; }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <div ng-repeat="job in ctrl.jobs">
+            <uib-accordion>
+                <div uib-accordion-group class="panel-default" is-open="ctrl.isAccordionOpen[$index]">
+                    <uib-accordion-heading>{{$index+1}}. {{job.title}}<div class="pull-right"><span class="label label-info">{{job.status}}</span> <i class="glyphicon" ng-class="{'glyphicon-chevron-down': ctrl.isAccordionOpen[$index], 'glyphicon-chevron-right': !ctrl.isAccordionOpen[$index]}"></i></div></uib-accordion-heading>
+                    <p><a ng-click="ctrl.modalDetail(job)">{{job.title}}</a></p>
+                    <p>{{job.createdOn | date: 'dd MMMM yyyy'}}</p>
+                    <p ng-show="job.bids.length > 0">Congratulations, you have {{job.bids.length}} interested freelancers</p>
+                    <p><strong>Category:</strong> {{job.category.name}}</p>
+                    <p ng-show="job.freelancers.length > 0"><strong>Freelancer(s):</strong> <span ng-repeat="freelancer in job.freelancers">{{freelancer.fullName}} </span></p>
+                </div>
+            </uib-accordion>
+        </div>
+    </div>
+</div>

@@ -6,26 +6,20 @@
         .controller('CommonJobsController', controller);
 
     /** @ngInject */
-    function controller($http, $uibModal, $log, ngToast, JOBS_URL) {
+    function controller($uibModal, $log, ngToast, Jobs) {
         var vm = this;
 
         vm.init = function() {
-            $http.get(JOBS_URL + '?status=APPROVED')
-
-            .success(function(result) {
+            Jobs.getAll({'status':'APPROVED'}, function(result) {
                 vm.jobs = result;
             })
-
-            .error(function(error) {
-                ngToast.danger(error.message);
-            });
         };
 
-        vm.modalDetail = function(size, selectedJob) {
+        vm.modalBid = function(selectedJob) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'app/sections/common/jobs/job_detail.html',
+                templateUrl: 'app/sections/common/jobs/jobs_bid.html',
                 controller: function($scope, $uibModalInstance, job) {
                     $scope.job = job;
 
@@ -37,7 +31,7 @@
                         $uibModalInstance.dismiss('cancel');
                     };
                 },
-                size: size,
+                size: 'lg',
                 resolve: {
                     job: function() {
                         return selectedJob;
@@ -50,15 +44,9 @@
             });
         };
 
-        vm.bidJob = function(job, bid) {
-            $http.post(JOBS_URL + '/' + job.id + '/bids', bid)
-
-            .success(function(result) {
-                ngToast.success('Successfully placed bid');
-            })
-
-            .error(function(error) {
-                ngToast.danger(error.message);
+        vm.bid = function(job, bid) {
+            Jobs.placeBid({id: job.id}, bid, function(result) {
+                ngToast.success('Successfully placed bid.');
             });
         };
 

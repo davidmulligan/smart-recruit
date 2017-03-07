@@ -1,19 +1,43 @@
 <style>
     .label { margin-left: 5px; }
 </style>
-<div class="row" ng-repeat="job in ctrl.jobs">
-    <h1><a ng-click="ctrl.modalDetail('lg', job)">{{job.title}}</a></h1>
-    <p>{{job.description}}</p>
-    <div>
-        <span class="label label-default">Posted: {{job.createdOn}}</span>
-        <span class="label label-default">Category: {{job.category.name}}</span>
-        <span class="label label-default">Location: {{job.location}}</span>
-        <span class="label label-default">Remuneration: {{job.remuneration}}</span>
-        <span class="label label-default">Duration: {{job.duration}}</span>
-        <span class="label label-default" ng-show="job.fixed">Fixed Price</span>
-        <div class="pull-right">
-            <span class="label label-primary" ng-repeat="skill in job.skills">{{skill.name}}</span>
+<div class="row">
+    <div class="col-md-12">
+        <uib-accordion>
+            <div uib-accordion-group class="panel-default" is-open="ctrl.isSearchOpen">
+                <uib-accordion-heading>Search <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': ctrl.isSearchOpen, 'glyphicon-chevron-right': !ctrl.isSearchOpen}"></i></uib-accordion-heading>
+                <form ng-submit="ctrl.search()" novalidate>
+                    <div class="col-md-6 form-group">
+                        <label for="skill">Skill:</label>
+                        <select class="form-control" id="skill" ng-model="ctrl.skill" ng-options="item as item.name for item in ctrl.skills" typeahead-editable="false">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </uib-accordion>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div ng-repeat="job in ctrl.jobs">
+            <uib-accordion>
+                <div uib-accordion-group class="panel-default" is-open="ctrl.isAccordionOpen[$index]">
+                    <uib-accordion-heading>{{$index+1}}. {{job.title}} <span ng-show="job.fixed">(Fixed Price)</span><div class="pull-right"> <i class="glyphicon" ng-class="{'glyphicon-chevron-down': ctrl.isAccordionOpen[$index], 'glyphicon-chevron-right': !ctrl.isAccordionOpen[$index]}"></i></div></uib-accordion-heading>
+                    <p>{{job.description}}</p>
+                    <p><strong>Posted On:</strong> {{job.createdOn | date: 'dd MMMM yyyy'}}</p>
+                    <p><strong>Posted By:</strong> {{job.createdBy.fullName}} - {{job.createdBy.companyName}}</p>
+                    <p><strong>Category:</strong> {{job.category.name}}</p>
+                    <p><strong>Skills:</strong> <span class="label label-primary" ng-repeat="skill in job.skills">{{skill.name}}</span></p>
+                    <p><strong>Location:</strong> {{job.location}}</p>
+                    <p><strong>Remuneration:</strong> {{job.remuneration}}</p>
+                    <p><strong>Duration:</strong> {{job.duration}}</p>
+                    <button class="btn btn-success" type="button" ng-click="ctrl.modalBid(job)" ng-show="currentUser && currentUser.roles.indexOf('FREELANCER') != -1">{{job.fixed ? 'Apply' : 'Bid'}}</button>
+                </div>
+            </uib-accordion>
         </div>
     </div>
-    <hr>
 </div>

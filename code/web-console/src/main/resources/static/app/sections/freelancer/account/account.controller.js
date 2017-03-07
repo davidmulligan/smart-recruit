@@ -6,7 +6,7 @@
         .controller('FreelancerAccountController', controller);
 
     /** @ngInject */
-    function controller($http, $state, ngToast) {
+    function controller($state) {
         $state.go('freelancer.account.jobs');
     }
 })();

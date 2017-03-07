@@ -208,6 +208,16 @@
                 abstract: true,
                 data : {
                     role : 'CLIENT'
+                },
+                resolve: {
+
+                    /* @ngInject */
+                    referenceData: function($q, Categories, Skills) {
+                        return $q.all({
+                            categories: Categories.getAll(),
+                            skills: Skills.getAll()
+                        });
+                    }
                 }
             })
             .state('client.account', {
@@ -224,16 +234,10 @@
                     }
                 }
             })
-            .state("client.account.disputeManagement", {
-                url: "/disputeManagement",
-                templateUrl: "app/sections/client/account/dispute/dispute.html",
-                controller : 'ClientAccountDisputeController',
-                controllerAs : 'ctrl'
-            })
             .state("client.account.jobs", {
                 url: "/jobs",
-                templateUrl: "app/sections/client/account/job/job.html",
-                controller : 'ClientAccountJobController',
+                templateUrl: "app/sections/client/account/jobs/jobs.html",
+                controller : 'ClientAccountJobsController',
                 controllerAs : 'ctrl'
             })
             .state("client.account.messages", {
@@ -249,7 +253,7 @@
                 controllerAs : 'ctrl'
             })
             .state('client.post', {
-                parent : 'nav',
+                parent : 'client',
                 url : '/post',
                 data : {
                     role : 'CLIENT'

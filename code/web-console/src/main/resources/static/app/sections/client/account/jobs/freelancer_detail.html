@@ -1,0 +1,16 @@
+<section ng-controller="ClientAccountJobsController as ctrl">
+    <div class="modal-header">
+        <h3 class="modal-title">{{bid.createdBy.fullName}}</h3>
+    </div>
+    <div class="modal-body">
+        <p>{{bid.comment}}</p>
+        <div class="well">
+            <p><strong>Profile:</strong> {{bid.createdBy.profile}}</p>
+            <p><strong>Company:</strong> {{bid.createdBy.companyName}}</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" type="button" ng-click="ctrl.acceptBid(bid, job);ok()">Hire</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+    </div>
+</section>

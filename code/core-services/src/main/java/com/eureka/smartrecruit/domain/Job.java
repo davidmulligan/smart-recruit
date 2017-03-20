@@ -59,21 +59,21 @@ public class Job extends DomainObject {
     @Enumerated(EnumType.STRING)
     private JobStatus status;
 
-    @OneToOne(mappedBy = "job", cascade = CascadeType.ALL)
-    private Workroom workroom;
-
     @ManyToMany
     @JoinTable(name = "JobSkills")
     private List<Skill> skills;
 
     @OneToMany(mappedBy = "job")
-    private Set<Bid> bids;
-
-    @OneToMany(mappedBy = "job")
     private Set<Feedback> feedback;
 
     @OneToMany(mappedBy = "job")
+    private Set<Bid> bids;
+
+    @OneToMany(mappedBy = "job")
     private Set<Dispute> disputes;
+
+    @OneToOne(mappedBy = "job", cascade = CascadeType.ALL)
+    private Workroom workroom;
 
     public Set<User> getFreelancers() {
         return Seq.seq(bids).filter(i -> i.getStatus().equals(BidStatus.ACCEPTED)).map(Bid::getCreatedBy).toSet();

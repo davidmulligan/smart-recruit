@@ -26,10 +26,10 @@ public class Membership extends DomainObject {
     private Double cost;
 
     @Column
-    private Integer jobPostLimit;
+    private Integer postLimit;
 
     @Column
-    private Integer jobBidLimit;
+    private Integer bidLimit;
 
     @Column(nullable = false)
     private boolean active;

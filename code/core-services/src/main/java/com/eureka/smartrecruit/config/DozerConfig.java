@@ -13,8 +13,6 @@ public class DozerConfig {
 
     @Bean
     public Mapper mapper() {
-        DozerBeanMapper mapper = new DozerBeanMapper();
-        mapper.setMappingFiles(Arrays.asList(new ClassPathResource("dozer_mapper.xml").getPath()));
-        return mapper;
+        return new DozerBeanMapper(Arrays.asList(new ClassPathResource("dozer_mapper.xml").getPath()));
     }
 }

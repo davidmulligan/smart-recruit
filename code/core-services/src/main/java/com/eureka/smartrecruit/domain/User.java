@@ -1,6 +1,5 @@
 package com.eureka.smartrecruit.domain;
 
-import com.eureka.smartrecruit.domain.enumeration.UserType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,8 +15,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -56,7 +53,7 @@ public class User extends DomainObject implements UserDetails {
     private String companyName;
 
     @Column
-    private String profile;
+    private String biography;
 
     @Column
     private String securityQuestion;
@@ -71,9 +68,6 @@ public class User extends DomainObject implements UserDetails {
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime activationExpiry;
 
-    @Enumerated(EnumType.STRING)
-    private UserType type;
-
     @Column(nullable = false)
     private boolean enabled;
 
@@ -87,13 +81,13 @@ public class User extends DomainObject implements UserDetails {
     @JoinTable(name = "UserRole")
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "createdBy")
-    @OrderBy("name")
-    private Set<Job> jobs;
-
     @ManyToMany
     @JoinTable(name = "UserSkills")
     private List<Skill> skills;
+
+    @OneToMany(mappedBy = "createdBy")
+    @OrderBy("createdOn")
+    private Set<Job> jobs;
 
     @OneToMany(mappedBy = "user")
     @OrderBy("createdOn")

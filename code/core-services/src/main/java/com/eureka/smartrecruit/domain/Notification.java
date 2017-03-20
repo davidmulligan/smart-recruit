@@ -23,6 +23,9 @@ import java.time.LocalDateTime;
 public class Notification extends BaseDomainObject {
 
     @Column(nullable = false)
+    private String subject;
+
+    @Column
     private String content;
 
     @Enumerated(EnumType.STRING)

@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -28,6 +27,5 @@ public class Bid extends DomainObject {
     private BidStatus status;
 
     @ManyToOne
-    @JoinColumn
     private Job job;
 }

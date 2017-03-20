@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -84,6 +85,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(FEEDBACK_ENTRY_POINT).permitAll()
                     .antMatchers("/skills/principal").permitAll()
                     .antMatchers("/categories/principal").permitAll()
+                    .antMatchers(HttpMethod.GET, "/skills").permitAll()
+                    .antMatchers(HttpMethod.GET, "/categories").permitAll()
                 .and()
                     .authorizeRequests()
                     .antMatchers(TOKEN_BASED_AUTH_ENTRY_POINT).authenticated()
@@ -106,7 +109,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter() throws Exception {
-        List<String> pathsToSkip = Arrays.asList(TOKEN_REFRESH_ENTRY_POINT, FORM_BASED_LOGIN_ENTRY_POINT, REGISTRATION_ENTRY_POINT, FREELANCERS_ENTRY_POINT, JOBS_ENTRY_POINT, FEEDBACK_ENTRY_POINT, "/skills/principal", "/categories/principal");
+        List<String> pathsToSkip = Arrays.asList(TOKEN_REFRESH_ENTRY_POINT, FORM_BASED_LOGIN_ENTRY_POINT, REGISTRATION_ENTRY_POINT, FREELANCERS_ENTRY_POINT, JOBS_ENTRY_POINT, FEEDBACK_ENTRY_POINT, "/skills/principal", "/categories/principal", "/skills", "/categories");
         SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, TOKEN_BASED_AUTH_ENTRY_POINT);
         JwtTokenAuthenticationProcessingFilter filter = new JwtTokenAuthenticationProcessingFilter(failureHandler, tokenExtractor, matcher);
         filter.setAuthenticationManager(authenticationManager);

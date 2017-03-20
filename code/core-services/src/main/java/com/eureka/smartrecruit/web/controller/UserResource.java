@@ -2,7 +2,6 @@ package com.eureka.smartrecruit.web.controller;
 
 import com.eureka.smartrecruit.domain.Role;
 import com.eureka.smartrecruit.domain.User;
-import com.eureka.smartrecruit.domain.enumeration.UserType;
 import com.eureka.smartrecruit.dto.UserDto;
 import com.eureka.smartrecruit.service.UserService;
 import com.querydsl.core.types.Predicate;
@@ -42,7 +41,7 @@ public class UserResource {
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setCompanyName(userDto.getCompanyName());
-        user.setProfile(userDto.getProfile());
+        user.setBiography(userDto.getBiography());
         user.setEnabled(userDto.isEnabled());
         user.setRoles(Seq.seq(userDto.getRoles()).map(role -> mapper.map(role, Role.class)).toSet());
         userService.update(user);
@@ -70,13 +69,13 @@ public class UserResource {
         return Seq.seq(userService.findAll()).map(user -> mapper.map(user, UserDto.class)).toList();
     }
 
+    @RequestMapping(value="/clients", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
+    public List<UserDto> getClients() {
+        return Seq.seq(userService.findByRole("CLIENT")).map(user -> mapper.map(user, UserDto.class)).toList();
+    }
+
     @RequestMapping(value="/freelancers", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<UserDto> getFreelancers(@QuerydslPredicate(root = User.class) Predicate predicate) {
         return Seq.seq(userService.find(predicate)).map(job -> mapper.map(job, UserDto.class)).toList();
-    }
-
-    @RequestMapping(value="/clients", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public List<UserDto> getClients() {
-        return Seq.seq(userService.findByType(UserType.CLIENT)).map(user -> mapper.map(user, UserDto.class)).toList();
     }
 }

@@ -26,6 +26,11 @@ public abstract class JobStatusBaseOperations implements JobStatusOperations {
     }
 
     @Override
+    public JobStatus feedback(final Job job) {
+        throw new UnsupportedJobStatusTransitionException(job.getStatus(), JobStatus.FINISHED);
+    }
+
+    @Override
     public JobStatus dispute(final Job job) {
         throw new UnsupportedJobStatusTransitionException(job.getStatus(), JobStatus.DISPUTED);
     }

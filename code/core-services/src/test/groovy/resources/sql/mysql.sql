@@ -7,10 +7,10 @@ INSERT INTO `smartrecruit`.`ROLE` (`id`, `name`) VALUES ('1', 'CLIENT');
 INSERT INTO `smartrecruit`.`ROLE` (`id`, `name`) VALUES ('2', 'FREELANCER');
 INSERT INTO `smartrecruit`.`ROLE` (`id`, `name`) VALUES ('3', 'ADMIN');
 
-INSERT INTO `smartrecruit`.`USER` (`id`,`created_by_id`,`created_on`,`modified_by_id`,`modified_on`,`activation_code`,`company_name`,`email`,`enabled`,`first_name`,`last_name`,`password`,`profile`,`security_answer`,`security_question`,`membership_id`,`type`)
-VALUES(1, 1, now(), 1, now(), null, 'Eureka Technology Limited', 'davidmulligan@btopenworld.com', b'1', 'David', 'Mulligan', '$2a$10$hl/Fx1lT9Bk/H4WttkfM.u8HxE2GgrHi60cqej5wWcpz83EYwfDXK', 'Software Developer & Entrepreneur', null, null, null, 'CLIENT');
+INSERT INTO `smartrecruit`.`USER` (`id`,`created_by_id`,`created_on`,`modified_by_id`,`modified_on`,`activation_code`,`company_name`,`email`,`enabled`,`first_name`,`last_name`,`password`,`biography`,`security_answer`,`security_question`,`membership_id`)
+VALUES(1, 1, now(), 1, now(), null, 'Eureka Technology Limited', 'davidmulligan@btopenworld.com', b'1', 'David', 'Mulligan', '$2a$10$hl/Fx1lT9Bk/H4WttkfM.u8HxE2GgrHi60cqej5wWcpz83EYwfDXK', 'Hello, my name is Dave and I am a software developer', null, null, null);
 
-INSERT INTO `smartrecruit`.`MEMBERSHIP`(`id`,`created_by_id`,`created_on`,`modified_by_id`,`modified_on`,`active`,`cost`,`description`,`job_bid_limit`,`job_post_limit`,`name`,`user_type`)
+INSERT INTO `smartrecruit`.`MEMBERSHIP`(`id`,`created_by_id`,`created_on`,`modified_by_id`,`modified_on`,`active`,`cost`,`description`,`bid_limit`,`post_limit`,`name`,`user_type`)
 VALUES
 (1, 1, now(), 1, now(), b'1', 0.00, 'Basic', 5, 5, 'Basic', 'CLIENT'),
 (2, 1, now(), 1, now(), b'1', 100.00, 'Individual', 5, 5, 'Individual', 'CLIENT'),
@@ -19,7 +19,6 @@ VALUES
 (5, 1, now(), 1, now(), b'1', 100.00, 'Professional', 5, 5, 'Professional', 'FREELANCER');
 
 UPDATE USER SET membership_id = 1;
-
 INSERT INTO `smartrecruit`.`USER_ROLE` (`user_id`, `roles_id`) VALUES (1, 1);
 
 INSERT INTO `smartrecruit`.`SKILL` (`id`, `created_by_id`, `created_on`, `modified_by_id`, `modified_on`, `active`, `description`, `name`, `principal`)
@@ -58,10 +57,8 @@ VALUES
 ('13', 1, now(), 1, now(), b'1', 'Lighting Technicians', 'Lighting Technicians', b'1'),
 ('14', 1, now(), 1, now(), b'1', 'Sound Engineers', 'Sound Engineers', b'1');
 
-INSERT INTO `smartrecruit`.`JOB`
-(`id`,`created_on`,`modified_on`,`deadline`,`description`,`duration`,`fixed`,`location`,`number_positions`,`remuneration`,`status`,`title`,`created_by_id`,`modified_by_id`,`category_id`)
-VALUES
-(1,now(),now(),now(),'Example Job',1,b'1','London',1,100,'NEW','Example Job',1,1,1);
+INSERT INTO `smartrecruit`.`JOB`(`id`,`created_on`,`modified_on`,`deadline`,`description`,`duration`,`fixed`,`location`,`number_positions`,`remuneration`,`status`,`title`,`created_by_id`,`modified_by_id`,`category_id`)
+VALUES(1,now(),now(),now(),'Example Job',1,b'1','London',1,100,'NEW','Example Job',1,1,1);
 
 INSERT INTO `smartrecruit`.`JOB_SKILLS` (`skills_id`, `job_id`)
 VALUES
@@ -71,5 +68,5 @@ VALUES
 ('4', '1'),
 ('5', '1');
 
-INSERT INTO `smartrecruit`.`FEEDBACK` (`id`, `created_by_id`, `created_on`, `modified_by_id`, `modified_on`, `rating`, `job_id`, `user_id`)
-VALUES ('1', 1, now(), 1, now(), 5, 1, 1);
+INSERT INTO `smartrecruit`.`FEEDBACK` (`id`, `created_by_id`, `created_on`, `modified_by_id`, `modified_on`, `rating`, `job_id`, `user_id`, `title`)
+VALUES ('1', 1, now(), 1, now(), 5, 1, 1, 'A great review');

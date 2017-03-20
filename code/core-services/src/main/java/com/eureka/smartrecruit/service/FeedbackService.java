@@ -19,8 +19,10 @@ import static com.eureka.smartrecruit.domain.QFeedback.feedback;
 public class FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
+    private final JobService jobService;
 
     public void create(final Feedback feedback) {
+        jobService.feedback(feedback.getJob());
         feedbackRepository.save(feedback);
     }
 

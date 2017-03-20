@@ -5,7 +5,6 @@ import com.eureka.smartrecruit.domain.Job;
 import com.eureka.smartrecruit.domain.Workroom;
 import com.eureka.smartrecruit.domain.enumeration.BidStatus;
 import com.eureka.smartrecruit.domain.enumeration.JobStatus;
-import com.eureka.smartrecruit.domain.enumeration.UserType;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.JobRepository;
 import com.querydsl.core.types.Predicate;
@@ -50,6 +49,11 @@ public class JobService extends BaseService {
         update(job);
     }
 
+    public void feedback(final Job job) {
+        job.setStatus(job.getStatus().feedback(job));
+        update(job);
+    }
+
     public void dispute(final Job job) {
         job.setStatus(job.getStatus().dispute(job));
         update(job);
@@ -76,8 +80,7 @@ public class JobService extends BaseService {
     }
 
     public List<Job> findMyJobs() {
-        if (getCurrentUser().getType() == UserType.CLIENT) {
-//            return jobRepository.findByCreatedBy((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        if (getCurrentUser().isClient()) {
             return Seq.seq(jobRepository.findAll(job.createdBy.eq(getCurrentUser()), job.createdOn.desc())).toList();
         } else {
             return Seq.seq(jobRepository.findAll(job.bids.any().createdBy.eq(getCurrentUser()).and(job.bids.any().status.eq(BidStatus.ACCEPTED)), job.createdOn.desc())).toList();

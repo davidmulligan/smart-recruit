@@ -129,4 +129,19 @@ public class User extends DomainObject implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
+    @Transient
+    public boolean isClient() {
+        return Seq.seq(roles).findFirst(role -> role.getName() == "CLIENT").isPresent();
+    }
+
+    @Transient
+    public boolean isFreelancer() {
+        return Seq.seq(roles).findFirst(role -> role.getName() == "FREELANCER").isPresent();
+    }
+
+    @Transient
+    public boolean isAdmin() {
+        return Seq.seq(roles).findFirst(role -> role.getName() == "ADMIN").isPresent();
+    }
 }

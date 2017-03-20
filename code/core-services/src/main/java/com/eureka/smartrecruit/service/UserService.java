@@ -1,7 +1,6 @@
 package com.eureka.smartrecruit.service;
 
 import com.eureka.smartrecruit.domain.User;
-import com.eureka.smartrecruit.domain.enumeration.UserType;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.UserRepository;
 import com.querydsl.core.types.Predicate;
@@ -53,8 +52,8 @@ public class UserService implements UserDetailsService {
         return users;
     }
 
-    public List<User> findByType(UserType userType) {
-        List<User> users = Seq.seq(userRepository.findAll(user.type.eq(userType), user.email.asc())).toList();
+    public List<User> findByRole(String role) {
+        List<User> users = Seq.seq(userRepository.findAll(user.roles.any().name.eq(role), user.email.asc())).toList();
         removePasswords(users);
         return users;
     }

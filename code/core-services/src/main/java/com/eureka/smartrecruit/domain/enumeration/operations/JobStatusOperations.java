@@ -13,6 +13,8 @@ public interface JobStatusOperations {
 
     JobStatus finish(final Job job);
 
+    JobStatus feedback(final Job job);
+
     JobStatus dispute(final Job job);
 
     JobStatus archive(final Job job);

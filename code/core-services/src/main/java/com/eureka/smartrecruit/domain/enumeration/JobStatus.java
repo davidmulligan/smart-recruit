@@ -6,6 +6,7 @@ import com.eureka.smartrecruit.domain.enumeration.operations.JobStatusArchivedOp
 import com.eureka.smartrecruit.domain.enumeration.operations.JobStatusCancelledOperations;
 import com.eureka.smartrecruit.domain.enumeration.operations.JobStatusDisputedOperations;
 import com.eureka.smartrecruit.domain.enumeration.operations.JobStatusExpiredOperations;
+import com.eureka.smartrecruit.domain.enumeration.operations.JobStatusFeedbackOperations;
 import com.eureka.smartrecruit.domain.enumeration.operations.JobStatusFinishedOperations;
 import com.eureka.smartrecruit.domain.enumeration.operations.JobStatusOperations;
 import com.eureka.smartrecruit.domain.enumeration.operations.JobStatusNewOperations;
@@ -22,6 +23,7 @@ public enum JobStatus implements JobStatusOperations {
     REJECTED(new JobStatusRejectedOperations()),
     STARTED(new JobStatusStartedOperations()),
     FINISHED(new JobStatusFinishedOperations()),
+    FEEDBACK(new JobStatusFeedbackOperations()),
     DISPUTED(new JobStatusDisputedOperations()),
     ARCHIVED(new JobStatusArchivedOperations()),
     EXPIRED(new JobStatusExpiredOperations()),
@@ -47,6 +49,11 @@ public enum JobStatus implements JobStatusOperations {
     @Override
     public JobStatus finish(Job job) {
         return operations.finish(job);
+    }
+
+    @Override
+    public JobStatus feedback(Job job) {
+        return operations.feedback(job);
     }
 
     @Override

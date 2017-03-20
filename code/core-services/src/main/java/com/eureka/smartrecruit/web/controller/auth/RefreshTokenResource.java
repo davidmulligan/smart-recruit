@@ -27,11 +27,11 @@ import java.io.IOException;
 @RequestMapping(value="/auth/token")
 public class RefreshTokenResource {
 
-    private JwtTokenFactory tokenFactory;
-    private JwtSettings jwtSettings;
-    private UserService userService;
-    private TokenVerifier tokenVerifier;
-    private TokenExtractor tokenExtractor;
+    private final JwtTokenFactory tokenFactory;
+    private final JwtSettings jwtSettings;
+    private final UserService userService;
+    private final TokenVerifier tokenVerifier;
+    private final TokenExtractor tokenExtractor;
 
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public @ResponseBody JwtToken refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

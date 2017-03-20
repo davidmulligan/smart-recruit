@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class MessageDto extends BaseDomainObject {
 
+    private Long id;
     private String subject;
     private String content;
     private boolean opened;

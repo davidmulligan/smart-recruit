@@ -6,6 +6,7 @@ import com.querydsl.core.types.EntityPath;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
+import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.Optional;
@@ -15,5 +16,9 @@ public interface QueryableRepository<T extends BaseDomainObject, Q extends Entit
 
     default Optional<T> tryFindOne(Predicate predicate) {
         return Optional.ofNullable(findOne(predicate));
+    }
+
+    @Override
+    default void customize(QuerydslBindings bindings, Q root) {
     }
 }

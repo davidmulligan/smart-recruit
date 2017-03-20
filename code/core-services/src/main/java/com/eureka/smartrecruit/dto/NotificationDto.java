@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class NotificationDto extends BaseDomainObject {
 
+    private Long id;
+    private String subject;
     private String content;
     private String type;
     private boolean opened;

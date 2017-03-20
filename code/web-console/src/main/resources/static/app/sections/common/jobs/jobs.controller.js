@@ -6,8 +6,10 @@
         .controller('CommonJobsController', controller);
 
     /** @ngInject */
-    function controller($uibModal, $log, ngToast, Jobs) {
+    function controller($uibModal, $log, ngToast, Categories, Skills, Jobs) {
         var vm = this;
+        vm.categories = Categories.getAll();
+        vm.skills = Skills.getAll();
 
         vm.init = function() {
             Jobs.getAll({'status':'APPROVED'}, function(result) {

@@ -49,12 +49,13 @@
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/sections/client/account/jobs/freelancer_detail.html',
-                controller: function($scope, $uibModalInstance, $log, bid, job) {
+                controller: function($scope, $uibModalInstance, $uibModalStack, $log, bid, job) {
                     $scope.bid = bid;
                     $scope.job = job;
 
                     $scope.ok = function() {
                         $uibModalInstance.close($scope.bid);
+                        $uibModalStack.dismissAll();
                     };
 
                     $scope.cancel = function() {

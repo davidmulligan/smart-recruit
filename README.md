@@ -6,7 +6,6 @@ show only open jobs
 relogin on refresh
 feedback categories/type
 
-
-Implement Notify Service
 Implement logging
 Switch to factories
+Determine type by roles

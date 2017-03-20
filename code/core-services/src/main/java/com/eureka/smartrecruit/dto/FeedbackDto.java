@@ -18,7 +18,6 @@ public class FeedbackDto {
     private String comment;
     private Integer rating;
     private UserDto user;
-    private JobDto job;
     private UserDto createdBy;
     private LocalDateTime createdOn;
 }

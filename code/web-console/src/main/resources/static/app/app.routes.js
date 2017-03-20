@@ -66,16 +66,6 @@
                         controller : 'CommonFreelancersController',
                         controllerAs : 'ctrl'
                     }
-                },
-                resolve: {
-
-                    /* @ngInject */
-                    referenceData: function($q, Categories, Skills) {
-                        return $q.all({
-                            categories: Categories.getAll(),
-                            skills: Skills.getAll()
-                        });
-                    }
                 }
             })
             .state('jobs', {
@@ -89,6 +79,15 @@
                         templateUrl : 'app/sections/common/jobs/jobs.html',
                         controller : 'CommonJobsController',
                         controllerAs : 'ctrl'
+                    }
+                },
+                resolve: {
+                    /* @ngInject */
+                    referenceData: function($q, Categories, Skills) {
+                        return $q.all({
+                            categories: Categories.getAll(),
+                            skills: Skills.getAll()
+                        });
                     }
                 }
             })

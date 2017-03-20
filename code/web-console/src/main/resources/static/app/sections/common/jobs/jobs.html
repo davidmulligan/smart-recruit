@@ -8,6 +8,12 @@
                 <uib-accordion-heading>Search <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': ctrl.isSearchOpen, 'glyphicon-chevron-right': !ctrl.isSearchOpen}"></i></uib-accordion-heading>
                 <form ng-submit="ctrl.search()" novalidate>
                     <div class="col-md-6 form-group">
+                        <label for="category">Category:</label>
+                        <select class="form-control" id="category" ng-model="ctrl.category" ng-options="item as item.name for item in ctrl.categories" typeahead-editable="false">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
                         <label for="skill">Skill:</label>
                         <select class="form-control" id="skill" ng-model="ctrl.skill" ng-options="item as item.name for item in ctrl.skills" typeahead-editable="false">
                             <option value=""></option>

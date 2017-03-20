@@ -77,6 +77,7 @@ public class JobService extends BaseService {
 
     public List<Job> findMyJobs() {
         if (getCurrentUser().getType() == UserType.CLIENT) {
+//            return jobRepository.findByCreatedBy((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
             return Seq.seq(jobRepository.findAll(job.createdBy.eq(getCurrentUser()), job.createdOn.desc())).toList();
         } else {
             return Seq.seq(jobRepository.findAll(job.bids.any().createdBy.eq(getCurrentUser()).and(job.bids.any().status.eq(BidStatus.ACCEPTED)), job.createdOn.desc())).toList();

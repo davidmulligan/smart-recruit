@@ -1,14 +1,14 @@
+CREATE SCHEMA `smartrecruit`;
+
 GRANT ALL ON sr_user.* TO 'smartrecruit'@'%';
 GRANT SELECT, INSERT, UPDATE, DELETE ON sr_user.* TO 'smartrecruit'@'%' identified by 'password';
-
-CREATE SCHEMA `smartrecruit`;
 
 INSERT INTO `smartrecruit`.`ROLE` (`id`, `name`) VALUES ('1', 'CLIENT');
 INSERT INTO `smartrecruit`.`ROLE` (`id`, `name`) VALUES ('2', 'FREELANCER');
 INSERT INTO `smartrecruit`.`ROLE` (`id`, `name`) VALUES ('3', 'ADMIN');
 
-INSERT INTO `smartrecruit`.`USER` (`id`,`created_by_id`,`created_on`,`modified_by_id`,`modified_on`,`activation_code`,`company_name`,`email`,`enabled`,`first_name`,`last_name`,`password`,`profile`,`security_answer`,`security_question`,`membership_id`)
-VALUES(1, 1, now(), 1, now(), null, 'Eureka Technology Limited', 'davidmulligan@btopenworld.com', b'1', 'David', 'Mulligan', '$2a$10$hl/Fx1lT9Bk/H4WttkfM.u8HxE2GgrHi60cqej5wWcpz83EYwfDXK', 'Software Developer & Entrepreneur', null, null, null);
+INSERT INTO `smartrecruit`.`USER` (`id`,`created_by_id`,`created_on`,`modified_by_id`,`modified_on`,`activation_code`,`company_name`,`email`,`enabled`,`first_name`,`last_name`,`password`,`profile`,`security_answer`,`security_question`,`membership_id`,`type`)
+VALUES(1, 1, now(), 1, now(), null, 'Eureka Technology Limited', 'davidmulligan@btopenworld.com', b'1', 'David', 'Mulligan', '$2a$10$hl/Fx1lT9Bk/H4WttkfM.u8HxE2GgrHi60cqej5wWcpz83EYwfDXK', 'Software Developer & Entrepreneur', null, null, null, 'CLIENT');
 
 INSERT INTO `smartrecruit`.`MEMBERSHIP`(`id`,`created_by_id`,`created_on`,`modified_by_id`,`modified_on`,`active`,`cost`,`description`,`job_bid_limit`,`job_post_limit`,`name`,`user_type`)
 VALUES
@@ -61,7 +61,7 @@ VALUES
 INSERT INTO `smartrecruit`.`JOB`
 (`id`,`created_on`,`modified_on`,`deadline`,`description`,`duration`,`fixed`,`location`,`number_positions`,`remuneration`,`status`,`title`,`created_by_id`,`modified_by_id`,`category_id`)
 VALUES
-(1,now(),now(),now(),'Example Job',1,b'1','Lonon',1,100,'NEW','Example Job',1,1,1);
+(1,now(),now(),now(),'Example Job',1,b'1','London',1,100,'NEW','Example Job',1,1,1);
 
 INSERT INTO `smartrecruit`.`JOB_SKILLS` (`skills_id`, `job_id`)
 VALUES

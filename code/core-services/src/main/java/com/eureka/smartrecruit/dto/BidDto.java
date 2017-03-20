@@ -17,7 +17,6 @@ public class BidDto {
     private String comment;
     private Double quote;
     private String status;
-    private JobDto job;
     private UserDto createdBy;
     private LocalDateTime createdOn;
 }

@@ -22,10 +22,6 @@ public class DisputeService {
         disputeRepository.save(dispute);
     }
 
-    public void delete(final Long id) {
-        disputeRepository.delete(id);
-    }
-
     public Dispute findById(final Long id) {
         return disputeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Could not find dispute with id: %s", id)));
     }

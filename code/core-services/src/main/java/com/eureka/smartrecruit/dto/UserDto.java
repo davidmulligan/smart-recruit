@@ -21,8 +21,7 @@ public class UserDto {
     private String fullName;
     private String email;
     private String companyName;
-    private String profile;
-    private String type;
+    private String biography;
     private Double rating;
     private boolean enabled;
     private List<RoleDto> roles;

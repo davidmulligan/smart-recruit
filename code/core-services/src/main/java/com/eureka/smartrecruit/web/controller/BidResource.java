@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping({"/jobs/{jobId}/bids", "bids"})
+@RequestMapping({"/jobs/{jobId}/bids", "/bids"})
 public class BidResource {
 
     private final BidService bidService;
@@ -43,12 +43,6 @@ public class BidResource {
         bid.setComment(bidDto.getComment());
         bid.setQuote(bidDto.getQuote());
         bidService.update(bid);
-    }
-
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable("id") Long id) {
-        bidService.delete(id);
     }
 
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })

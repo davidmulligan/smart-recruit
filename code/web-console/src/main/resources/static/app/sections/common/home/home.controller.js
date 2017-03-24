@@ -6,12 +6,12 @@
         .controller('HomeController', controller);
 
     /** @ngInject */
-    function controller(Skills, Categories, $log) {
+    function controller($log, Categories, Skills) {
         var vm = this;
 
         vm.init = function() {
-            vm.fetchSkills();
             vm.fetchCategories();
+            vm.fetchSkills();
         };
 
         vm.fetchSkills = function() {

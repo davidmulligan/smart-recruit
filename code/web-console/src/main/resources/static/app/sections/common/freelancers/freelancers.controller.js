@@ -6,15 +6,27 @@
         .controller('CommonFreelancersController', controller);
 
     /** @ngInject */
-    function controller($uibModal, $log, Users, referenceData) {
+    function controller($uibModal, $log, Skills, Users) {
         var vm = this;
         vm.isSearchOpen = true;
-        vm.skills = referenceData.skills;
+
+        vm.init = function() {
+            vm.fetchSkills();
+        };
+
+        vm.fetchSkills = function() {
+            Skills.getAll(
+                function(data) {
+                   vm.skills = data;
+                   $log.info('Successfully fetched ' + data.length + ' skills.');
+                }
+            );
+        };
 
         vm.search = function() {
             vm.freelancers = [];
             vm.isSearchOpen = false;
-            Users.freelancers( {skill: vm.skill ? vm.skill.id : ''},
+            Users.freelancers({skill: vm.skill ? vm.skill.id : ''},
                 function(data) {
                    vm.freelancers = data;
                    $log.info('Successfully fetched ' + data.length + ' freelancers.');
@@ -58,5 +70,7 @@
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
+
+        vm.init();
     }
 })();

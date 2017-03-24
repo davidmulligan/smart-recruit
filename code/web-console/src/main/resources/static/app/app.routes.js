@@ -44,6 +44,17 @@
                     }
                 }
             })
+            .state('register', {
+                parent : 'nav',
+                url : '/register',
+                views : {
+                    'content@' : {
+                        templateUrl : 'app/sections/common/register/register.html',
+                        controller : 'RegisterController',
+                        controllerAs : 'ctrl'
+                    }
+                }
+            })
             .state('freelancers', {
                 parent : 'nav',
                 url : '/freelancers',
@@ -62,26 +73,6 @@
                     'content@' : {
                         templateUrl : 'app/sections/common/jobs/jobs.html',
                         controller : 'CommonJobsController',
-                        controllerAs : 'ctrl'
-                    }
-                },
-                resolve: {
-                    /* @ngInject */
-                    referenceData: function($q, Categories, Skills) {
-                        return $q.all({
-                            categories: Categories.getAll(),
-                            skills: Skills.getAll()
-                        });
-                    }
-                }
-            })
-            .state('register', {
-                parent : 'nav',
-                url : '/register',
-                views : {
-                    'content@' : {
-                        templateUrl : 'app/sections/common/register/register.html',
-                        controller : 'RegisterController',
                         controllerAs : 'ctrl'
                     }
                 }

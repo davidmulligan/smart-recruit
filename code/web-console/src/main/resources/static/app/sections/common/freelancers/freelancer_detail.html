@@ -1,42 +1,22 @@
 <style>
-    .bold {
+    .well {
+        padding: 15px;
+        border-radius: 3px;
+    }
+    .well h2 {
         font-weight: 700;
+        padding-bottom: 7px;
     }
-    .padding-bottom-7 {
-        padding-bottom:7px;
-    }
-    .rating {
-        background-color:#FAFAFA;
-        border:1px solid #EFEFEF;
-        padding:15px 15px 20px 15px;
-        border-radius:3px;
-    }
-    .rating .glyphicon {
+    .well .glyphicon {
         font-size: 22px;
     }
-    .review-block{
-        background-color:#FAFAFA;
-        border:1px solid #EFEFEF;
-        padding:15px;
-        border-radius:3px;
+    .review-name {
+        margin: 10px 0;
     }
-    .review-block-name{
-        font-size:12px;
-        margin:10px 0;
-    }
-    .review-block-date{
-        font-size:12px;
-    }
-    .review-block-title{
-        font-size:15px;
-        font-weight:700;
-        margin-bottom:10px;
-    }
-    .review-block-description{
-        font-size:13px;
-    }
-    .review-block-rating .glyphicon {
-        font-size: 22px;
+    .review-title {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 10px;
     }
 </style>
 <section>
@@ -46,7 +26,7 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-sm-6">
-                <div class="rating">
+                <div class="well">
                     <h2 class="bold padding-bottom-7">{{freelancer.rating}} / 5</h2>
                     <span class="glyphicon glyphicon-star" ng-show="freelancer.rating >= 1"></span>
                     <span class="glyphicon glyphicon-star" ng-show="freelancer.rating >= 2"></span>
@@ -131,15 +111,15 @@
         <div class="row">
             <div class="col-sm-12" ng-repeat="item in feedback">
                 <hr/>
-                <div class="review-block">
+                <div class="well">
                     <div class="row">
                         <div class="col-sm-2">
-                            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-                            <div class="review-block-name"><a href="#">{{item.createdBy.firstName}} {{item.createdBy.lastName}}</a></div>
-                            <div class="review-block-date">{{item.createdOn | date : "dd/MM/y HH:mm"}}</div>
+                            <img src="http://placehold.it/60x60" class="img-thumbnail">
+                            <div class="review-name"><a href="#">{{item.createdBy.fullName}}</a></div>
+                            <div>{{item.createdOn | date : "dd/MM/y HH:mm"}}</div>
                         </div>
                         <div class="col-sm-10">
-                            <div class="review-block-rating">
+                            <div>
                                 <span class="glyphicon glyphicon-star" ng-show="item.rating >= 1"></span>
                                 <span class="glyphicon glyphicon-star" ng-show="item.rating >= 2"></span>
                                 <span class="glyphicon glyphicon-star" ng-show="item.rating >= 3"></span>
@@ -151,8 +131,8 @@
                                 <span class="glyphicon glyphicon-star-empty" ng-show="item.rating < 4"></span>
                                 <span class="glyphicon glyphicon-star-empty" ng-show="item.rating < 5"></span>
                             </div>
-                            <div class="review-block-title">{{item.title}}</div>
-                            <div class="review-block-description">{{item.comment}}</div>
+                            <div class="review-title">{{item.title}}</div>
+                            <div>{{item.comment}}</div>
                         </div>
                     </div>
                 </div>

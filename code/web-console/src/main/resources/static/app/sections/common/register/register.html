@@ -31,9 +31,9 @@
 						<label for="companyName">Company Name:</label>
 						<input type="text" required class="form-control" ng-model="ctrl.user.companyName" id="companyName" name="companyName">
 					</div>
-					<div class="col-md-6 form-group" ng-class="{ 'has-error': ctrl.registerForm.profile.$invalid && ctrl.registerForm.profile.$dirty }">
-						<label for="profile">Profile:</label>
-						<input type="text" required class="form-control" ng-model="ctrl.user.profile" id="profile" name="profile">
+					<div class="col-md-6 form-group" ng-class="{ 'has-error': ctrl.registerForm.biography.$invalid && ctrl.registerForm.biography.$dirty }">
+						<label for="biography">Biography:</label>
+						<input type="text" required class="form-control" ng-model="ctrl.user.biography" id="biography" name="biography">
 					</div>
 					<button type="submit" class="btn btn-default" ng-disabled="ctrl.registerForm.$invalid || (confirmPassword != user.password)">Register</button>
 					<button class="btn btn-default" ui-sref="login">Login</button>

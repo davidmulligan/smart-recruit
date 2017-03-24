@@ -4,6 +4,7 @@
     angular
         .module('app.factories', [
             'factories.accessTokenStorage',
+            'factories.auth',
             'factories.bids',
             'factories.categories',
             'factories.errorInterceptor',

@@ -8,13 +8,39 @@
     /** @ngInject */
     function controller($uibModal, $log, ngToast, Categories, Skills, Jobs) {
         var vm = this;
-        vm.categories = Categories.getAll();
-        vm.skills = Skills.getAll();
+        vm.isSearchOpen = true;
 
         vm.init = function() {
-            Jobs.getAll({'status':'APPROVED'}, function(result) {
-                vm.jobs = result;
-            })
+            vm.fetchCategories();
+            vm.fetchSkills();
+            vm.fetchJobs();
+        };
+
+        vm.fetchCategories = function() {
+            Categories.getAll(
+                function(data) {
+                   vm.categories = data;
+                   $log.info('Successfully fetched ' + data.length + ' categories.');
+                }
+            );
+        };
+
+        vm.fetchSkills = function() {
+            Skills.getAll(
+                function(data) {
+                   vm.skills = data;
+                   $log.info('Successfully fetched ' + data.length + ' skills.');
+                }
+            );
+        };
+
+        vm.fetchJobs = function() {
+            Jobs.getAll({'status':'APPROVED'},
+                function(data) {
+                   vm.jobs = data;
+                   $log.info('Successfully fetched ' + data.length + ' jobs.');
+                }
+            );
         };
 
         vm.modalBid = function(selectedJob) {

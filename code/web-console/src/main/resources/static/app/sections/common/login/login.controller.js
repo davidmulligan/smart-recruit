@@ -10,8 +10,7 @@
         var vm = this;
 
         vm.login = function() {
-            AuthenticationService.login({username: vm.email, password: vm.password})
-            .then(function(result) {
+            AuthenticationService.login({username: vm.email, password: vm.password}).then(function(result) {
                 vm.password = null;
                 if (AuthenticationService.isAuthenticated()) {
                     $state.go('home');

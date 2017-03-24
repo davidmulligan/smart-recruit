@@ -6,20 +6,16 @@
         .controller('RegisterController', controller);
 
     /** @ngInject */
-    function controller($http, $state, ngToast, USERS_URL) {
+    function controller($http, $state, ngToast, Auth) {
         var vm = this;
 
         vm.submit = function() {
-            $http.post(USERS_URL + '/register', vm.user)
-
-            .success(function(result) {
-                ngToast.success('Registration Successful');
-                $state.go('home');
-            })
-
-            .error(function(error) {
-                ngToast.danger('Error: ' + error.message);
-            });
+            Auth.post(vm.user,
+                function(result) {
+                    ngToast.success('Registration successful');
+                    $state.go('home');
+                }
+            );
         };
     }
 })();

@@ -23,6 +23,9 @@ public class UserDto {
     private String companyName;
     private String biography;
     private Double rating;
+    private boolean client;
+    private boolean freelancer;
+    private boolean admin;
     private boolean enabled;
     private List<RoleDto> roles;
     private List<SkillDto> skills;

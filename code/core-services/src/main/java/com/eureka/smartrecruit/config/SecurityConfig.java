@@ -5,6 +5,7 @@ import com.eureka.smartrecruit.security.auth.JwtTokenAuthenticationProcessingFil
 import com.eureka.smartrecruit.security.auth.LoginProcessingFilter;
 import com.eureka.smartrecruit.security.auth.UserAuthenticationProvider;
 import com.eureka.smartrecruit.security.auth.extractor.TokenExtractor;
+import com.eureka.smartrecruit.security.model.Path;
 import com.eureka.smartrecruit.security.util.SkipPathRequestMatcher;
 import com.eureka.smartrecruit.security.web.RestAuthenticationEntryPoint;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,10 +44,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationManager authenticationManager;
 
     public static final String JWT_TOKEN_HEADER_PARAM = "X-Authorization";
-    private static final String FORM_BASED_LOGIN_ENTRY_POINT = "/auth/login";
+
+    private static final Path FORM_BASED_LOGIN_PATH = new Path("/auth/login", HttpMethod.POST);
+    private static final Path REGISTRATION_PATH = new Path("/auth/register", HttpMethod.POST);
+
+
     private static final String TOKEN_REFRESH_ENTRY_POINT = "/auth/token";
     private static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/**";
-    private static final String REGISTRATION_ENTRY_POINT = "/users/register";
     private static final String FREELANCERS_ENTRY_POINT = "/users/freelancers";
     private static final String FEEDBACK_ENTRY_POINT = "/users/*/feedback";
     private static final String JOBS_ENTRY_POINT = "/jobs";
@@ -77,9 +81,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                     .authorizeRequests()
-                    .antMatchers(FORM_BASED_LOGIN_ENTRY_POINT).permitAll()
+                    .antMatchers(FORM_BASED_LOGIN_PATH.getMethod(), FORM_BASED_LOGIN_PATH.getPath()).permitAll()
                     .antMatchers(TOKEN_REFRESH_ENTRY_POINT).permitAll()
-                    .antMatchers(REGISTRATION_ENTRY_POINT).permitAll()
+                    .antMatchers(REGISTRATION_PATH.getMethod(), REGISTRATION_PATH.getPath()).permitAll()
                     .antMatchers(FREELANCERS_ENTRY_POINT).permitAll()
                     .antMatchers(JOBS_ENTRY_POINT).permitAll()
                     .antMatchers(FEEDBACK_ENTRY_POINT).permitAll()
@@ -103,13 +107,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private LoginProcessingFilter buildAjaxLoginProcessingFilter() throws Exception {
-        LoginProcessingFilter filter = new LoginProcessingFilter(FORM_BASED_LOGIN_ENTRY_POINT, successHandler, failureHandler, objectMapper);
+        LoginProcessingFilter filter = new LoginProcessingFilter(FORM_BASED_LOGIN_PATH.getPath(), successHandler, failureHandler, objectMapper);
         filter.setAuthenticationManager(authenticationManager);
         return filter;
     }
 
     private JwtTokenAuthenticationProcessingFilter buildJwtTokenAuthenticationProcessingFilter() throws Exception {
-        List<String> pathsToSkip = Arrays.asList(TOKEN_REFRESH_ENTRY_POINT, FORM_BASED_LOGIN_ENTRY_POINT, REGISTRATION_ENTRY_POINT, FREELANCERS_ENTRY_POINT, JOBS_ENTRY_POINT, FEEDBACK_ENTRY_POINT, "/skills/principal", "/categories/principal", "/skills", "/categories");
+        List<Path> pathsToSkip = Arrays.asList(new Path(TOKEN_REFRESH_ENTRY_POINT), FORM_BASED_LOGIN_PATH, REGISTRATION_PATH,
+                new Path(FREELANCERS_ENTRY_POINT), new Path(JOBS_ENTRY_POINT), new Path(FEEDBACK_ENTRY_POINT), new Path("/skills/principal"),
+                new Path("/categories/principal"), new Path("/skills"), new Path("/categories"));
         SkipPathRequestMatcher matcher = new SkipPathRequestMatcher(pathsToSkip, TOKEN_BASED_AUTH_ENTRY_POINT);
         JwtTokenAuthenticationProcessingFilter filter = new JwtTokenAuthenticationProcessingFilter(failureHandler, tokenExtractor, matcher);
         filter.setAuthenticationManager(authenticationManager);

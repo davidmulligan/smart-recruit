@@ -17,6 +17,16 @@
                 method: 'PUT',
                 url: JOBS_URL + '/:id/cancel',
                 params: {id: '@id'}
+            },
+            approve: {
+                method: 'PUT',
+                url: JOBS_URL + '/:id/approve',
+                params: {id: '@id'}
+            },
+            reject: {
+                method: 'PUT',
+                url: JOBS_URL + '/:id/reject',
+                params: {id: '@id'}
             }
         });
     }

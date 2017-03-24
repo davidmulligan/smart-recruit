@@ -6,10 +6,31 @@
         .controller('ClientPostController', controller);
 
     /** @ngInject */
-    function controller($http, ngToast, referenceData, Jobs) {
+    function controller($log, ngToast, Categories, Jobs, Skills) {
         var vm = this;
-        vm.categories = referenceData.categories;
-        vm.skills = referenceData.skills;
+
+         vm.init = function() {
+            vm.fetchCategories();
+            vm.fetchSkills();
+        };
+
+        vm.fetchCategories = function() {
+            Categories.getAll(
+                function(data) {
+                   vm.categories = data;
+                   $log.info('Successfully fetched ' + data.length + ' categories.');
+                }
+            );
+        };
+
+        vm.fetchSkills = function() {
+            Skills.getAll(
+                function(data) {
+                   vm.skills = data;
+                   $log.info('Successfully fetched ' + data.length + ' skills.');
+                }
+            );
+        };
 
         vm.submit = function() {
             Jobs.post(vm.job,
@@ -20,5 +41,7 @@
                 }
             );
         };
+
+        vm.init();
     }
 })();

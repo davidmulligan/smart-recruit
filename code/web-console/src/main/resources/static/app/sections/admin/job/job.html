@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="panel panel-default">
-            <div class="panel-heading">Review Jobs ({{ctrl.jobs.length}})</div>
+            <div class="panel-heading">Jobs ({{ctrl.jobs.length}})</div>
             <div class="panel-body">
                 <table class="table table-bordered" ng-show="ctrl.jobs.length != 0">
                     <thead>
@@ -11,8 +11,7 @@
                         <th>Title</th>
                         <th>Category</th>
                         <th>Deadline</th>
-                        <th>Fixed</th>
-                        <th class="col-sm-2"></th>
+                        <th class="col-md-2"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -22,10 +21,6 @@
                         <td>{{job.title}}</td>
                         <td>{{job.category.name}}</td>
                         <td>{{job.deadline}}</td>
-                        <td>
-                            <span ng-show="job.fixed">Yes</span>
-                            <span ng-hide="job.fixed">No</span>
-                        </td>
                         <td>
                             <button type="button" class="btn btn-primary btn-sm" ng-click="ctrl.approve(job)"><i class="glyphicon glyphicon-ok"></i> Approve</button>
                             <button type="button" class="btn btn-primary btn-sm" ng-click="ctrl.reject(job)"><i class="glyphicon glyphicon-remove"></i> Reject</button>

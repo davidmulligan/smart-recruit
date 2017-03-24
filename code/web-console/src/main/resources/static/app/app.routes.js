@@ -1,5 +1,4 @@
 (function() {
-
     'use strict';
 
     angular
@@ -13,9 +12,6 @@
             .state('nav', {
                 abstract : true,
                 url : '',
-                data : {
-                    secure : true
-                },
                 views : {
                     'nav@' : {
                         templateUrl : 'app/sections/common/navigation/navigation.html',
@@ -29,9 +25,6 @@
             .state('home', {
                 parent : 'nav',
                 url : '/',
-                data : {
-                    secure : false
-                },
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/common/home/home.html',
@@ -43,9 +36,6 @@
             .state('login', {
                 parent : 'nav',
                 url : '/login',
-                data : {
-                    secure : false
-                },
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/common/login/login.html',
@@ -57,9 +47,6 @@
             .state('freelancers', {
                 parent : 'nav',
                 url : '/freelancers',
-                data : {
-                    secure : false
-                },
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/common/freelancers/freelancers.html',
@@ -71,9 +58,6 @@
             .state('jobs', {
                 parent : 'nav',
                 url : '/jobs',
-                data : {
-                    secure : false
-                },
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/common/jobs/jobs.html',
@@ -94,9 +78,6 @@
             .state('register', {
                 parent : 'nav',
                 url : '/register',
-                data : {
-                    secure : false
-                },
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/common/register/register.html',
@@ -108,9 +89,6 @@
             .state('help', {
                 parent : 'nav',
                 url : '/help',
-                data : {
-                    secure : false
-                },
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/common/help/help.html'
@@ -120,9 +98,6 @@
             .state('guide', {
                 parent : 'nav',
                 url : '/guide',
-                data : {
-                    secure : false
-                },
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/common/help/guide.html'
@@ -132,9 +107,6 @@
             .state('page-not-found', {
                 parent : 'nav',
                 url : '/page-not-found',
-                data : {
-                    secure : false
-                },
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/common/page-not-found/page-not-found.html'
@@ -144,9 +116,6 @@
             .state('access-denied', {
                 parent : 'nav',
                 url : '/access-denied',
-                data : {
-                    secure : false
-                },
                 views : {
                     'content@' : {
                         templateUrl : 'app/sections/common/access-denied/access-denied.html'

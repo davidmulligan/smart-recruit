@@ -3,9 +3,9 @@
 
     angular
         .module('app.config', [
+            'ngAnimate',
             'ngResource',
             'ngToast',
-            'ngAnimate',
             'ui.router',
             'ui.bootstrap',
             'app.constants',
@@ -16,7 +16,7 @@
     .run(runner)
     .config(state)
     .config(toaster)
-    .config(config)
+    .config(http)
     .config(resources);
 
     /* @ngInject */
@@ -29,14 +29,14 @@
         });
 
     	NotifyService.getMessage('LogoutEvent', function(event, data) {
-    	    $rootScope.currentUser = null;
+            $rootScope.currentUser = null;
             AuthenticationService.clearCurrentUser();
         });
 
         // The following method will run at the time of initializing the module, running once.
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
             if (!AuthenticationService.isAuthenticated()) {
-                if (toState.data.role) {
+                if (toState.data && toState.data.role) {
                     if (AccessTokenStorage.retrieve()) {
                         AuthenticationService.recoverToken();
                     } else {
@@ -77,7 +77,7 @@
     }
 
     /* @ngInject */
-    function config($logProvider, $httpProvider) {
+    function http($logProvider, $httpProvider) {
         $logProvider.debugEnabled(true);
         $httpProvider.interceptors.push('ErrorInterceptor');
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

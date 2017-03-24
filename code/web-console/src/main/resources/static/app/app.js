@@ -1,1 +1,1 @@
-angular.module('sr-app', [ 'app.module', 'app.routes' ]);
+angular.module('crewlance-app', [ 'app.module', 'app.routes' ]);

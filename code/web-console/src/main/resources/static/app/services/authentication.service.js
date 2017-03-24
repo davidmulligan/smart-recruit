@@ -6,7 +6,7 @@
         .service('AuthenticationService', service);
 
     /* @ngInject */
-    function service($http, AccessTokenStorage, RefreshTokenStorage, JwtService, NotifyService) {
+    function service($http, LOGIN_URL, AccessTokenStorage, RefreshTokenStorage, JwtService, NotifyService) {
         var currentUser;
         return {
             setCurrentUser: function(user) {
@@ -25,7 +25,7 @@
                 return (currentUser) ? currentUser : false;
             },
             login: function(credentials) {
-                return $http.post('http://localhost:8888/auth/login', credentials)
+                return $http.post(LOGIN_URL, credentials)
                     .then(function(result) {
                         if (result.status == 200) {
                             AccessTokenStorage.store(result.data.token);

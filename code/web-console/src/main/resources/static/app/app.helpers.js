@@ -1,7 +1,7 @@
 (function() {
-  'use strict';
+    'use strict';
 
-    /**
+   /**
     * Extension method linking a child state given an array of states representing parent > child
     * $stateProvider.linkState(grandParent, parent, child);
     */

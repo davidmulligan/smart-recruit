@@ -6,7 +6,7 @@
         .controller('CommonJobsController', controller);
 
     /** @ngInject */
-    function controller($uibModal, $log, ngToast, Categories, Skills, Jobs) {
+    function controller($uibModal, $log, ngToast, Bids, Categories, Skills, Jobs) {
         var vm = this;
         vm.isSearchOpen = true;
 
@@ -47,7 +47,7 @@
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'app/sections/common/jobs/jobs_bid.html',
+                templateUrl: 'app/sections/common/jobs/job_bid.html',
                 controller: function($scope, $uibModalInstance, job) {
                     $scope.job = job;
 
@@ -73,8 +73,12 @@
         };
 
         vm.bid = function(job, bid) {
-            Jobs.placeBid({id: job.id}, bid, function(result) {
-                ngToast.success('Successfully placed bid.');
+            Bids.post({jobId: job.id}, bid, function(result) {
+                if (job.fixed) {
+                    ngToast.success('Successfully applied for job.');
+                } else {
+                    ngToast.success('Successfully placed bid.');
+                }
             });
         };
 

@@ -39,7 +39,7 @@
                 <p><strong>Remuneration:</strong> £{{job.remuneration}}</p>
                 <p><strong>Duration:</strong> {{job.duration}}</p>
                 <p><strong>Skills:</strong> <span class="label label-primary" ng-repeat="skill in job.skills">{{skill.name}}</span></p>
-                <button class="btn btn-success" type="button" ng-click="ctrl.modalBid(job)" ng-show="currentUser && currentUser.roles.indexOf('FREELANCER') != -1">{{job.fixed ? 'Apply' : 'Bid'}}</button>
+                <button class="btn btn-success pull-right" type="button" ng-click="ctrl.modalBid(job)" ng-show="currentUser && currentUser.roles.indexOf('FREELANCER') != -1">{{job.fixed ? 'Apply' : 'Bid'}}</button>
             </div>
         </uib-accordion>
     </div>

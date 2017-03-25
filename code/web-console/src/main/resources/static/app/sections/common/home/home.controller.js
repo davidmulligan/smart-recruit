@@ -6,12 +6,13 @@
         .controller('HomeController', controller);
 
     /** @ngInject */
-    function controller($log, Categories, Skills) {
+    function controller($log, Categories, Jobs, Skills) {
         var vm = this;
 
         vm.init = function() {
             vm.fetchCategories();
             vm.fetchSkills();
+            vm.fetchJobs();
         };
 
         vm.fetchSkills = function() {
@@ -31,6 +32,15 @@
                 }
             );
         }
+
+        vm.fetchJobs = function() {
+            Jobs.getAll({'status':'APPROVED'},
+                function(data) {
+                   vm.jobs = data;
+                   $log.info('Successfully fetched ' + data.length + ' jobs.');
+                }
+            );
+        };
 
         vm.init();
     }

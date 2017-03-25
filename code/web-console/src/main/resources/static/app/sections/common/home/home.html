@@ -52,5 +52,13 @@
     </div>
     <div class="col-xs-12 col-md-5">
         <h3>Recent Jobs</h3>
+        <table class="table table-bordered table-striped">
+            <tbody>
+            <tr ng-repeat="job in ctrl.jobs | limitTo: 10">
+                <td>{{$index+1}}</td>
+                <td>{{job.title}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>

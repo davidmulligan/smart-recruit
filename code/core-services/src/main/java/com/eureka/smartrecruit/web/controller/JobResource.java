@@ -3,6 +3,7 @@ package com.eureka.smartrecruit.web.controller;
 import com.eureka.smartrecruit.domain.Category;
 import com.eureka.smartrecruit.domain.Job;
 import com.eureka.smartrecruit.domain.Skill;
+import com.eureka.smartrecruit.domain.User;
 import com.eureka.smartrecruit.dto.JobDto;
 import com.eureka.smartrecruit.service.JobService;
 import com.querydsl.core.types.Predicate;
@@ -12,6 +13,7 @@ import org.jooq.lambda.Seq;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -88,7 +91,13 @@ public class JobResource {
 
     @RequestMapping(value="/self", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<JobDto> findMyJobs() {
-        return Seq.seq(jobService.findMyJobs()).map(job -> mapper.map(job, JobDto.class)).toList();
+        return Seq.seq(jobService.findMyJobs()).map(job -> {
+            JobDto jobDto = mapper.map(job, JobDto.class);
+            jobDto.setBids(Seq.seq(jobDto.getBids())
+                    .filter(bid -> bid.getCreatedBy().getId().equals(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()))
+                    .collect(Collectors.toList()));
+            return jobDto;
+        }).toList();
     }
 
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })

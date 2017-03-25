@@ -83,7 +83,7 @@ public class JobService extends BaseService {
         if (getCurrentUser().isClient()) {
             return Seq.seq(jobRepository.findAll(job.createdBy.eq(getCurrentUser()), job.createdOn.desc())).toList();
         } else {
-            return Seq.seq(jobRepository.findAll(job.bids.any().createdBy.eq(getCurrentUser()).and(job.bids.any().status.eq(BidStatus.ACCEPTED)), job.createdOn.desc())).toList();
+            return Seq.seq(jobRepository.findAll(job.bids.any().createdBy.eq(getCurrentUser()), job.createdOn.desc())).toList();
         }
     }
 

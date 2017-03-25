@@ -167,16 +167,6 @@
                 abstract: true,
                 data : {
                     role : 'CLIENT'
-                },
-                resolve: {
-
-                    /* @ngInject */
-                    referenceData: function($q, Categories, Skills) {
-                        return $q.all({
-                            categories: Categories.getAll(),
-                            skills: Skills.getAll()
-                        });
-                    }
                 }
             })
             .state('client.account', {
@@ -244,18 +234,6 @@
                         controllerAs : 'ctrl'
                     }
                 }
-            })
-            .state("freelancer.account.bids", {
-                url: "/bids",
-                templateUrl: "app/sections/freelancer/account/bids/bids.html",
-                controller : 'FreelancerAccountBidsController',
-                controllerAs : 'ctrl'
-            })
-            .state("freelancer.account.disputeManagement", {
-                url: "/disputeManagement",
-                templateUrl: "app/sections/freelancer/account/dispute_management/dispute_management.html",
-                controller : 'FreelancerAccountDisputeManagementController',
-                controllerAs : 'ctrl'
             })
             .state("freelancer.account.jobs", {
                 url: "/jobs",

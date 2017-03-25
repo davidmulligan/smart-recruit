@@ -27,6 +27,16 @@
                 method: 'PUT',
                 url: JOBS_URL + '/:id/reject',
                 params: {id: '@id'}
+            },
+            createBid: {
+                method: 'POST',
+                url: JOBS_URL + '/:id/bids',
+                params: {id: '@id'}
+            },
+            cancelBid: {
+                method: 'PUT',
+                url: JOBS_URL + '/:id/bids/:bidId/cancel',
+                params: {id: '@id', bidId: '@bidId'}
             }
         });
     }

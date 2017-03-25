@@ -2,6 +2,7 @@ package com.eureka.smartrecruit.web.controller;
 
 import com.eureka.smartrecruit.domain.Bid;
 import com.eureka.smartrecruit.domain.Job;
+import com.eureka.smartrecruit.domain.enumeration.BidStatus;
 import com.eureka.smartrecruit.dto.BidDto;
 import com.eureka.smartrecruit.service.BidService;
 import com.eureka.smartrecruit.service.JobService;
@@ -42,6 +43,15 @@ public class BidResource {
         Bid bid = bidService.findById(bidDto.getId());
         bid.setComment(bidDto.getComment());
         bid.setQuote(bidDto.getQuote());
+        bidService.update(bid);
+    }
+
+    @RequestMapping(value="/{id}/cancel", method=RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public void cancel(@PathVariable("jobId") Long jobId, @PathVariable("id") Long id) {
+        Job job = jobService.findById(jobId);
+        Bid bid = bidService.findById(id);
+        bid.setStatus(BidStatus.CANCELLED);
         bidService.update(bid);
     }
 

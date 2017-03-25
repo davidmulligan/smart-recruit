@@ -6,7 +6,7 @@
         .controller('CommonJobsController', controller);
 
     /** @ngInject */
-    function controller($uibModal, $log, ngToast, Bids, Categories, Skills, Jobs) {
+    function controller($uibModal, $log, ngToast, Categories, Skills, Jobs) {
         var vm = this;
         vm.isSearchOpen = true;
 
@@ -73,7 +73,7 @@
         };
 
         vm.bid = function(job, bid) {
-            Bids.post({jobId: job.id}, bid, function(result) {
+            Jobs.createBid({id: job.id}, bid, function(result) {
                 if (job.fixed) {
                     ngToast.success('Successfully applied for job.');
                 } else {

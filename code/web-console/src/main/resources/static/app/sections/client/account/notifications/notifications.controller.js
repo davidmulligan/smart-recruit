@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('client.account.message.core', [])
-        .controller('ClientAccountMessageController', controller);
+        .module('client.account.notifications.core', [])
+        .controller('ClientAccountNotificationsController', controller);
 
     /** @ngInject */
     function controller($http) {

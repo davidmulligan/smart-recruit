@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('admin.user.core', [])
-        .controller('AdminUserController', controller);
+        .module('admin.users.core', [])
+        .controller('AdminUsersController', controller);
 
     /** @ngInject */
     function controller($http, ngToast, USERS_URL) {

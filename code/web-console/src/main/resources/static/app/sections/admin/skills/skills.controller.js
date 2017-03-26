@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('admin.skill.core', [])
-        .controller('AdminSkillController', controller);
+        .module('admin.skills.core', [])
+        .controller('AdminSkillsController', controller);
 
     /** @ngInject */
     function controller($http, ngToast, SKILLS_URL) {

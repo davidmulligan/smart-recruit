@@ -4,10 +4,10 @@
     angular
         .module('admin', [
             'admin.core',
-            'admin.category',
-            'admin.job',
-            'admin.membership',
-            'admin.skill',
-            'admin.user'
+            'admin.categories',
+            'admin.jobs',
+            'admin.memberships',
+            'admin.skills',
+            'admin.users'
         ]);
 })();

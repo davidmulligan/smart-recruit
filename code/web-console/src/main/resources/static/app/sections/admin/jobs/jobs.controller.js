@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('admin.job.core', [])
-        .controller('AdminJobController', controller);
+        .module('admin.jobs.core', [])
+        .controller('AdminJobsController', controller);
 
     /** @ngInject */
     function controller($log, ngToast, Jobs, NotifyService) {

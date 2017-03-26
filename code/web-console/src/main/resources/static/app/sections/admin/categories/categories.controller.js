@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('admin.category.core', [])
-        .controller('AdminCategoryController', controller);
+        .module('admin.categories.core', [])
+        .controller('AdminCategoriesController', controller);
 
     /** @ngInject */
     function controller($http, ngToast, CATEGORIES_URL) {

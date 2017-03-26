@@ -131,32 +131,32 @@
             })
             .state("admin.jobs", {
                 url: "/jobs",
-                templateUrl: "app/sections/admin/job/job.html",
-                controller : 'AdminJobController',
+                templateUrl: "app/sections/admin/jobs/jobs.html",
+                controller : 'AdminJobsController',
                 controllerAs : 'ctrl'
             })
             .state("admin.categories", {
                 url: "/categories",
-                templateUrl: "app/sections/admin/category/category.html",
-                controller : 'AdminCategoryController',
+                templateUrl: "app/sections/admin/categories/categories.html",
+                controller : 'AdminCategoriesController',
                 controllerAs : 'ctrl'
             })
             .state("admin.skills", {
                 url: "/skills",
-                templateUrl: "app/sections/admin/skill/skill.html",
-                controller : 'AdminSkillController',
+                templateUrl: "app/sections/admin/skills/skills.html",
+                controller : 'AdminSkillsController',
                 controllerAs : 'ctrl'
             })
             .state("admin.memberships", {
                 url: "/memberships",
-                templateUrl: "app/sections/admin/membership/membership.html",
-                controller : 'AdminMembershipController',
+                templateUrl: "app/sections/admin/memberships/memberships.html",
+                controller : 'AdminMembershipsController',
                 controllerAs : 'ctrl'
             })
             .state("admin.users", {
                 url: "/users",
-                templateUrl: "app/sections/admin/user/user.html",
-                controller : 'AdminUserController',
+                templateUrl: "app/sections/admin/users/users.html",
+                controller : 'AdminUsersController',
                 controllerAs : 'ctrl'
             })
 
@@ -191,14 +191,14 @@
             })
             .state("client.account.messages", {
                 url: "/messages",
-                templateUrl: "app/sections/client/account/message/message.html",
-                controller : 'ClientAccountMessageController',
+                templateUrl: "app/sections/client/account/messages/messages.html",
+                controller : 'ClientAccountMessagesController',
                 controllerAs : 'ctrl'
             })
             .state("client.account.notifications", {
                 url: "/notifications",
-                templateUrl: "app/sections/client/account/notification/notification.html",
-                controller : 'ClientAccountNotificationController',
+                templateUrl: "app/sections/client/account/notifications/notifications.html",
+                controller : 'ClientAccountNotificationsController',
                 controllerAs : 'ctrl'
             })
             .state('client.post', {

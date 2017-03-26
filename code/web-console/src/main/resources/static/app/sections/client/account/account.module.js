@@ -5,7 +5,7 @@
         .module('client.account', [
             'client.account.core',
             'client.account.jobs',
-            'client.account.message',
-            'client.account.notification'
+            'client.account.messages',
+            'client.account.notifications'
         ]);
 })();

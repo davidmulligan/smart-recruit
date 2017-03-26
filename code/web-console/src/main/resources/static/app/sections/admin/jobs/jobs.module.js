@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('admin.job', [
-            'admin.job.core'
+        .module('admin.jobs', [
+            'admin.jobs.core'
         ]);
 })();

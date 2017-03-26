@@ -1,53 +1,23 @@
 <style>
-    .glyphicon { margin-right: 5px; }
-    .rating .glyphicon { font-size: 16px; }
+    .label { margin-left: 5px; }
 </style>
 <section ng-controller="ClientAccountJobsController as ctrl">
     <div class="modal-header">
         <h3 class="modal-title">{{job.title}}</h3>
     </div>
-    <div class="modal-body row">
-        <div class="col-md-6">
-            <h4>Job Description</h4>
-            <p>{{job.description}}</p>
-            <div class="well">
-                <p><strong>Posted:</strong> {{job.createdOn | date: 'dd MMMM yyyy'}}</p>
-                <p><strong>Category:</strong> {{job.category.name}}</p>
-                <p><strong>Remuneration:</strong> {{job.remuneration}}</p>
-                <p><strong>Duration:</strong> {{job.duration}}</p>
-                <p><strong>Location:</strong> {{job.location}}</p>
-                <p><strong>Skills:</strong> <span class="label label-primary" ng-repeat="skill in job.skills">{{skill.name}}</span></p>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <h4>Interested Freelancers</h4>
-            <div class="well" ng-repeat="bid in job.bids">
-                <div class="row">
-                    <div class="col-md-7">
-                        <h4><a ng-click="ctrl.modalFreelancerDetail(bid, job)">{{bid.createdBy.fullName}}</a></h4>
-                        <p ng-show="!job.fixed">{{bid.quote}}</p>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="rating pull-right">
-                            <span class="glyphicon glyphicon-star" ng-show="bid.createdBy.rating >= 1"></span>
-                            <span class="glyphicon glyphicon-star" ng-show="bid.createdBy.rating >= 2"></span>
-                            <span class="glyphicon glyphicon-star" ng-show="bid.createdBy.rating >= 3"></span>
-                            <span class="glyphicon glyphicon-star" ng-show="bid.createdBy.rating >= 4"></span>
-                            <span class="glyphicon glyphicon-star" ng-show="bid.createdBy.rating >= 5"></span>
-                            <span class="glyphicon glyphicon-star-empty" ng-show="bid.createdBy.rating < 1"></span>
-                            <span class="glyphicon glyphicon-star-empty" ng-show="bid.createdBy.rating < 2"></span>
-                            <span class="glyphicon glyphicon-star-empty" ng-show="bid.createdBy.rating < 3"></span>
-                            <span class="glyphicon glyphicon-star-empty" ng-show="bid.createdBy.rating < 4"></span>
-                            <span class="glyphicon glyphicon-star-empty" ng-show="bid.createdBy.rating < 5"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="modal-body">
+        <h4>Job Description</h4>
+        <p>{{job.description}}</p>
+        <div class="well">
+            <p><strong>Posted:</strong> {{job.createdOn | date: 'dd MMMM yyyy'}}</p>
+            <p><strong>Category:</strong> {{job.category.name}}</p>
+            <p><strong>Remuneration:</strong> {{job.remuneration}}</p>
+            <p><strong>Duration:</strong> {{job.duration}}</p>
+            <p><strong>Location:</strong> {{job.location}}</p>
+            <p><strong>Skills:</strong> <span class="label label-primary" ng-repeat="skill in job.skills">{{skill.name}}</span></p>
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success" type="button" ng-click="ctrl.cancelJob(job);ok()" ng-show="job.status != 'CANCELLED'">Cancel Job</button>
-        <button class="btn btn-success" type="button" ng-click="ctrl.archiveJob(job);ok()" ng-show="job.status == 'CANCELLED'">Archive Job</button>
         <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
     </div>
 </section>

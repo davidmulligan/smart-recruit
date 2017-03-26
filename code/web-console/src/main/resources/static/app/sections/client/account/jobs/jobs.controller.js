@@ -44,14 +44,22 @@
             });
         };
 
-        vm.modalFreelancerDetail = function(selectedBid, selectedJob) {
+        vm.modalBidDetail = function(selectedBid, selectedJob) {
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'app/sections/client/account/jobs/freelancer_detail.html',
-                controller: function($scope, $uibModalInstance, $uibModalStack, $log, bid, job) {
+                templateUrl: 'app/sections/client/account/jobs/bid_detail.html',
+                controller: function($scope, $uibModalInstance, $uibModalStack, $log, Feedback, bid, job) {
                     $scope.bid = bid;
                     $scope.job = job;
+
+                    Feedback.getAll({userId: $scope.bid.createdBy.id},
+                        function(data) {
+                            $scope.feedback = data;
+                            $scope.ratingBreakdown = _.groupBy(data, "rating");
+                            $log.info('Successfully fetched feedback for freelancer : ' + $scope.bid.createdBy.fullName);
+                        }
+                    );
 
                     $scope.ok = function() {
                         $uibModalInstance.close($scope.bid);
@@ -78,14 +86,20 @@
             });
         };
 
-        vm.acceptBid = function(bid, job) {
-            Jobs.accept({id: job.id, bidId: bid.id}, function(result) {
+        vm.cancelJob = function(job) {
+            Jobs.cancel({id: job.id}, function(result) {
                 NotifyService.sendMessage('JobChangeEvent');
             });
         };
 
-        vm.cancelJob = function(job) {
-            Jobs.cancel({id: job.id}, function(result) {
+        vm.acceptBid = function(bid, job) {
+            Jobs.acceptBid({id: job.id, bidId: bid.id}, function(result) {
+                NotifyService.sendMessage('JobChangeEvent');
+            });
+        };
+
+        vm.rejectBid = function(bid, job) {
+            Jobs.rejectBid({id: job.id, bidId: bid.id}, function(result) {
                 NotifyService.sendMessage('JobChangeEvent');
             });
         };

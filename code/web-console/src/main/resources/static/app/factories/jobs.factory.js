@@ -28,6 +28,21 @@
                 url: JOBS_URL + '/:id/reject',
                 params: {id: '@id'}
             },
+            start: {
+                method: 'PUT',
+                url: JOBS_URL + '/:id/start',
+                params: {id: '@id'}
+            },
+            finish: {
+                method: 'PUT',
+                url: JOBS_URL + '/:id/finish',
+                params: {id: '@id'}
+            },
+            archive: {
+                method: 'PUT',
+                url: JOBS_URL + '/:id/archive',
+                params: {id: '@id'}
+            },
             createBid: {
                 method: 'POST',
                 url: JOBS_URL + '/:id/bids',
@@ -46,6 +61,11 @@
             rejectBid: {
                 method: 'PUT',
                 url: JOBS_URL + '/:id/bids/:bidId/reject',
+                params: {id: '@id', bidId: '@bidId'}
+            },
+            confirmBid: {
+                method: 'PUT',
+                url: JOBS_URL + '/:id/bids/:bidId/confirm',
                 params: {id: '@id', bidId: '@bidId'}
             }
         });

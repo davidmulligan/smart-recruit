@@ -65,6 +65,12 @@ public class JobResource {
         jobService.reject(jobService.findById(id));
     }
 
+    @RequestMapping(value="/{id}/start", method=RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public void start(@PathVariable("id") Long id) {
+        jobService.start(jobService.findById(id));
+    }
+
     @RequestMapping(value="/{id}/finish", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void finish(@PathVariable("id") Long id) {

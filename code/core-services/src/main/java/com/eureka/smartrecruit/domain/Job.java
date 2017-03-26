@@ -76,6 +76,9 @@ public class Job extends DomainObject {
     private Set<Dispute> disputes;
 
     public Set<User> getFreelancers() {
-        return Seq.seq(bids).filter(i -> i.getStatus().equals(BidStatus.ACCEPTED)).map(Bid::getCreatedBy).toSet();
+        return Seq.seq(bids)
+                .filter(i -> i.getStatus().equals(BidStatus.CONFIRMED))
+                .map(Bid::getCreatedBy)
+                .toSet();
     }
 }

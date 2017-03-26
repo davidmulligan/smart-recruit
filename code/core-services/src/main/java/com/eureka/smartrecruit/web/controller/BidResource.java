@@ -71,6 +71,14 @@ public class BidResource {
         jobService.reject(job, bid);
     }
 
+    @RequestMapping(value="/{id}/confirm", method=RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public void confirm(@PathVariable("jobId") Long jobId, @PathVariable("id") Long id) {
+        Job job = jobService.findById(jobId);
+        Bid bid = bidService.findById(id);
+        jobService.confirm(job, bid);
+    }
+
     @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public List<BidDto> findByJob(@PathVariable("jobId") Long jobId) {
         return Seq.seq(jobService.findById(jobId).getBids()).map(bid -> mapper.map(bid, BidDto.class)).toList();

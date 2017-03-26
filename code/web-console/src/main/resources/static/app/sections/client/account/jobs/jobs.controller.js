@@ -104,8 +104,20 @@
             });
         };
 
+        vm.startJob = function(job) {
+            Jobs.start({id: job.id}, function(result) {
+                NotifyService.sendMessage('JobChangeEvent');
+            });
+        };
+
+        vm.finishJob = function(job) {
+            Jobs.finish({id: job.id}, function(result) {
+                NotifyService.sendMessage('JobChangeEvent');
+            });
+        };
+
         vm.archiveJob = function(job) {
-            Jobs.cancel({id: job.id}, function(result) {
+            Jobs.archive({id: job.id}, function(result) {
                 NotifyService.sendMessage('JobChangeEvent');
             });
         };

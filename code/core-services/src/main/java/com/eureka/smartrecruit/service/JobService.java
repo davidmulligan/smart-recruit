@@ -44,6 +44,11 @@ public class JobService extends BaseService {
         update(job);
     }
 
+    public void start(final Job job) {
+        job.setStatus(job.getStatus().start(job));
+        update(job);
+    }
+
     public void finish(final Job job) {
         job.setStatus(job.getStatus().finish(job));
         update(job);
@@ -76,6 +81,11 @@ public class JobService extends BaseService {
 
     public void reject(final Job job, Bid bid) {
         bid.setStatus(BidStatus.REJECTED);
+        update(job);
+    }
+
+    public void confirm(final Job job, Bid bid) {
+        bid.setStatus(BidStatus.CONFIRMED);
         update(job);
     }
 

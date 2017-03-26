@@ -12,6 +12,7 @@ public enum BidStatus {
     PENDING("Pending"),
     ACCEPTED("Accepted"),
     REJECTED("Rejected"),
+    CONFIRMED("Confirmed"),
     CANCELLED("Cancelled");
 
     private final String description;

@@ -17,11 +17,12 @@
                     <tbody>
                     <tr ng-repeat="job in ctrl.jobs">
                         <td>{{$index+1}}</td>
-                        <td>{{job.title}}</td>
+                        <td><a ng-click="ctrl.modalJobDetail(job)">{{job.title}}</a></td>
                         <td>{{job.category.name}}</td>
                         <td><span class="label label-info">{{job.status}}</span></td>
                         <td><span class="label label-info">{{job.bids[0].status}}</span></td>
                         <td>
+                            <button type="button" class="btn btn-primary btn-sm" ng-show="job.bids[0].status === 'ACCEPTED'" ng-click="ctrl.confirmBid(job, job.bids[0])"><i class="glyphicon glyphicon-ok"></i> Confirm</button>
                             <button type="button" class="btn btn-primary btn-sm" ng-show="job.bids[0].status === 'PENDING'" ng-click="ctrl.cancelBid(job, job.bids[0])"><i class="glyphicon glyphicon-remove"></i> Cancel</button>
                             <!--<button type="button" class="btn btn-primary btn-sm" ui-sref="workroom"><i class="glyphicon glyphicon-list-alt"></i> Workroom</button>-->
                         </td>

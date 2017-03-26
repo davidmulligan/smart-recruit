@@ -12,7 +12,7 @@
                         <th>Category</th>
                         <th>Job Status</th>
                         <th>Interested Freelancers</th>
-                        <th>Hire Freelancers</th>
+                        <th>Hired Freelancers</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -26,6 +26,9 @@
                         <td><a ng-repeat="bid in job.bids" ng-click="ctrl.modalBidDetail(bid, job)">{{bid.createdBy.fullName}} ({{bid.createdBy.rating}}) - {{bid.status}}</a></td>
                         <td><span ng-repeat="freelancer in job.freelancers">{{freelancer.fullName}} </span></td>
                         <td>
+                            <button type="button" class="btn btn-primary btn-sm" ng-show="job.status === 'APPROVED'" ng-click="ctrl.startJob(job)"><i class="glyphicon glyphicon-play"></i> Start</button>
+                            <button type="button" class="btn btn-primary btn-sm" ng-show="job.status === 'STARTED'" ng-click="ctrl.finishJob(job)"><i class="glyphicon glyphicon-stop"></i> Finish</button>
+                            <button type="button" class="btn btn-primary btn-sm" ng-show="job.status === 'FINISHED'" ng-click="ctrl.archiveJob(job)"><i class="glyphicon glyphicon-paperclip"></i> Archive</button>
                             <button type="button" class="btn btn-primary btn-sm" ng-show="job.status === 'APPROVED'" ng-click="ctrl.cancelJob(job)"><i class="glyphicon glyphicon-remove"></i> Cancel</button>
                         </td>
                     </tr>

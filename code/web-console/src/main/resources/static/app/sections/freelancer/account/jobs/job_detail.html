@@ -1,0 +1,23 @@
+<style>
+    .label { margin-left: 5px; }
+</style>
+<section ng-controller="ClientAccountJobsController as ctrl">
+    <div class="modal-header">
+        <h3 class="modal-title">{{job.title}}</h3>
+    </div>
+    <div class="modal-body">
+        <h4>Job Description</h4>
+        <p>{{job.description}}</p>
+        <div class="well">
+            <p><strong>Posted:</strong> {{job.createdOn | date: 'dd MMMM yyyy'}}</p>
+            <p><strong>Category:</strong> {{job.category.name}}</p>
+            <p><strong>Remuneration:</strong> {{job.remuneration}}</p>
+            <p><strong>Duration:</strong> {{job.duration}}</p>
+            <p><strong>Location:</strong> {{job.location}}</p>
+            <p><strong>Skills:</strong> <span class="label label-primary" ng-repeat="skill in job.skills">{{skill.name}}</span></p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+    </div>
+</section>

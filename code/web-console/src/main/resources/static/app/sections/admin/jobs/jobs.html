@@ -18,7 +18,7 @@
                     <tr ng-repeat="job in ctrl.jobs">
                         <td>{{$index+1}}</td>
                         <td>{{job.createdBy.companyName}}</td>
-                        <td>{{job.title}}</td>
+                        <td><a ng-click="ctrl.modalJobDetail(job)">{{job.title}}</a></td>
                         <td>{{job.category.name}}</td>
                         <td>{{job.deadline}}</td>
                         <td>

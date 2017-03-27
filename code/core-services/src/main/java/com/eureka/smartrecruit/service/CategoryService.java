@@ -13,20 +13,22 @@ import java.util.List;
 import static com.eureka.smartrecruit.domain.QCategory.category;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
+    @Transactional
     public void create(final Category category) {
         categoryRepository.save(category);
     }
 
+    @Transactional
     public void update(final Category category) {
         categoryRepository.save(category);
     }
 
+    @Transactional
     public void delete(final Long id) {
         categoryRepository.delete(id);
     }

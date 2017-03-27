@@ -1,9 +1,6 @@
 package com.eureka.smartrecruit.service;
 
-import com.eureka.smartrecruit.domain.Bid;
 import com.eureka.smartrecruit.domain.Job;
-import com.eureka.smartrecruit.domain.Workroom;
-import com.eureka.smartrecruit.domain.enumeration.BidStatus;
 import com.eureka.smartrecruit.domain.enumeration.JobStatus;
 import com.eureka.smartrecruit.microservice.exception.ResourceNotFoundException;
 import com.eureka.smartrecruit.respository.JobRepository;
@@ -18,18 +15,18 @@ import java.util.List;
 import static com.eureka.smartrecruit.domain.QJob.job;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class JobService extends BaseService {
 
     private final JobRepository jobRepository;
 
+    @Transactional
     public void create(final Job job) {
         job.setStatus(JobStatus.NEW);
-        job.setWorkroom(new Workroom());
         jobRepository.save(job);
     }
 
+    @Transactional
     public void update(final Job job) {
         jobRepository.save(job);
     }
@@ -59,11 +56,6 @@ public class JobService extends BaseService {
         update(job);
     }
 
-    public void dispute(final Job job) {
-        job.setStatus(job.getStatus().dispute(job));
-        update(job);
-    }
-
     public void archive(final Job job) {
         job.setStatus(job.getStatus().archive(job));
         update(job);
@@ -74,18 +66,8 @@ public class JobService extends BaseService {
         update(job);
     }
 
-    public void accept(final Job job, Bid bid) {
-        bid.setStatus(BidStatus.ACCEPTED);
-        update(job);
-    }
-
-    public void reject(final Job job, Bid bid) {
-        bid.setStatus(BidStatus.REJECTED);
-        update(job);
-    }
-
-    public void confirm(final Job job, Bid bid) {
-        bid.setStatus(BidStatus.CONFIRMED);
+    public void dispute(final Job job) {
+        job.setStatus(job.getStatus().dispute(job));
         update(job);
     }
 

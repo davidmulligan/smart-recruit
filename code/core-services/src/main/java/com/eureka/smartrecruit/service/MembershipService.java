@@ -13,20 +13,22 @@ import java.util.List;
 import static com.eureka.smartrecruit.domain.QMembership.membership;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class MembershipService {
 
     private final MembershipRepository membershipRepository;
 
+    @Transactional
     public void create(final Membership membership) {
         membershipRepository.save(membership);
     }
 
+    @Transactional
     public void update(final Membership membership) {
         membershipRepository.save(membership);
     }
 
+    @Transactional
     public void delete(final Long id) {
         membershipRepository.delete(id);
     }

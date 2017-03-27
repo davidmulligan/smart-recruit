@@ -53,12 +53,6 @@ public class UserResource {
         userService.delete(id);
     }
 
-    @RequestMapping(value="/register", method=RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public void register(@RequestBody UserDto userDto) {
-        userService.create(mapper.map(userDto, User.class));
-    }
-
     @RequestMapping(value="/{id}", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
     public UserDto findById(@PathVariable("id") Long id) {
         return mapper.map(userService.findById(id), UserDto.class);

@@ -8,16 +8,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class DisputeService {
 
     private final DisputeRepository disputeRepository;
 
+    @Transactional
     public void create(final Dispute dispute) {
         disputeRepository.save(dispute);
     }
 
+    @Transactional
     public void update(final Dispute dispute) {
         disputeRepository.save(dispute);
     }

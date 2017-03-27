@@ -14,13 +14,13 @@ import java.util.List;
 import static com.eureka.smartrecruit.domain.QFeedback.feedback;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
     private final JobService jobService;
 
+    @Transactional
     public void create(final Feedback feedback) {
         jobService.feedback(feedback.getJob());
         feedbackRepository.save(feedback);

@@ -8,16 +8,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class MessageService {
 
     private final MessageRepository messageRepository;
 
+    @Transactional
     public void create(final Message message) {
         messageRepository.save(message);
     }
 
+    @Transactional
     public void delete(final Long id) {
         messageRepository.delete(id);
     }

@@ -1,8 +1,6 @@
 package com.eureka.smartrecruit.web.controller;
 
 import com.eureka.smartrecruit.domain.Bid;
-import com.eureka.smartrecruit.domain.Job;
-import com.eureka.smartrecruit.domain.enumeration.BidStatus;
 import com.eureka.smartrecruit.dto.BidDto;
 import com.eureka.smartrecruit.service.BidService;
 import com.eureka.smartrecruit.service.JobService;
@@ -46,42 +44,28 @@ public class BidResource {
         bidService.update(bid);
     }
 
-    @RequestMapping(value="/{id}/cancel", method=RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
-    public void cancel(@PathVariable("jobId") Long jobId, @PathVariable("id") Long id) {
-        Job job = jobService.findById(jobId);
-        Bid bid = bidService.findById(id);
-        bid.setStatus(BidStatus.CANCELLED);
-        bidService.update(bid);
-    }
-
     @RequestMapping(value="/{id}/accept", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void accept(@PathVariable("jobId") Long jobId, @PathVariable("id") Long id) {
-        Job job = jobService.findById(jobId);
-        Bid bid = bidService.findById(id);
-        jobService.accept(job, bid);
+    public void accept(@PathVariable("id") Long id) {
+        bidService.accept(bidService.findById(id));
     }
 
     @RequestMapping(value="/{id}/reject", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void reject(@PathVariable("jobId") Long jobId, @PathVariable("id") Long id) {
-        Job job = jobService.findById(jobId);
-        Bid bid = bidService.findById(id);
-        jobService.reject(job, bid);
+    public void reject(@PathVariable("id") Long id) {
+        bidService.reject(bidService.findById(id));
     }
 
     @RequestMapping(value="/{id}/confirm", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void confirm(@PathVariable("jobId") Long jobId, @PathVariable("id") Long id) {
-        Job job = jobService.findById(jobId);
-        Bid bid = bidService.findById(id);
-        jobService.confirm(job, bid);
+    public void confirm(@PathVariable("id") Long id) {
+        bidService.confirm(bidService.findById(id));
     }
 
-    @RequestMapping(method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })
-    public List<BidDto> findByJob(@PathVariable("jobId") Long jobId) {
-        return Seq.seq(jobService.findById(jobId).getBids()).map(bid -> mapper.map(bid, BidDto.class)).toList();
+    @RequestMapping(value="/{id}/cancel", method=RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public void cancel(@PathVariable("id") Long id) {
+        bidService.cancel(bidService.findById(id));
     }
 
     @RequestMapping(value="/self", method=RequestMethod.GET, produces={ MediaType.APPLICATION_JSON_VALUE })

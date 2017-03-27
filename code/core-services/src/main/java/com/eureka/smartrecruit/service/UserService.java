@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,6 +25,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
+    @Transactional
     public void create(final User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActivationCode(UUID.randomUUID().toString());
@@ -34,10 +36,12 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    @Transactional
     public void update(final User user) {
         userRepository.save(user);
     }
 
+    @Transactional
     public void delete(final Long id) {
         userRepository.delete(id);
     }
@@ -47,13 +51,13 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> findAll() {
-        List<User> users = Seq.seq(userRepository.findAll(user.email.asc())).toList();
+        List<User> users = Seq.seq(userRepository.findAll(user.lastName.asc(), user.firstName.asc())).toList();
         removePasswords(users);
         return users;
     }
 
     public List<User> findByRole(String role) {
-        List<User> users = Seq.seq(userRepository.findAll(user.roles.any().name.eq(role), user.email.asc())).toList();
+        List<User> users = Seq.seq(userRepository.findAll(user.roles.any().name.eq(role), user.lastName.asc(), user.firstName.asc())).toList();
         removePasswords(users);
         return users;
     }
@@ -64,7 +68,9 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> find(Predicate predicate) {
-        return Seq.seq(userRepository.findAll(predicate)).toList();
+        List<User> users = Seq.seq(userRepository.findAll(predicate)).toList();
+        removePasswords(users);
+        return users;
     }
 
     private static void removePasswords(List<User> users) {

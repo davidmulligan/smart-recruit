@@ -77,16 +77,16 @@ public class JobResource {
         jobService.finish(jobService.findById(id));
     }
 
-    @RequestMapping(value="/{id}/dispute", method=RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
-    public void dispute(@PathVariable("id") Long id) {
-        jobService.dispute(jobService.findById(id));
-    }
-
     @RequestMapping(value="/{id}/archive", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void archive(@PathVariable("id") Long id) {
         jobService.archive(jobService.findById(id));
+    }
+
+    @RequestMapping(value="/{id}/dispute", method=RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public void dispute(@PathVariable("id") Long id) {
+        jobService.dispute(jobService.findById(id));
     }
 
     @RequestMapping(value="/{id}/cancel", method=RequestMethod.PUT)

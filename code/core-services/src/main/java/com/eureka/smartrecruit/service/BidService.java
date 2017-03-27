@@ -14,19 +14,40 @@ import java.util.List;
 import static com.eureka.smartrecruit.domain.QBid.bid;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class BidService extends BaseService {
 
     private final BidRepository bidRepository;
 
+    @Transactional
     public void create(final Bid bid) {
         bid.setStatus(BidStatus.PENDING);
         bidRepository.save(bid);
     }
 
+    @Transactional
     public void update(final Bid bid) {
         bidRepository.save(bid);
+    }
+
+    public void accept(Bid bid) {
+        bid.setStatus(BidStatus.ACCEPTED);
+        update(bid);
+    }
+
+    public void reject(Bid bid) {
+        bid.setStatus(BidStatus.REJECTED);
+        update(bid);
+    }
+
+    public void confirm(Bid bid) {
+        bid.setStatus(BidStatus.CONFIRMED);
+        update(bid);
+    }
+
+    public void cancel(Bid bid) {
+        bid.setStatus(BidStatus.CANCELLED);
+        update(bid);
     }
 
     public Bid findById(final Long id) {

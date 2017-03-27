@@ -13,20 +13,22 @@ import java.util.List;
 import static com.eureka.smartrecruit.domain.QSkill.skill;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class SkillService {
 
     private final SkillRepository skillRepository;
 
+    @Transactional
     public void create(final Skill skill) {
         skillRepository.save(skill);
     }
 
+    @Transactional
     public void update(final Skill skill) {
         skillRepository.save(skill);
     }
 
+    @Transactional
     public void delete(final Skill skill) {
         skillRepository.delete(skill);
     }

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head></head>
+    <body>
+        <p>Dear <span th:text="${notification.recipient.fullName}"></span></p>
+        <p>Your job '<span th:text="${notification.job.title}"></span>' has been archived.</p>
+        <p>Regards</p>
+        <p>Crewlance</p>
+    </body>
+</html>

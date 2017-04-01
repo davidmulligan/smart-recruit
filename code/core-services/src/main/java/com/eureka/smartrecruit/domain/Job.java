@@ -16,6 +16,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
@@ -34,7 +35,7 @@ public class Job extends DomainObject {
     @Column(nullable = false)
     private String description;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Category category;
 
     @Column(nullable = false)

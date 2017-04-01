@@ -41,4 +41,15 @@ public class Notification extends BaseDomainObject {
     @ManyToOne
     @JoinColumn
     private User recipient;
+
+    @ManyToOne
+    private Job job;
+
+    public Notification(Job job, NotificationType type) {
+        this.subject = type.getSubject();
+        this.content = type.getContent();
+        this.type = type;
+        this.recipient = job.getCreatedBy();
+        this.job = job;
+    }
 }

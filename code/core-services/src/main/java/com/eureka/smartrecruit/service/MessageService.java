@@ -9,13 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class MessageService {
+public class MessageService extends BaseService {
 
     private final MessageRepository messageRepository;
+    private final EmailService emailService;
 
     @Transactional
     public void create(final Message message) {
+        message.setSender(getCurrentUser());
         messageRepository.save(message);
+        emailService.send(message);
     }
 
     @Transactional

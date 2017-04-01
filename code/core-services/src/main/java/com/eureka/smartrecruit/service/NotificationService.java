@@ -9,13 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class NotificationService {
+public class NotificationService extends BaseService {
 
     private final NotificationRepository notificationRepository;
+    private final EmailService emailService;
 
     @Transactional
     public void create(final Notification notification) {
         notificationRepository.save(notification);
+        emailService.send(notification);
     }
 
     @Transactional
